@@ -33,15 +33,14 @@
 
     <dependencies>
 
-<<<<<<< HEAD
-=======
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.3.5</version>
         </dependency>
 
->>>>>>> 1281234 (primer commit)
+
         <!-- ISIS API -->
 
         <dependency>
