@@ -13,7 +13,7 @@ import java.util.List;
 
 @DomainService(
         nature = NatureOfService.VIEW,
-        logicalTypeName = "articulo.Articulos"
+        logicalTypeName = "depotapp.Articulos"
 )
 @javax.annotation.Priority(PriorityPrecedence.EARLY)
 @lombok.RequiredArgsConstructor(onConstructor_ = {@Inject} )
@@ -26,7 +26,7 @@ public class Articulos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Articulo create(
-            @Codigo final int codigo) {
+            @Codigo final String codigo) {
         return repositoryService.persist(Articulo.withName(codigo));
     }
 
@@ -34,7 +34,7 @@ public class Articulos {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Articulo> findByCodigo(
-            @Codigo final int codigo
+            @Codigo final String codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
@@ -43,7 +43,7 @@ public class Articulos {
 
 
     @Programmatic
-    public Articulo findByCodigoExact(final int codigo) {
+    public Articulo findByCodigoExact(final String codigo) {
         return repositoryService.firstMatch(
                         Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))
@@ -64,7 +64,7 @@ public class Articulos {
     @Programmatic
     public void ping() {
         JDOQLTypedQuery<Articulo> q = jdoSupportService.newTypesafeQuery(Articulo.class);
-        final QArticulo candidate = QArticulo.jdoCandidate.candidate();
+        final QArticulo candidate = QArticulo.candidate();
         q.range(0,2);
         q.orderBy(candidate.codigo.asc());
         q.executeList();

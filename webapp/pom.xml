@@ -57,6 +57,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.5</version>
+        </dependency>
+
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>simpleapp-jdo-module-simple</artifactId>
         </dependency>
@@ -145,8 +151,8 @@
             <dependencies>
                 <dependency>
                     <groupId>org.postgresql</groupId>
-		    		<artifactId>postgresql</artifactId>
-					<!-- <version>42.2.12</version> ... version already managed -->
+                    <artifactId>postgresql</artifactId>
+                    <version>42.3.5</version>
                 </dependency>
             </dependencies>
         </profile>

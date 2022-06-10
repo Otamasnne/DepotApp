@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 public class ArticuloBuilder extends BuilderScriptWithResult<Articulo> {
 
     @Getter @Setter
-    private int codigo;
+    private String codigo;
 
     @Override
     protected Articulo buildResult(final ExecutionContext ec) {

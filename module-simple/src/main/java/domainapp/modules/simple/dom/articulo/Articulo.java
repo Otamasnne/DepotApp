@@ -14,12 +14,13 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Comparator;
 
 @javax.jdo.annotations.PersistenceCapable(
-        schema = "DepotApp",
+        schema = "depotapp",
         identityType= IdentityType.DATASTORE)
 @javax.jdo.annotations.Unique(
-        name = "Articulo_codigo_UNQ", members = {"Codigo"}
+        name = "Articulo_codigo_UNQ", members = {"codigo"}
 )
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
@@ -37,7 +38,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
 @javax.jdo.annotations.Version(strategy= VersionStrategy.DATE_TIME, column="version")
-@DomainObject(logicalTypeName = "DepotApp.Articulo", entityChangePublishing = Publishing.ENABLED)
+@DomainObject(logicalTypeName = "depotapp.Articulo", entityChangePublishing = Publishing.ENABLED)
 @DomainObjectLayout()
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
@@ -51,11 +52,7 @@ public class Articulo implements Comparable<Articulo> {
     @Inject TitleService titleService;
     @Inject MessageService messageService;
 
-    public Articulo(@NonNull int codigo) {
-        this.codigo = codigo;
-    }
-
-    public static Articulo withName(int codigo ) {
+    public static Articulo withName(String codigo ) {
         val articulo = new Articulo();
         articulo.setCodigo(codigo);
         return articulo;
@@ -67,10 +64,12 @@ public class Articulo implements Comparable<Articulo> {
     @Setter
     @ToString.Include
     @PropertyLayout(fieldSetId = "codigo", sequence = "1")
-    private int codigo;
+    private String codigo;
 
+    private final static Comparator<Articulo> comparator =
+            Comparator.comparing(Articulo::getCodigo);
     @Override
-    public int compareTo(Articulo articulo) {
-        return 0;
+    public int compareTo(final Articulo other) {
+        return comparator.compare(this, other);
     }
 }
