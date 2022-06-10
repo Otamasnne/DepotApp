@@ -1,6 +1,5 @@
 package domainapp.modules.simple.types.articulo;
 
-import domainapp.modules.simple.types.Name;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Property;

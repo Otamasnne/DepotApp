@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.articulo.Articulos;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.HomePage;
 import org.apache.isis.applib.annotation.Nature;
 
-import domainapp.modules.simple.dom.so.SimpleObject;
-import domainapp.modules.simple.dom.so.SimpleObjects;
 
 @DomainObject(
         nature = Nature.VIEW_MODEL,
@@ -21,12 +21,13 @@ import domainapp.modules.simple.dom.so.SimpleObjects;
 public class HomePageViewModel {
 
     public String title() {
-        return getObjects().size() + " objects";
+        return getObjects().size() + " artículos";
     }
 
-    public List<SimpleObject> getObjects() {
-        return simpleObjects.listAll();
+    public List<Articulo> getObjects() {
+        return articulos.listAll();
     }
 
-    @Inject SimpleObjects simpleObjects;
+    @Inject
+    Articulos articulos;
 }

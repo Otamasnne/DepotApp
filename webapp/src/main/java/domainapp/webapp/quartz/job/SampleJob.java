@@ -20,8 +20,8 @@ import org.apache.isis.applib.services.xactn.TransactionalProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-import domainapp.modules.simple.dom.so.SimpleObject;
-import domainapp.modules.simple.dom.so.SimpleObjects;
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.articulo.Articulos;
 
 @Component
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
@@ -30,17 +30,17 @@ public class SampleJob implements Job {
 
     private final InteractionService interactionService;
     private final TransactionalProcessor transactionalProcessor;
-    private final SimpleObjects simpleObjects;
+    private final Articulos articulos;
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        final List<SimpleObject> all = all();
+        final List<Articulo> all = all();
         log.info("{} objects in the database", all.size());
     }
 
-    List<SimpleObject> all() {
-        return call("sven", simpleObjects::listAll)
-                .orElse(Collections.<SimpleObject>emptyList());
+    List<Articulo> all() {
+        return call("sven", articulos::listAll)
+                .orElse(Collections.<Articulo>emptyList());
     }
 
     private <T> Optional<T> call(

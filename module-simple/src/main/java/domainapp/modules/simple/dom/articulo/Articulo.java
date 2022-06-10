@@ -1,14 +1,15 @@
 package domainapp.modules.simple.dom.articulo;
 
-import domainapp.modules.simple.dom.so.SimpleObject;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.Publishing;
-import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 
+import domainapp.modules.simple.types.articulo.Codigo;
+import lombok.*;
+import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
+import org.apache.isis.applib.services.message.MessageService;
+import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.services.title.TitleService;
+
+import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
@@ -18,20 +19,20 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
         schema = "DepotApp",
         identityType= IdentityType.DATASTORE)
 @javax.jdo.annotations.Unique(
-        name = "SimpleObject_name_UNQ", members = {"name"}
+        name = "Articulo_codigo_UNQ", members = {"Codigo"}
 )
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
-                name = Articulo.NAMED_QUERY__FIND_BY_NAME_LIKE,
+                name = Articulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE name.indexOf(:name) >= 0"
+                        "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
-                name = Articulo.NAMED_QUERY__FIND_BY_NAME_EXACT,
+                name = Articulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE name == :name"
+                        "WHERE codigo == :codigo"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -42,6 +43,31 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
 public class Articulo implements Comparable<Articulo> {
+
+    static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Articulo.findByCodigoLike";
+    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
+
+    @Inject RepositoryService repositoryService;
+    @Inject TitleService titleService;
+    @Inject MessageService messageService;
+
+    public Articulo(@NonNull int codigo) {
+        this.codigo = codigo;
+    }
+
+    public static Articulo withName(int codigo ) {
+        val articulo = new Articulo();
+        articulo.setCodigo(codigo);
+        return articulo;
+    }
+
+    @Title
+    @Codigo
+    @Getter
+    @Setter
+    @ToString.Include
+    @PropertyLayout(fieldSetId = "codigo", sequence = "1")
+    private int codigo;
 
     @Override
     public int compareTo(Articulo articulo) {
