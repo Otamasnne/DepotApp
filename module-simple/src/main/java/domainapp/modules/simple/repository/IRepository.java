@@ -6,9 +6,9 @@ public interface IRepository {
 
     void save(Object object);
 
-    <T> void save(List<T> objetos);
+    <T> void save(List<T> objects);
 
     <T> Object retrieve(Class<T> clase, String id);
 
-    <T> List<T> consultar(Class<T> clase);
+    <T> List<T> retrieve(Class<T> clase);
 }

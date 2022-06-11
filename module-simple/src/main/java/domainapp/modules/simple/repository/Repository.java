@@ -3,7 +3,9 @@ package domainapp.modules.simple.repository;
 import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
+import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Repository
@@ -33,17 +35,60 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public <T> void save(List<T> objetos) {
-
+    public <T> void save(List<T> objects) {
+        PersistenceManager pm = this.pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try{
+            tx.begin();
+            pm.makePersistentAll(objects);
+            tx.commit();
+        }finally {
+            if(tx.isActive()){
+                tx.rollback();
+            }
+            pm.close();
+        }
     }
 
     @Override
     public <T> Object retrieve(Class<T> clase, String id) {
-        return null;
+        Object object = null;
+
+        PersistenceManager pm = this.pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+
+        try {
+            tx.begin();
+            object = pm.getObjectById(clase,id);
+            tx.commit();
+        }finally {
+            if(tx.isActive()){
+                tx.rollback();
+            }
+            pm.close();
+        }
+        return object;
     }
 
     @Override
-    public <T> List<T> consultar(Class<T> clase) {
-        return null;
+    public <T> List<T> retrieve(Class<T> clase) {
+        List<T> list = new ArrayList<T>();
+
+        PersistenceManager pm = this.pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+
+        try{
+            tx.begin();
+            Query<T> query = pm.newQuery(clase);
+            list = query.executeList();
+            tx.commit();
+        }finally {
+            if(tx.isActive()){
+                tx.rollback();
+            }
+            pm.close();
+        }
+
+        return list;
     }
 }
