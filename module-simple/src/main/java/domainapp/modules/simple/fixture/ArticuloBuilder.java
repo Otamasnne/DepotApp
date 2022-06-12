@@ -17,12 +17,16 @@ public class ArticuloBuilder extends BuilderScriptWithResult<Articulo> {
     @Getter @Setter
     private String codigo;
 
+    @Getter @Setter
+    private String descripcion;
+
     @Override
     protected Articulo buildResult(final ExecutionContext ec) {
 
-        checkParam("codigo", ec, String.class);
+        checkParam("codigo", ec, int.class);
+        checkParam("descripcion", ec, String.class);
 
-        return wrap(articulos).create(codigo);
+        return wrap(articulos).create(codigo, descripcion);
     }
 
     // -- DEPENDENCIES

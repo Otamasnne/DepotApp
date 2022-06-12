@@ -2,6 +2,8 @@ package domainapp.modules.simple.dom.articulo;
 
 
 import domainapp.modules.simple.types.articulo.Codigo;
+import domainapp.modules.simple.types.articulo.Descripcion;
+import domainapp.modules.simple.types.articulo.Stock;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
@@ -15,6 +17,8 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+
+import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
 @javax.jdo.annotations.PersistenceCapable(
         schema = "depotapp",
@@ -52,19 +56,55 @@ public class Articulo implements Comparable<Articulo> {
     @Inject TitleService titleService;
     @Inject MessageService messageService;
 
-    public static Articulo withName(String codigo ) {
+    // Agregar una entidad proveedor al constructor mas adelante.
+    public static Articulo withName(String codigo, String descripcion) {
         val articulo = new Articulo();
+        codigo = ("000000" + codigo).substring(codigo.length());
         articulo.setCodigo(codigo);
+        articulo.setDescripcion(descripcion);
         return articulo;
     }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Borra el artículo y sus existencias.")
+    public String borrar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' borrado", title));
+        repositoryService.removeAndFlush(this);
+        return "Se borró el artículo " + nombre;
+    }
+
 
     @Title
     @Codigo
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "codigo", sequence = "1")
+    @PropertyLayout(fieldSetId = "articulo", sequence = "1")
     private String codigo;
+
+    @Descripcion
+    @Getter
+    @Setter
+    @ToString.Include
+    @PropertyLayout(fieldSetId = "articulo", sequence = "2")
+    private String descripcion;
+
+
+    @Stock
+    @Getter
+    @Setter
+    @ToString.Include
+    @PropertyLayout(fieldSetId = "articulo", sequence = "3")
+    private Integer stock;
+
+    //private Proveedor proveedor;
+
+
+
 
     private final static Comparator<Articulo> comparator =
             Comparator.comparing(Articulo::getCodigo);

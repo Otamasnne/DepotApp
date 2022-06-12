@@ -7,6 +7,8 @@
                 <mb3:serviceAction objectType="articulo.Articulo" id="create"/>
                 <mb3:serviceAction objectType="articulo.Articulo" id="findByName"/>
                 <mb3:serviceAction objectType="articulo.Articulo" id="listAll"/>
+                <mb3:serviceAction objectType="articulo.Articulo" id="ajustePositivo"/>
+                <mb3:serviceAction objectType="articulo.Articulo" id="ajusteNegativo"/>
             </mb3:section>
         </mb3:menu>
         <!--
