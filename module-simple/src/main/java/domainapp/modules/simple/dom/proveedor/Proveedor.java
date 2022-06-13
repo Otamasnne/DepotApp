@@ -83,6 +83,7 @@ public class Proveedor implements Comparable<Proveedor>{
     /**
      * PENDIENTE: agregar metodos para actualizar campos
      * Agregar Querys?
+     * Definir nombre de la clase repo
      */
 
     public static final Comparator<Proveedor> comparator = Comparator.comparing(Proveedor::getCodigo);
