@@ -4,11 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import domainapp.modules.simple.config.Config;
+
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.articulo.Articulos;
-import domainapp.modules.simple.service.IService;
-import domainapp.modules.simple.service.Service;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.HomePage;

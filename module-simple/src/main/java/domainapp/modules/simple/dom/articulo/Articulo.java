@@ -65,6 +65,7 @@ public class Articulo implements Comparable<Articulo> {
         return articulo;
     }
 
+
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
