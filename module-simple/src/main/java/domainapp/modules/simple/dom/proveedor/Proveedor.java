@@ -61,9 +61,9 @@ public class Proveedor implements Comparable<Proveedor>{
    }
 
    //Probando metodo title en lugar de anotacion (mejor personalizacion?)
-    public String title(){
-       return getCodigo() + getCodigo();
-    }
+//    public String title(){
+//       return getCodigo() + getCodigo();
+//    }
 
     // Por que no usar anotacion column?
     @Codigo
@@ -74,6 +74,7 @@ public class Proveedor implements Comparable<Proveedor>{
     @Getter @Setter @ToString.Include
     private String direccion;
 
+    @Title
     @Getter @Setter @ToString.Include
     private String razonSocial;
 

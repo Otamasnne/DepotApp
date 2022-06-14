@@ -95,7 +95,7 @@ public class Articulo implements Comparable<Articulo> {
     private String descripcion;
 
 
-    @Stock
+    //@Stock
     @Getter
     @Setter
     @ToString.Include

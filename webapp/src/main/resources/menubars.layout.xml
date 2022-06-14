@@ -11,6 +11,14 @@
                 <mb3:serviceAction objectType="articulo.Articulo" id="ajusteNegativo"/>
             </mb3:section>
         </mb3:menu>
+
+        <mb3:menu unreferencedActions="true">
+            <mb3:named>Proveedores</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction objectType="proveedor.Proveedor" id="create"/>
+                <mb3:serviceAction objectType="proveedor.Proveedor" id="listAll"/>
+            </mb3:section>
+        </mb3:menu>
         <!--
         <mb3:menu unreferencedActions="true">
             <mb3:named>Other</mb3:named>
