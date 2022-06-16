@@ -10,9 +10,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Column(allowsNull = "false")
+@Column(length = Codigo.MAX_LEN, allowsNull = "false")
+@Property(maxLength = Codigo.MAX_LEN)
+@Parameter(maxLength = Codigo.MAX_LEN)
 @ParameterLayout(named = "Codigo")
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Codigo {
+    int MAX_LEN = 6;
+
 }
