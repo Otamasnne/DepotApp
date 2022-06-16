@@ -10,12 +10,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Column(length = Stock.MAX_LEN, allowsNull = "false")
-@Property(maxLength = Stock.MAX_LEN)
-@Parameter(maxLength = Stock.MAX_LEN)
+@Column(allowsNull = "false")
 @ParameterLayout(named = "Stock")
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Stock {
-    int MAX_LEN = 6;
 }
