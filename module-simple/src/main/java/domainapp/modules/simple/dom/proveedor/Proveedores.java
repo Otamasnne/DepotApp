@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.proveedor;
 
 import domainapp.modules.simple.types.articulo.Codigo;
-import domainapp.modules.simple.types.articulo.RazonSocial;
+import domainapp.modules.simple.types.proveedor.RazonSocial;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.repository.RepositoryService;

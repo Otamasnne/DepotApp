@@ -80,7 +80,7 @@ public class Articulo implements Comparable<Articulo> {
 
 
     @Title
-    @Codigo
+    //@Codigo
     @Getter
     @Setter
     @ToString.Include
