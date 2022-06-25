@@ -1,6 +1,9 @@
 package domainapp.modules.simple.dom.articulo;
 
 
+import domainapp.modules.simple.dom.comprobante.Comprobantes;
+import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
+import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
 import domainapp.modules.simple.types.articulo.Codigo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +42,9 @@ public class Articulos {
     public String ajustePositivo(String articulo, int cantidad){
         Articulo objetivo = findByCodigoExact(articulo);
         objetivo.setStock(objetivo.getStock()+cantidad);
-        return "Se realizó el ajuste positivo para el artículo " + articulo + " por " + cantidad + " unidades.";
+        AjustePositivo comprobante = repositoryService.persist(AjustePositivo.creacion(objetivo, cantidad));
+        return "Se realizó el ajuste positivo para el artículo " + articulo + " por " + cantidad + " unidades. " +
+                "Comprobante: " + comprobante.title();
     }
 
     //Esta acción debe generar un comprobante de tipo AJN.
@@ -48,7 +53,9 @@ public class Articulos {
     public String ajusteNegativo(String articulo, int cantidad){
         Articulo objetivo = findByCodigoExact(articulo);
         objetivo.setStock(objetivo.getStock()-cantidad);
-        return "Se realizó el ajuste negativo para el artículo " + articulo + " por " + cantidad + " unidades.";
+        AjusteNegativo comprobante = repositoryService.persist(AjusteNegativo.creacion(objetivo, cantidad));
+        return "Se realizó el ajuste negativo para el artículo " + articulo + " por " + cantidad + " unidades. " +
+                "Comprobante: " + comprobante.title();
     }
 
 
