@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.Codigo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
@@ -16,6 +17,9 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.List;
+
+import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
 @javax.jdo.annotations.PersistenceCapable(
         schema = "depotapp",
@@ -59,6 +63,23 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @PropertyLayout(fieldSetId = "Kitarticulo", sequence = "2")
     private String descripcion;
 
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Borra el kit y sus existencias.")
+    public String borrar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' borrado", title));
+        repositoryService.removeAndFlush(this);
+        return "Se borró el Kit " + nombre;
+    }
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<KitArticulo> listAll(){
+        return repositoryService.allInstances(KitArticulo.class);
+    }
 
     private final static Comparator<KitArticulo> comparator =
             Comparator.comparing(KitArticulo::getCodigo);

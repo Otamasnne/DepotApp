@@ -16,6 +16,9 @@ import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 
@@ -82,6 +85,11 @@ public  class Articulo implements Comparable<Articulo> {
 
 
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Getter @Setter
+//    @PropertyLayout(fieldSetId = "metadata", sequence = "1")
+//    private Long id;
 
     @Title
     @Codigo

@@ -19,9 +19,9 @@ import javax.inject.Inject;
 )
 @ActionLayout(associateWith = "articulos", sequence = "1")
 @RequiredArgsConstructor
-public class KitArticulo_addArticulos {
-    @Inject
-    RepositoryService repositoryService;
+public class KitArticulo_addArticulo {
+    @Inject RepositoryService repositoryService;
+    @Inject ArticuloRepository articuloRepository;
 
     private final KitArticulo kitArticulo;
 
@@ -30,4 +30,6 @@ public class KitArticulo_addArticulos {
             @Descripcion final String descripcion) {
         return repositoryService.persist(KitArticulo.withName(codigo, descripcion));
     }
+
+
 }

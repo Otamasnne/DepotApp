@@ -23,6 +23,7 @@
             <mb3:named>KitArticulos</mb3:named>
             <mb3:section>
                 <mb3:serviceAction objectType="kitArticulo.KitArticulo" id="create"/>
+                <mb3:serviceAction objectType="kitArticulo.KitArticulo" id="listAll"/>
             </mb3:section>
         </mb3:menu>
 
