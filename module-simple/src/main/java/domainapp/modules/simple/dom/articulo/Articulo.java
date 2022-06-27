@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.articulo;
 
 
+import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.articulo.Codigo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -80,6 +81,8 @@ public  class Articulo implements Comparable<Articulo> {
     }
 
 
+
+
     @Title
     @Codigo
     @Getter
@@ -105,7 +108,11 @@ public  class Articulo implements Comparable<Articulo> {
 
     //private Proveedor proveedor;
 
-
+    @Getter
+    @Setter
+    @ToString.Include
+    @PropertyLayout(fieldSetId = "name", sequence = "1")
+    private KitArticulo kitArticulo;
 
 
     private final static Comparator<Articulo> comparator =
