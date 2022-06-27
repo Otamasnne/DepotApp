@@ -47,7 +47,8 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
-public class Articulo implements Comparable<Articulo> {
+@javax.persistence.Table(schema = "SIMPLE")
+public  class Articulo extends ItemComponent implements Comparable<Articulo> {
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Articulo.findByCodigoLike";
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
@@ -113,4 +114,5 @@ public class Articulo implements Comparable<Articulo> {
     public int compareTo(final Articulo other) {
         return comparator.compare(this, other);
     }
+
 }
