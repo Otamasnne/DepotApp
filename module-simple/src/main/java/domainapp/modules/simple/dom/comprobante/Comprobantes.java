@@ -23,7 +23,7 @@ public class Comprobantes {
     final RepositoryService repositoryService;
     final JdoSupportService jdoSupportService;
 
-
+/*
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public AjustePositivo crearAJP(
@@ -40,6 +40,8 @@ public class Comprobantes {
         return repositoryService.persist(AjusteNegativo.creacion(articulo, cantidad));
     }
 
+
+ */
 }
 
 
