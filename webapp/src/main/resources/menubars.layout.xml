@@ -19,6 +19,16 @@
                 <mb3:serviceAction objectType="proveedor.Proveedor" id="listAll"/>
             </mb3:section>
         </mb3:menu>
+
+    <mb3:primary>
+        <mb3:menu unreferencedActions="true">
+            <mb3:named>Cliente</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction objectType="cliente.Cliente" id="create"/>
+                <mb3:serviceAction objectType="cliente.Cliente" id="findByName"/>
+                <mb3:serviceAction objectType="cliente.Cliente" id="listAll"/>
+            </mb3:section>
+        </mb3:menu>
         <!--
         <mb3:menu unreferencedActions="true">
             <mb3:named>Other</mb3:named>
