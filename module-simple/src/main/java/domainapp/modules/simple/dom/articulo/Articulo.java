@@ -1,9 +1,7 @@
 package domainapp.modules.simple.dom.articulo;
 
 
-import domainapp.modules.simple.types.articulo.Codigo;
 import domainapp.modules.simple.types.articulo.Descripcion;
-import domainapp.modules.simple.types.articulo.Stock;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;

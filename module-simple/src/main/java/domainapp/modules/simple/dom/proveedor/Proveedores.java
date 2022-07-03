@@ -1,6 +1,6 @@
 package domainapp.modules.simple.dom.proveedor;
 
-import domainapp.modules.simple.types.articulo.Codigo;
+import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.proveedor.RazonSocial;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
@@ -26,7 +26,7 @@ public class Proveedores {
     //USAMOS "CODIGO" PARA LA MAYORIA O DEBERIAMOS HACER UN IDENTIFICADOR APARTE PARA PROVEEDOR??
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Proveedor create(@Codigo final String codigo,
+    public Proveedor create(@CodigoArticulo final String codigo,
     @RazonSocial final String razonSocial){
         return repositoryService.persist(Proveedor.withName(codigo,razonSocial));
     }

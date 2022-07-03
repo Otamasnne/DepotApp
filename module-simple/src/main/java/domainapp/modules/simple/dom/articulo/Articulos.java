@@ -1,12 +1,10 @@
 package domainapp.modules.simple.dom.articulo;
 
 
-import domainapp.modules.simple.dom.comprobante.Comprobantes;
 import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
 import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
-import domainapp.modules.simple.types.articulo.Codigo;
+import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
-import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
@@ -31,7 +29,7 @@ public class Articulos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Articulo create(
-            @Codigo final String codigo,
+            @CodigoArticulo final String codigo,
             @Descripcion final String descripcion) {
         return repositoryService.persist(Articulo.withName(codigo, descripcion));
     }
@@ -63,7 +61,7 @@ public class Articulos {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Articulo> findByCodigo(
-            @Codigo final String codigo
+            @CodigoArticulo final String codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE)

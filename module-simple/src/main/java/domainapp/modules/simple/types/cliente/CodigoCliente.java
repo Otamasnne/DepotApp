@@ -7,12 +7,12 @@ import org.apache.isis.applib.annotation.Parameter;
         import java.lang.annotation.ElementType;
         import java.lang.annotation.Target;
 
-@Property(maxLength = Codigo.MAX_LEN)
-@Column(length = Codigo.MAX_LEN, allowsNull = "false")
-@Parameter(maxLength = Codigo.MAX_LEN)
+@Property(maxLength = CodigoCliente.MAX_LEN)
+@Column(length = CodigoCliente.MAX_LEN, allowsNull = "false")
+@Parameter(maxLength = CodigoCliente.MAX_LEN)
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
 
-public @interface Codigo {
+public @interface CodigoCliente {
     int MAX_LEN =12;
 
 
