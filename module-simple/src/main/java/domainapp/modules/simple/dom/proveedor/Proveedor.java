@@ -1,8 +1,6 @@
 package domainapp.modules.simple.dom.proveedor;
 
-import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.types.articulo.Codigo;
-import domainapp.modules.simple.types.articulo.Stock;
+import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
@@ -66,7 +64,7 @@ public class Proveedor implements Comparable<Proveedor>{
 //    }
 
     // Por que no usar anotacion column?
-    @Codigo
+    @CodigoArticulo
     @Getter @Setter @ToString.Include
     @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
     private String codigo;

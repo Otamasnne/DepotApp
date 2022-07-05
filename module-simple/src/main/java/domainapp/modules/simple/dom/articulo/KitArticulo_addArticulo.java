@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.articulo;
 
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
-import domainapp.modules.simple.types.articulo.Codigo;
+import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
@@ -21,12 +21,11 @@ import javax.inject.Inject;
 @RequiredArgsConstructor
 public class KitArticulo_addArticulo {
     @Inject RepositoryService repositoryService;
-    @Inject ArticuloRepository articuloRepository;
 
     private final KitArticulo kitArticulo;
 
     public KitArticulo act (
-            @Codigo final String codigo,
+            @CodigoArticulo final String codigo,
             @Descripcion final String descripcion) {
         return repositoryService.persist(KitArticulo.withName(codigo, descripcion));
     }

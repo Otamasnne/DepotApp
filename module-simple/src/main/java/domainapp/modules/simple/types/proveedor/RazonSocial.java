@@ -1,4 +1,5 @@
-package domainapp.modules.simple.types.articulo;
+package domainapp.modules.simple.types.proveedor;
+
 
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
@@ -10,13 +11,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Column(length = Descripcion.MAX_LEN, allowsNull = "false")
-@Property(maxLength = Descripcion.MAX_LEN)
-@Parameter(maxLength = Descripcion.MAX_LEN)
-@ParameterLayout(named = "Descripcion")
+@Column(length = RazonSocial.MAX_LEN, allowsNull = "false")
+
+@Property(maxLength = RazonSocial.MAX_LEN)
+@Parameter(maxLength = RazonSocial.MAX_LEN)
+@ParameterLayout(named = "Razon social")
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Descripcion{
+public @interface RazonSocial {
     int MAX_LEN = 250;
-
 }

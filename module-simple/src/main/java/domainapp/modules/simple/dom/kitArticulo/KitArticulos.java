@@ -2,7 +2,8 @@ package domainapp.modules.simple.dom.kitArticulo;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
-import domainapp.modules.simple.types.articulo.Codigo;
+import domainapp.modules.simple.types.articulo.CodigoArticulo;
+import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.repository.RepositoryService;
@@ -25,7 +26,7 @@ public class KitArticulos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public KitArticulo create(
-            @Codigo final String codigo,
+            @CodigoArticulo final String codigo,
             @Descripcion final String descripcion) {
         return repositoryService.persist(KitArticulo.withName(codigo, descripcion));
     }
