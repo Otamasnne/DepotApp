@@ -4,6 +4,7 @@ import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
+import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
@@ -54,16 +55,19 @@ public class KitArticulo implements Comparable<KitArticulo>{
     }
 
     @Title
-    @CodigoArticulo
+    @CodigoKit
     @Getter @Setter @ToString.Include
-    @PropertyLayout(fieldSetId = "Kitarticulo", sequence = "1")
+    @PropertyLayout(fieldSetId = "kitArticulo", sequence = "1")
     private String codigo;
 
     @Descripcion
     @Getter @Setter @ToString.Include
-    @PropertyLayout(fieldSetId = "Kitarticulo", sequence = "2")
+    @PropertyLayout(fieldSetId = "kitArticulo", sequence = "2")
     private String descripcion;
 
+    @Getter@Setter@ToString.Include
+    @PropertyLayout(fieldSetId = "kitArticulo", sequence ="3" )
+    private List<Articulo> articulos;
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
