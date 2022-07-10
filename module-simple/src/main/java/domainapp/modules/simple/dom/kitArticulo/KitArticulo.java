@@ -1,6 +1,8 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.articulo.Articulos;
+import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
@@ -9,6 +11,7 @@ import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
+import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
@@ -18,6 +21,7 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -37,6 +41,14 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
 @javax.persistence.Table(schema = "SIMPLE")
+@javax.jdo.annotations.Queries({
+        @javax.jdo.annotations.Query(
+                name = KitArticulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
+                        "WHERE codigo == :codigo"
+        )
+})
 public class KitArticulo implements Comparable<KitArticulo>{
 
     @Inject
@@ -45,6 +57,8 @@ public class KitArticulo implements Comparable<KitArticulo>{
     TitleService titleService;
     @Inject
     MessageService messageService;
+
+    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
 
     public static KitArticulo withName(String codigo, String descripcion) {
         val kitArticulo = new KitArticulo();
@@ -66,8 +80,12 @@ public class KitArticulo implements Comparable<KitArticulo>{
     private String descripcion;
 
     @Getter@Setter@ToString.Include
+    @Collection
     @PropertyLayout(fieldSetId = "kitArticulo", sequence ="3" )
     private List<Articulo> articulos;
+
+    // ?
+//    private Articulos artic;
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
@@ -86,6 +104,27 @@ public class KitArticulo implements Comparable<KitArticulo>{
         return repositoryService.allInstances(KitArticulo.class);
     }
 
+    //PRUEBA
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public void addArticulo(String articulo){
+        Articulo objetivo = findByCodigoExact(articulo);
+
+        repositoryService.persist(articulos.add(objetivo));;
+    }
+
+
+
+
+
+    public Articulo findByCodigoExact(final String codigo) {
+        return repositoryService.firstMatch(
+                        Query.named(Articulo.class, KitArticulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
+                                .withParameter("codigo", codigo))
+                .orElse(null);
+    }
+
+    //Prueba
     private final static Comparator<KitArticulo> comparator =
             Comparator.comparing(KitArticulo::getCodigo);
     @Override
