@@ -117,8 +117,8 @@ public  class Articulo implements Comparable<Articulo> {
 
     //private Proveedor proveedor;
 
-    @Getter@Setter
-    private KitArticulo kitArticulo;
+//    @Getter@Setter
+//    private KitArticulo kitArticulo;
 
 
     private final static Comparator<Articulo> comparator =
