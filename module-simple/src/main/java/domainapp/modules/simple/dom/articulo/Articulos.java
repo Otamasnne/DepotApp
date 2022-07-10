@@ -105,10 +105,13 @@ public class Articulos {
 
 
 
-    @Programmatic
-    public void ping() {
-        JDOQLTypedQuery<Articulo> q = jdoSupportService.newTypesafeQuery(Articulo.class);
-        final QArticulo candidate = QArticulo.candidate();
+
+
+
+   @Programmatic
+  public void ping() {
+       JDOQLTypedQuery<Articulo> q = jdoSupportService.newTypesafeQuery(Articulo.class);
+       final QArticulo candidate = QArticulo.candidate();
         q.range(0,2);
         q.orderBy(candidate.codigo.asc());
         q.executeList();

@@ -27,7 +27,9 @@ public class KitArticulos {
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public KitArticulo create(
             @CodigoArticulo final String codigo,
-            @Descripcion final String descripcion) {
+            @Descripcion final String descripcion
+            )
+            {
         return repositoryService.persist(KitArticulo.withName(codigo, descripcion));
     }
 
