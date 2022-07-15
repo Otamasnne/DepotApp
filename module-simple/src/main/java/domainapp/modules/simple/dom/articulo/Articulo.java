@@ -36,13 +36,25 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 name = Articulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo.indexOf(:codigo) >= 0"
+                        "WHERE codigo.indexOf(:codigo) >= 0 and habilitado is true"
         ),
         @javax.jdo.annotations.Query(
                 name = Articulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo == :codigo"
+                        "WHERE codigo == :codigo and habilitado is true"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Articulo.NAMED_QUERY__FIND_BY_HABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
+                        "WHERE codigo == :codigo and estado='Habilitado'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Articulo.NAMED_QUERY__FIND_BY_DESHABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
+                        "WHERE codigo == :codigo and estado='Deshabilitado'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -57,6 +69,8 @@ public  class Articulo implements Comparable<Articulo> {
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Articulo.findByCodigoLike";
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
+    static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
+    static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Articulo.findByDeshabilitado";
 
     @Inject RepositoryService repositoryService;
     @Inject TitleService titleService;
@@ -84,6 +98,29 @@ public  class Articulo implements Comparable<Articulo> {
         return "Se borró el artículo " + nombre;
     }
 
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Habilita el artículo")
+    public String habilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' habilitado", title));
+        this.setEstado("Habilitado");
+        return "Se habilitó el artículo " + nombre;
+    }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Deshabilita el artículo.")
+    public String deshabilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' deshabilitado", title));
+        this.setEstado("Deshabilitado");
+        return "Se deshabilitó el artículo " + nombre;
+    }
 
 
 //    @Id
@@ -114,6 +151,11 @@ public  class Articulo implements Comparable<Articulo> {
     @ToString.Include
     @PropertyLayout(fieldSetId = "articulo", sequence = "3")
     private Integer stock;
+
+    @Getter
+    @Setter
+    @ToString.Include
+    private String estado;
 
     //private Proveedor proveedor;
 

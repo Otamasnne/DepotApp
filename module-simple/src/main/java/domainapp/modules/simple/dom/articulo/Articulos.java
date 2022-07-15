@@ -86,6 +86,22 @@ public class Articulos {
         return repositoryService.allInstances(Articulo.class);
     }
 
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Articulo> articulosHabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_HABILITADO)
+        );
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Articulo> articulosDeshabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_DESHABILITADO)
+        );
+    }
+
 
 
 
