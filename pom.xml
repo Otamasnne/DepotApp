@@ -50,6 +50,9 @@
                 <version>42.3.5</version>
             </dependency>
 
+
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -60,6 +63,9 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+
+
 
     <modules>
         <module>module-simple</module>
