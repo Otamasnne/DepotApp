@@ -1,12 +1,14 @@
 package domainapp.modules.simple.dom.pedidos;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.types.pedido.CodigoPedido;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Publishing;
+import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
@@ -45,7 +47,8 @@ public class Pedido implements Comparable<Pedido> {
     @Inject
     MessageService messageService;
 
-    @
+    @Title
+    @CodigoPedido
     private String codigo;
 
 
