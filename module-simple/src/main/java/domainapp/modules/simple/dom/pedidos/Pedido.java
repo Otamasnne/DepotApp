@@ -2,9 +2,7 @@ package domainapp.modules.simple.dom.pedidos;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.Publishing;
@@ -49,9 +47,18 @@ public class Pedido implements Comparable<Pedido> {
 
     @Title
     @CodigoPedido
+    @Getter@Setter @ToString.Include
     private String codigo;
 
 
+    public static Pedido withName(String codigo) {
+        val pedido = new Pedido();
+        codigo = ("000000" + codigo).substring(codigo.length());
+        pedido.setCodigo(codigo);
+        return pedido;
+    }
+
+    
     private final static Comparator<Pedido> comparator =
             Comparator.comparing(Pedido::getCodigo);
     @Override
