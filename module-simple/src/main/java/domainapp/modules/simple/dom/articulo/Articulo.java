@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.articulo;
 
 
 
+import domainapp.modules.simple.dom.EstadoACP;
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
@@ -48,13 +49,13 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 name = Articulo.NAMED_QUERY__FIND_BY_HABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo == :codigo and estado='Habilitado'"
+                        "WHERE codigo == :codigo and estado='HABILITADO'"
         ),
         @javax.jdo.annotations.Query(
                 name = Articulo.NAMED_QUERY__FIND_BY_DESHABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo == :codigo and estado='Deshabilitado'"
+                        "WHERE codigo == :codigo and estado='DESHABILITADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -82,6 +83,8 @@ public  class Articulo implements Comparable<Articulo> {
         codigo = ("000000" + codigo).substring(codigo.length());
         articulo.setCodigo(codigo);
         articulo.setDescripcion(descripcion);
+        articulo.setStock(0);
+        articulo.setEstado(EstadoACP.HABILITADO);
         return articulo;
     }
 
@@ -106,7 +109,7 @@ public  class Articulo implements Comparable<Articulo> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
-        this.setEstado("Habilitado");
+        this.setEstado(EstadoACP.HABILITADO);
         return "Se habilitó el artículo " + nombre;
     }
 
@@ -118,7 +121,7 @@ public  class Articulo implements Comparable<Articulo> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
-        this.setEstado("Deshabilitado");
+        this.setEstado(EstadoACP.DESHABILITADO);
         return "Se deshabilitó el artículo " + nombre;
     }
 
@@ -155,7 +158,7 @@ public  class Articulo implements Comparable<Articulo> {
     @Getter
     @Setter
     @ToString.Include
-    private String estado;
+    private EstadoACP estado;
 
     //private Proveedor proveedor;
 

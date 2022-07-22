@@ -1,5 +1,7 @@
 package domainapp.modules.simple.dom.cliente;
 
+import domainapp.modules.simple.dom.EstadoACP;
+import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.cliente.CodigoCliente;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
@@ -38,6 +40,18 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.cliente.Cliente " +
                         "WHERE codigo == :codigo"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Cliente.NAMED_QUERY__FIND_BY_HABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.cliente.Cliente " +
+                        "WHERE codigo == :codigo and estado='HABILITADO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Cliente.NAMED_QUERY__FIND_BY_DESHABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.cliente.Cliente " +
+                        "WHERE codigo == :codigo and estado='DESHABILITADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -53,6 +67,8 @@ public class Cliente implements Comparable<Cliente>{
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Cliente.findByCodigoLike";
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Cliente.findByCodigoExact";
+    static final String NAMED_QUERY__FIND_BY_HABILITADO = "Cliente.findByHabilitado";
+    static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Cliente.findByDeshabilitado";
 
     @Inject RepositoryService repositoryService;
     @Inject TitleService titleService;
@@ -65,9 +81,33 @@ public class Cliente implements Comparable<Cliente>{
         cliente.setCodigo(codigo);
         cliente.setDni(dni);
         cliente.setRazonSocial(razonSocial);
+        cliente.setEstado(EstadoACP.HABILITADO);
         return cliente;
     }
 
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Habilita el cliente")
+    public String habilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' habilitado", title));
+        this.setEstado(EstadoACP.HABILITADO);
+        return "Se habilitó el cliente " + nombre;
+    }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Deshabilita el cliente.")
+    public String deshabilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' deshabilitado", title));
+        this.setEstado(EstadoACP.DESHABILITADO);
+        return "Se deshabilitó el cliente " + nombre;
+    }
 
     @CodigoCliente
     @Title
@@ -89,7 +129,10 @@ public class Cliente implements Comparable<Cliente>{
     @PropertyLayout(fieldSetId = "cliente", sequence = "3")
     private String razonSocial;
 
-
+    @Setter
+    @Getter
+    @PropertyLayout(fieldSetId = "cliente", sequence = "4")
+    private EstadoACP estado;
 
 
 

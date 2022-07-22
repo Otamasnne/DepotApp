@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dom.cliente;
 
+import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.cliente.CodigoCliente;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
@@ -54,11 +55,27 @@ public class Clientes {
     }
 
 
-
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<Cliente> listAll() {
         return repositoryService.allInstances(Cliente.class);
+    }
+
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Cliente> clientesHabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_HABILITADO)
+        );
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Cliente> clientesDeshabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_DESHABILITADO)
+        );
     }
 
 
