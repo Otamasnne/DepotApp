@@ -1,9 +1,11 @@
 package domainapp.modules.simple.dom.proveedor;
 
+import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.proveedor.RazonSocial;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
@@ -29,6 +31,42 @@ public class Proveedores {
     public Proveedor create(@CodigoArticulo final String codigo,
     @RazonSocial final String razonSocial){
         return repositoryService.persist(Proveedor.withName(codigo,razonSocial));
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public List<Proveedor> findByCodigo(
+            @CodigoArticulo final String codigo
+    ) {
+        return repositoryService.allMatches(
+                Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
+                        .withParameter("codigo", codigo));
+    }
+
+
+
+    @Programmatic
+    public Proveedor findByCodigoExact(final String codigo) {
+        return repositoryService.firstMatch(
+                        Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
+                                .withParameter("codigo", codigo))
+                .orElse(null);
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Proveedor> proveedoresHabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_HABILITADO)
+        );
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Proveedor> proveedoresDeshabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_DESHABILITADO)
+        );
     }
 
     @Action(semantics = SemanticsOf.SAFE)

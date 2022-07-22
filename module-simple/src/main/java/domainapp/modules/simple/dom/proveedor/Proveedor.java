@@ -1,5 +1,7 @@
 package domainapp.modules.simple.dom.proveedor;
 
+import domainapp.modules.simple.dom.EstadoACP;
+import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
@@ -14,6 +16,8 @@ import javax.jdo.annotations.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 
+import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
+
 @PersistenceCapable(
         schema = "depotapp",
         identityType = IdentityType.DATASTORE
@@ -21,6 +25,32 @@ import java.util.Comparator;
 @Unique(
         name= "Proveedor_codigo_UNQ", members = {"codigo"}
 )
+@javax.jdo.annotations.Queries({
+        @javax.jdo.annotations.Query(
+                name = Proveedor.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
+                        "WHERE codigo.indexOf(:codigo) >= 0 and habilitado is true"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Proveedor.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
+                        "WHERE codigo == :codigo and habilitado is true"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Proveedor.NAMED_QUERY__FIND_BY_HABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
+                        "WHERE codigo == :codigo and estado='HABILITADO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Proveedor.NAMED_QUERY__FIND_BY_DESHABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
+                        "WHERE codigo == :codigo and estado='DESHABILITADO'"
+        )
+})
 @DatastoreIdentity(strategy = IdGeneratorStrategy.IDENTITY, column="id")
 @Version(strategy = VersionStrategy.DATE_TIME, column="version")
 @DomainObject(logicalTypeName = "depotapp.Proveedor", entityChangePublishing = Publishing.ENABLED)
@@ -29,6 +59,12 @@ import java.util.Comparator;
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
 public class Proveedor implements Comparable<Proveedor>{
+
+    static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Proveedor.findByCodigoLike";
+    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Proveedor.findByCodigoExact";
+    static final String NAMED_QUERY__FIND_BY_HABILITADO = "Proveedor.findByHabilitado";
+    static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Proveedor.findByDeshabilitado";
+
 
     @Inject
     RepositoryService repositoryService;
@@ -47,6 +83,7 @@ public class Proveedor implements Comparable<Proveedor>{
 //       proveedor.setTelefono(telefono);
 //       proveedor.setLocalidad(localidad);
 //       proveedor.setEmail(email);
+//       proveedor.setEstado(EstadoACP.HABILITADO);
 //       return proveedor;
 //   }
 
@@ -55,8 +92,33 @@ public class Proveedor implements Comparable<Proveedor>{
        codigo = ("000000" + codigo).substring(codigo.length());
        proveedor.setCodigo(codigo);
        proveedor.setRazonSocial(razonSocial);
+       proveedor.setEstado(EstadoACP.HABILITADO);
        return proveedor;
    }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Habilita el proveedor")
+    public String habilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' habilitado", title));
+        this.setEstado(EstadoACP.HABILITADO);
+        return "Se habilitó el proveedor " + nombre;
+    }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Deshabilita el proveedor.")
+    public String deshabilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' deshabilitado", title));
+        this.setEstado(EstadoACP.DESHABILITADO);
+        return "Se deshabilitó el proveedor " + nombre;
+    }
 
    //Probando metodo title en lugar de anotacion (mejor personalizacion?)
 //    public String title(){
@@ -87,6 +149,10 @@ public class Proveedor implements Comparable<Proveedor>{
     @Getter @Setter @ToString.Include
     private String email;
 
+    @Getter
+    @Setter
+    @ToString.Include
+    private EstadoACP estado;
 
     /**
      * PENDIENTE: agregar metodos para actualizar campos
