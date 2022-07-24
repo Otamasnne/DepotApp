@@ -45,13 +45,13 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 name = Cliente.NAMED_QUERY__FIND_BY_HABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.cliente.Cliente " +
-                        "WHERE codigo == :codigo and estado='HABILITADO'"
+                        "WHERE estado == 'HABILITADO'"
         ),
         @javax.jdo.annotations.Query(
                 name = Cliente.NAMED_QUERY__FIND_BY_DESHABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.cliente.Cliente " +
-                        "WHERE codigo == :codigo and estado='DESHABILITADO'"
+                        "WHERE estado == 'DESHABILITADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -108,6 +108,15 @@ public class Cliente implements Comparable<Cliente>{
         this.setEstado(EstadoACP.DESHABILITADO);
         return "Se deshabilitó el cliente " + nombre;
     }
+
+    public String disableHabilitar() {
+        return this.getEstado()==EstadoACP.HABILITADO ? "Ya se encuentra habilitado" : null;
+    }
+
+    public String disableDeshabilitar() {
+        return this.getEstado()==EstadoACP.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
+    }
+
 
     @CodigoCliente
     @Title

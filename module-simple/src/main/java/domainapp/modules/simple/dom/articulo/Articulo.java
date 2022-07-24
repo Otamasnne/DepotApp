@@ -23,6 +23,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.EmptyStackException;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -37,25 +38,25 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 name = Articulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo.indexOf(:codigo) >= 0 and habilitado is true"
+                        "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = Articulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo == :codigo and habilitado is true"
+                        "WHERE codigo == :codigo"
         ),
         @javax.jdo.annotations.Query(
                 name = Articulo.NAMED_QUERY__FIND_BY_HABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo == :codigo and estado='HABILITADO'"
+                        "WHERE estado == 'HABILITADO'"
         ),
         @javax.jdo.annotations.Query(
                 name = Articulo.NAMED_QUERY__FIND_BY_DESHABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE codigo == :codigo and estado='DESHABILITADO'"
+                        "WHERE estado == 'DESHABILITADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -113,6 +114,7 @@ public  class Articulo implements Comparable<Articulo> {
         return "Se habilitó el artículo " + nombre;
     }
 
+
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
@@ -123,6 +125,14 @@ public  class Articulo implements Comparable<Articulo> {
         messageService.informUser(String.format("'%s' deshabilitado", title));
         this.setEstado(EstadoACP.DESHABILITADO);
         return "Se deshabilitó el artículo " + nombre;
+    }
+
+    public String disableHabilitar() {
+        return this.getEstado()==EstadoACP.HABILITADO ? "Ya se encuentra habilitado" : null;
+    }
+
+    public String disableDeshabilitar() {
+        return this.getEstado()==EstadoACP.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
     }
 
 

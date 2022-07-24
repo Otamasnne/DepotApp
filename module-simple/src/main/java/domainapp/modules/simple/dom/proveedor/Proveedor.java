@@ -30,25 +30,25 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 name = Proveedor.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
-                        "WHERE codigo.indexOf(:codigo) >= 0 and habilitado is true"
+                        "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = Proveedor.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
-                        "WHERE codigo == :codigo and habilitado is true"
+                        "WHERE codigo == :codigo"
         ),
         @javax.jdo.annotations.Query(
                 name = Proveedor.NAMED_QUERY__FIND_BY_HABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
-                        "WHERE codigo == :codigo and estado='HABILITADO'"
+                        "WHERE estado == 'HABILITADO'"
         ),
         @javax.jdo.annotations.Query(
                 name = Proveedor.NAMED_QUERY__FIND_BY_DESHABILITADO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.proveedor.Proveedor " +
-                        "WHERE codigo == :codigo and estado='DESHABILITADO'"
+                        "WHERE estado == 'DESHABILITADO'"
         )
 })
 @DatastoreIdentity(strategy = IdGeneratorStrategy.IDENTITY, column="id")
@@ -120,7 +120,16 @@ public class Proveedor implements Comparable<Proveedor>{
         return "Se deshabilitó el proveedor " + nombre;
     }
 
-   //Probando metodo title en lugar de anotacion (mejor personalizacion?)
+    public String disableHabilitar() {
+        return this.getEstado()==EstadoACP.HABILITADO ? "Ya se encuentra habilitado" : null;
+    }
+
+    public String disableDeshabilitar() {
+        return this.getEstado()==EstadoACP.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
+    }
+
+
+    //Probando metodo title en lugar de anotacion (mejor personalizacion?)
 //    public String title(){
 //       return getCodigo() + getCodigo();
 //    }
