@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
+import domainapp.modules.simple.dom.Item;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.articulo.Articulos;
 import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
@@ -82,10 +83,8 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @Getter@Setter@ToString.Include
     @Collection
     @PropertyLayout(fieldSetId = "kitArticulo", sequence ="3" )
-    private List<Articulo> articulos;
+    private List<Item> articulos;
 
-    // ?
-//    private Articulos artic;
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
@@ -98,31 +97,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
         repositoryService.removeAndFlush(this);
         return "Se borró el Kit " + nombre;
     }
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
-    public List<KitArticulo> listAll(){
-        return repositoryService.allInstances(KitArticulo.class);
-    }
 
-    //PRUEBA
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public void addArticulo(String articulo){
-        Articulo objetivo = findByCodigoExact(articulo);
-
-        repositoryService.persist(articulos.add(objetivo));;
-    }
-
-
-
-
-
-    public Articulo findByCodigoExact(final String codigo) {
-        return repositoryService.firstMatch(
-                        Query.named(Articulo.class, KitArticulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
-                                .withParameter("codigo", codigo))
-                .orElse(null);
-    }
 
     //Prueba
     private final static Comparator<KitArticulo> comparator =

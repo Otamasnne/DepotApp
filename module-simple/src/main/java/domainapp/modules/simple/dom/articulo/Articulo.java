@@ -57,6 +57,12 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
                         "WHERE estado == 'DESHABILITADO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Articulo.NAMED_QUERY__FIND_BY_KIT,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
+                        "WHERE estado == 'DESHABILITADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -73,7 +79,7 @@ public  class Articulo implements Comparable<Articulo> {
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Articulo.findByDeshabilitado";
-
+    static final String NAMED_QUERY__FIND_BY_KIT = "Articulo.findByKit";
     @Inject RepositoryService repositoryService;
     @Inject TitleService titleService;
     @Inject MessageService messageService;
@@ -137,11 +143,6 @@ public  class Articulo implements Comparable<Articulo> {
     }
 
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Getter @Setter
-//    @PropertyLayout(fieldSetId = "metadata", sequence = "1")
-//    private Long id;
 
     @Title
     @CodigoArticulo
@@ -170,11 +171,6 @@ public  class Articulo implements Comparable<Articulo> {
     @Setter
     @ToString.Include
     private EstadoACP estado;
-
-    //private Proveedor proveedor;
-
-//    @Getter@Setter
-//    private KitArticulo kitArticulo;
 
 
     private final static Comparator<Articulo> comparator =
