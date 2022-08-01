@@ -65,6 +65,7 @@ public  class Articulo implements Comparable<Articulo> {
     // Agregar una entidad proveedor al constructor mas adelante.
     public static Articulo withName(String codigo, String descripcion) {
         val articulo = new Articulo();
+        articulo.setStock(0);
         codigo = ("000000" + codigo).substring(codigo.length());
         articulo.setCodigo(codigo);
         articulo.setDescripcion(descripcion);

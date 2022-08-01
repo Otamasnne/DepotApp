@@ -2,27 +2,81 @@
 <bs3:grid xsi:schemaLocation="http://isis.apache.org/applib/layout/component http://isis.apache.org/applib/layout/component/component.xsd http://isis.apache.org/applib/layout/links http://isis.apache.org/applib/layout/links/links.xsd http://isis.apache.org/applib/layout/grid/bootstrap3 http://isis.apache.org/applib/layout/grid/bootstrap3/bootstrap3.xsd" xmlns:bs3="http://isis.apache.org/applib/layout/grid/bootstrap3" xmlns:cpt="http://isis.apache.org/applib/layout/component" xmlns:lnk="http://isis.apache.org/applib/layout/links" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <bs3:row>
         <bs3:col span="12" unreferencedActions="true">
-            <cpt:domainObject bookmarking="AS_ROOT"/>
+            <cpt:domainObject bookmarking="AS_ROOT">
+                <cpt:named>Cliente</cpt:named>
+                <cpt:serviceAction objectType="cliente.Cliente" id="create"/>
+                <cpt:serviceAction objectType="cliente.Cliente" id="findByName"/>
+                <cpt:serviceAction objectType="cliente.Cliente" id="listAll"/>
+                <cpt:plural>Clientes</cpt:plural>
+            </cpt:domainObject>
+
         </bs3:col>
     </bs3:row>
     <bs3:row>
-        <bs3:col span="6">
+        <bs3:col span="20">
             <bs3:row>
-                <bs3:col span="12">
+                <bs3:col span="6">
                     <bs3:tabGroup>
-                        <bs3:tab name="General">
+                        <bs3:tab name="Datos">
                             <bs3:row>
                                 <bs3:col span="12">
-                                    <cpt:fieldSet name="Cliente" id="cliente"/>
+                                    <cpt:fieldSet name="Cliente">
+                                        <cpt:property dateRenderAdjustDays="0" id="codigo" labelPosition="NOT_SPECIFIED" typicalLength="25"/>
+                                        <cpt:property dateRenderAdjustDays="0" id="dni" labelPosition="NOT_SPECIFIED" typicalLength="11"/>
+                                        <cpt:property dateRenderAdjustDays="0" id="razonSocial" labelPosition="NOT_SPECIFIED" typicalLength="25"/>
+                                    </cpt:fieldSet>
                                 </bs3:col>
                             </bs3:row>
                         </bs3:tab>
                         <bs3:tab name="Metadata">
                             <bs3:row>
                                 <bs3:col span="12">
-                                    <cpt:fieldSet name="Metadata" id="metadata"/>
+                                    <cpt:fieldSet name="Metadata" id="metadata">
+                                        <cpt:action cssClassFa="fa fa-fw fa-circle" cssClassFaPosition="LEFT" id="clearHints" position="PANEL_DROPDOWN">
+                                            <cpt:named>Clear Hints</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-download" cssClassFaPosition="LEFT" id="downloadLayoutXml" position="PANEL_DROPDOWN">
+                                            <cpt:named>Download Layout Xml</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-download" cssClassFaPosition="LEFT" id="downloadMetamodelXml" position="PANEL_DROPDOWN">
+                                            <cpt:named>Download Metamodel Xml</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-sitemap" cssClassFaPosition="LEFT" id="inspectMetamodel" position="PANEL_DROPDOWN">
+                                            <cpt:named>Inspect Metamodel</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-download" cssClassFaPosition="LEFT" id="downloadJdoMetadata" position="PANEL_DROPDOWN">
+                                            <cpt:named>Download Jdo Metadata</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-external-link-alt" cssClassFaPosition="LEFT" id="openRestApi" position="PANEL_DROPDOWN">
+                                            <cpt:named>Open Rest Api</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-sync" cssClassFaPosition="LEFT" id="rebuildMetamodel" position="PANEL_DROPDOWN">
+                                            <cpt:named>Rebuild Metamodel</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-mask" cssClassFaPosition="LEFT" id="impersonate" position="PANEL_DROPDOWN">
+                                            <cpt:named>Impersonate</cpt:named>
+                                        </cpt:action>
+                                        <cpt:action cssClassFa="fa fa-fw fa-mask" cssClassFaPosition="LEFT" id="impersonateWithRoles" position="PANEL_DROPDOWN">
+                                            <cpt:named>Impersonate With Roles</cpt:named>
+                                        </cpt:action>
+
+                                        <cpt:property dateRenderAdjustDays="0" hidden="ALL_TABLES" id="numeroDeIdentidad" typicalLength="25">
+                                            <cpt:named>Numero de identidad</cpt:named>
+                                        </cpt:property>
+                                        <cpt:property dateRenderAdjustDays="0" hidden="ALL_TABLES" id="fechaDeCreacion">
+                                            <cpt:named>Fecha de Creacion</cpt:named>
+                                        </cpt:property>
+                                        <cpt:property dateRenderAdjustDays="0" hidden="ALL_TABLES" id="fechaDeCreacion">
+                                            <cpt:named>Fecha de Creacion</cpt:named>
+                                        </cpt:property>
+                                    </cpt:fieldSet>
                                 </bs3:col>
                             </bs3:row>
+                        </bs3:tab>
+                        <bs3:tab>
+                            <cpt:action id="borrar">
+                                <cpt:describedAs>Borra el cliente.</cpt:describedAs>
+                            </cpt:action>
                         </bs3:tab>
                         <bs3:tab name="Other">
                             <bs3:row>
@@ -35,8 +89,7 @@
                 </bs3:col>
             </bs3:row>
             <bs3:row>
-                <bs3:col span="12">
-                </bs3:col>
+                <bs3:col span="12"/>
             </bs3:row>
         </bs3:col>
         <bs3:col span="6">

@@ -103,7 +103,7 @@ public class Cliente implements Comparable<Cliente>{
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' borrado", title));
         repositoryService.removeAndFlush(this);
-        return "Se borró el artículo " + nombre;
+        return "Se borró el cliente " + nombre;
     }
 
 
