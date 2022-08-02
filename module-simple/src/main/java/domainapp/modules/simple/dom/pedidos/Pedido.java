@@ -35,7 +35,14 @@ import java.util.List;
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
 @javax.persistence.Table(schema = "SIMPLE")
-
+@javax.jdo.annotations.Queries({
+        @javax.jdo.annotations.Query(
+                name = Pedido.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
+                        "WHERE codigo == :codigo"
+        )
+})
 public class Pedido implements Comparable<Pedido> {
 
 
@@ -45,6 +52,8 @@ public class Pedido implements Comparable<Pedido> {
     TitleService titleService;
     @Inject
     MessageService messageService;
+
+    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
 
     @Title
     @CodigoPedido
@@ -63,10 +72,12 @@ public class Pedido implements Comparable<Pedido> {
         return pedido;
     }
 
-
-
-
-
+    public Articulo findByCodigoExact(final String codigo) {
+        return repositoryService.firstMatch(
+                        Query.named(Articulo.class, Pedido.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
+                                .withParameter("codigo", codigo))
+                .orElse(null);
+    }
 
 
 

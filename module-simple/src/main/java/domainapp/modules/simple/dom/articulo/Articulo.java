@@ -173,10 +173,10 @@ public  class Articulo implements Comparable<Articulo> {
     private EstadoHabDes estado;
 
 
-    @Column(name="CODIGO_PEDIDO")
-    @PropertyLayout(fieldSetId = "name", sequence = "1")
-    @Getter@Setter
-    private Pedido pedido;
+//    @Column(name="CODIGO_PEDIDO")
+//    @PropertyLayout(fieldSetId = "name", sequence = "1")
+//    @Getter@Setter
+//    private Pedido pedido;
 
     //private Proveedor proveedor;
 
