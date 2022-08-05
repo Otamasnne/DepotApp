@@ -1,6 +1,7 @@
-package domainapp.modules.simple.dom;
+package domainapp.modules.simple.dom.item;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.comprobante.CantidadMueve;
 import lombok.*;
 import org.apache.isis.applib.annotation.DomainObject;
@@ -19,10 +20,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
-public class Item {
+public class ItemKit {
 
-    public static Item creacionItem(Articulo articulo, int cantidad) {
-        val item = new Item();
+    public static ItemKit creacionItem(Articulo articulo, int cantidad) {
+        val item = new ItemKit();
         item.setArticulo(articulo);
         item.setCantidad(cantidad);
         return item;
@@ -39,5 +40,9 @@ public class Item {
     @ToString.Include
     private int cantidad;
 
+    @Getter
+    @Setter
+    @ToString.Include
+    private KitArticulo kitArticulo;
 
 }

@@ -76,7 +76,7 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 public  class Articulo implements Comparable<Articulo> {
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Articulo.findByCodigoLike";
-    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
+    public static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Articulo.findByDeshabilitado";
     static final String NAMED_QUERY__FIND_BY_KIT = "Articulo.findByKit";

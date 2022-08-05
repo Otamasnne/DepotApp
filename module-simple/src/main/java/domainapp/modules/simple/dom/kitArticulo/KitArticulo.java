@@ -1,18 +1,11 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
-import domainapp.modules.simple.dom.Item;
-import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.articulo.Articulos;
-import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
-import domainapp.modules.simple.dom.proveedor.Proveedor;
-import domainapp.modules.simple.types.articulo.CodigoArticulo;
-import domainapp.modules.simple.types.articulo.CodigoArticulo;
+import domainapp.modules.simple.dom.item.ItemKit;
 import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
-import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
@@ -22,7 +15,6 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -83,7 +75,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @Getter@Setter@ToString.Include
     @Collection
     @PropertyLayout(fieldSetId = "kitArticulo", sequence ="3" )
-    private List<Item> articulos;
+    private List<ItemKit> articulos;
 
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
