@@ -33,7 +33,7 @@ public class Articulos {
             @Descripcion final String descripcion) {
         return repositoryService.persist(Articulo.withName(codigo, descripcion));
     }
-
+/*
     //Esta acción debe generar un comprobante de tipo AJP.
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
@@ -43,6 +43,20 @@ public class Articulos {
         AjustePositivo comprobante = repositoryService.persist(AjustePositivo.creacion(objetivo, cantidad));
         return "Se realizó el ajuste positivo para el artículo " + articulo + " por " + cantidad + " unidades. " +
                 "Comprobante: " + comprobante.title();
+    }
+*/
+//Esta acción debe generar un comprobante de tipo AJP.
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public String ajustePositivo(Articulo articulo, int cantidad){
+        articulo.setStock(articulo.getStock()+cantidad);
+        AjustePositivo comprobante = repositoryService.persist(AjustePositivo.creacion(articulo, cantidad));
+        return "Se realizó el ajuste positivo para el artículo " + articulo + " por " + cantidad + " unidades. " +
+                "Comprobante: " + comprobante.title();
+    }
+
+    public List<Articulo> choices0AjustePositivo() {
+        return repositoryService.allInstances(Articulo.class);
     }
 
     //Esta acción debe generar un comprobante de tipo AJN.
@@ -55,6 +69,8 @@ public class Articulos {
         return "Se realizó el ajuste negativo para el artículo " + articulo + " por " + cantidad + " unidades. " +
                 "Comprobante: " + comprobante.title();
     }
+
+
 
 
 

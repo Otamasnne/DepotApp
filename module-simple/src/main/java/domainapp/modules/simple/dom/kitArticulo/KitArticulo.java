@@ -1,6 +1,6 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
-import domainapp.modules.simple.dom.item.ItemKit;
+//import domainapp.modules.simple.dom.item.ItemKit;
 import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
@@ -72,11 +72,12 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "2")
     private String descripcion;
 
+    /*
     @Getter@Setter@ToString.Include
     @Collection
     @PropertyLayout(fieldSetId = "kitArticulo", sequence ="3" )
     private List<ItemKit> articulos;
-
+*/
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
