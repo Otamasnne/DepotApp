@@ -8,8 +8,10 @@ import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
+import javax.jdo.JDOQLTypedQuery;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
@@ -54,6 +56,9 @@ public class KitArticulo implements Comparable<KitArticulo>{
     TitleService titleService;
     @Inject
     MessageService messageService;
+
+    @Inject
+    JdoSupportService jdoSupportService;
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "KitArticulo.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "KitArticulo.findByCodigoLike";
@@ -101,5 +106,16 @@ public class KitArticulo implements Comparable<KitArticulo>{
     public int compareTo(final KitArticulo other) {
         return comparator.compare(this, other);
     }
+
+    @Programmatic
+    public void ping() {
+        JDOQLTypedQuery<KitArticulo> q = jdoSupportService.newTypesafeQuery(KitArticulo.class);
+        final QKitArticulo candidate = QKitArticulo.candidate();
+        q.range(0,2);
+        q.orderBy(candidate.codigo.asc());
+        q.executeList();
+    }
+
+
 
 }

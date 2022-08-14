@@ -31,6 +31,8 @@ import domainapp.webapp.quartz.QuartzModule;
         IsisModuleTestingFixturesApplib.class,
         IsisModuleTestingH2ConsoleUi.class,
 
+
+
         IsisModuleExtFlywayImpl.class,
 
         ApplicationModule.class,

@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.item;
 
+import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
-import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
@@ -25,15 +25,23 @@ public class ItemsKit {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public ItemKit create(
-            @CodigoArticulo final String codigo,
+            final Articulo articulo,
             final int cantidad,
             final KitArticulo kitArticulo) {
-        return repositoryService.persist(ItemKit.creacionItem(kitArticulo, codigo, cantidad));
+        return repositoryService.persist(ItemKit.creacionItem(kitArticulo, articulo, cantidad));
     }
+
+
+    public List<Articulo> choices0Create() {
+        return repositoryService.allInstances(Articulo.class);
+    }
+
+
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<ItemKit> listAll(KitArticulo kitArticulo) {
         return repositoryService.allInstances(ItemKit.class).stream().filter(x -> x.getKitArticulo().equals(kitArticulo)).collect(Collectors.toList());
     }
+
 }

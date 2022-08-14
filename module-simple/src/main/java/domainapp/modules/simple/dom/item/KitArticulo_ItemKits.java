@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.item;
 
 
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Collection;
 import org.apache.isis.applib.annotation.CollectionLayout;
@@ -12,9 +13,10 @@ import java.util.List;
 @Collection
 @CollectionLayout(defaultView = "table")
 @RequiredArgsConstructor
-public class KitArticulo_items {
+public class KitArticulo_ItemKits {
 
 
+    @Getter
     private final KitArticulo kitArticulo;
 
     public List<ItemKit> coll() {

@@ -81,6 +81,7 @@ datanucleus:
     validateTables: true
     validateConstraints: true
 
+
   persistenceByReachabilityAtCommit: false
   identifier:
     case: MixedCase

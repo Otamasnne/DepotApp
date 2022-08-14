@@ -18,9 +18,9 @@ import java.util.List;
         commandPublishing = Publishing.ENABLED,
         executionPublishing = Publishing.ENABLED
 )
-@ActionLayout(associateWith = "items", sequence = "1")
+@ActionLayout(associateWith = "itemsKit", sequence = "1")
 @RequiredArgsConstructor
-public class KitArticulo_addItem {
+public class KitArticulo_addItemKit {
 
 
     private final KitArticulo kitArticulo;
