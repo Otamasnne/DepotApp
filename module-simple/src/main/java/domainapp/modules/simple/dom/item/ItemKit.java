@@ -16,10 +16,12 @@ import org.apache.isis.applib.services.title.TitleService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
+import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.VersionStrategy;
 import javax.mail.FetchProfile;
 import javax.persistence.EntityListeners;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 
@@ -33,12 +35,12 @@ import java.util.Comparator;
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
 @javax.jdo.annotations.Version(strategy= VersionStrategy.DATE_TIME, column="version")
-@DomainObject(logicalTypeName = "depotapp.Item", entityChangePublishing = Publishing.ENABLED)
+@DomainObject(logicalTypeName = "depotapp.ItemKit", entityChangePublishing = Publishing.ENABLED)
 @DomainObjectLayout()
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
-public class ItemKit implements Comparable<ItemKit>{
+public class ItemKit{
 
     @Inject
     static
@@ -70,34 +72,24 @@ public class ItemKit implements Comparable<ItemKit>{
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "item", sequence = "1")
-    private String codigo;
-
-    @Getter
-    @Setter
-    @ToString.Include
-    @PropertyLayout(fieldSetId = "item", sequence = "2")
+    @PropertyLayout(fieldSetId = "name", sequence = "2")
     private Articulo articulo;
 
     @CantidadMueve
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "item", sequence = "3")
+    @PropertyLayout(fieldSetId = "name", sequence = "3")
     private int cantidad;
 
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "item", sequence = "4")
+    @PropertyLayout(fieldSetId = "name", sequence = "4")
+    @ManyToOne
+    @Column(name="Kit Articulo")
     private KitArticulo kitArticulo;
 
 
-    private final static Comparator<ItemKit> comparator =
-            Comparator.comparing(ItemKit::getCodigo);
-    @Override
-    public int compareTo(final ItemKit other) {
-        return comparator.compare(this, other);
-    }
 
 }

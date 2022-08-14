@@ -11,15 +11,16 @@ import java.util.List;
 
 @Collection
 @CollectionLayout(defaultView = "table")
-@lombok.RequiredArgsConstructor(onConstructor_ = {@Inject} )
+@RequiredArgsConstructor
 public class KitArticulo_items {
 
+
     private final KitArticulo kitArticulo;
-    private final ItemsKit itemsKit;
 
     public List<ItemKit> coll() {
-        return  itemsKit.listAll();
+        return  itemKitRepository.Listar(kitArticulo);
     }
 
+    @Inject ItemKitRepository itemKitRepository;
 
 }

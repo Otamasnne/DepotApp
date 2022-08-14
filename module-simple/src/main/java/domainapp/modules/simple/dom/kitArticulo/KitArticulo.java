@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
 //import domainapp.modules.simple.dom.item.ItemKit;
+import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
@@ -36,9 +37,15 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 @javax.persistence.Table(schema = "SIMPLE")
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
+                name = KitArticulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.kitArticulo.KitArticulo " +
+                        "WHERE codigo.indexOf(:codigo) >= 0"
+        ),
+        @javax.jdo.annotations.Query(
                 name = KitArticulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
+                        "FROM domainapp.modules.simple.dom.kitArticulo.KitArticulo " +
                         "WHERE codigo == :codigo"
         )
 })
@@ -51,7 +58,8 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @Inject
     MessageService messageService;
 
-    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
+    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "KitArticulo.findByCodigoExact";
+    static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "KitArticulo.findByCodigoLike";
 
     public static KitArticulo withName(String codigo, String descripcion) {
         val kitArticulo = new KitArticulo();
@@ -72,12 +80,6 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "2")
     private String descripcion;
 
-    /*
-    @Getter@Setter@ToString.Include
-    @Collection
-    @PropertyLayout(fieldSetId = "kitArticulo", sequence ="3" )
-    private List<ItemKit> articulos;
-*/
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
