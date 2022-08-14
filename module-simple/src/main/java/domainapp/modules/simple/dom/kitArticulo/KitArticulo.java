@@ -86,6 +86,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
     private String descripcion;
 
 
+
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,

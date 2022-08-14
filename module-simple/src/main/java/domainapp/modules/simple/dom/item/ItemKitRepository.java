@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor_ = {@Inject} )
 public class ItemKitRepository {
     private final RepositoryService repositoryService;
-    @Inject ItemsKit itemsKit;
 
     public List<ItemKit> buscarItemPorKit(KitArticulo kitArticulo) {
         //return itemsKit.listAll(kitArticulo);
