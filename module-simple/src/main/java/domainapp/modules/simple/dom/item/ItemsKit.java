@@ -1,16 +1,14 @@
 package domainapp.modules.simple.dom.item;
 
-import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
-import domainapp.modules.simple.types.articulo.Descripcion;
 import org.apache.isis.applib.annotation.*;
-import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @DomainService(
@@ -36,8 +34,6 @@ public class ItemsKit {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<ItemKit> listAll(KitArticulo kitArticulo) {
-        return repositoryService.allMatches(
-                Query.named(ItemKit.class, ItemKit.NAMED_QUERY__BUSCAR_ITEM_POR_KIT).withParameter("kitArticulo", kitArticulo)
-        );
+        return repositoryService.allInstances(ItemKit.class).stream().filter(x -> x.getKitArticulo().equals(kitArticulo)).collect(Collectors.toList());
     }
 }

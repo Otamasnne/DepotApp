@@ -13,28 +13,26 @@ import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
-import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
-import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.VersionStrategy;
-import javax.mail.FetchProfile;
 import javax.persistence.EntityListeners;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Comparator;
 
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
                 name = ItemKit.NAMED_QUERY__BUSCAR_ITEM_POR_KIT,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.item.ItemKit " +
-                        "WHERE kitArticulo == :kitArticulo"
+                        "WHERE kitArticulo.indexOf(:kitArticulo) >= 0 "
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
 @javax.jdo.annotations.Version(strategy= VersionStrategy.DATE_TIME, column="version")
+@EntityListeners(EntityListeners.class  )
 @DomainObject(logicalTypeName = "depotapp.ItemKit", entityChangePublishing = Publishing.ENABLED)
 @DomainObjectLayout()
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -73,6 +71,7 @@ public class ItemKit{
     @Setter
     @ToString.Include
     @PropertyLayout(fieldSetId = "name", sequence = "2")
+    @Join(table="Articulo")
     private Articulo articulo;
 
     @CantidadMueve
@@ -87,7 +86,7 @@ public class ItemKit{
     @ToString.Include
     @PropertyLayout(fieldSetId = "name", sequence = "4")
     @ManyToOne
-    @Column(name="Kit Articulo")
+    @Join(table="KitArticulo")
     private KitArticulo kitArticulo;
 
 

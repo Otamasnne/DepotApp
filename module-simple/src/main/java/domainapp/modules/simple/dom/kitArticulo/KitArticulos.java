@@ -1,8 +1,5 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
-import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.proveedor.Proveedor;
-import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import org.apache.isis.applib.annotation.*;

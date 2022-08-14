@@ -1,9 +1,7 @@
 package domainapp.modules.simple.dom.articulo;
 
 
-
 import domainapp.modules.simple.dom.EstadoACP;
-import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -18,12 +16,8 @@ import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
-import java.util.EmptyStackException;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 

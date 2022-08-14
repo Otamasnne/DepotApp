@@ -1,7 +1,5 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
-//import domainapp.modules.simple.dom.item.ItemKit;
-import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
@@ -17,7 +15,6 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
-import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -61,6 +58,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "KitArticulo.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "KitArticulo.findByCodigoLike";
 
+
     public static KitArticulo withName(String codigo, String descripcion) {
         val kitArticulo = new KitArticulo();
         codigo = ("000000" + codigo).substring(codigo.length());
@@ -71,7 +69,9 @@ public class KitArticulo implements Comparable<KitArticulo>{
 
     @Title
     @CodigoKit
-    @Getter @Setter @ToString.Include
+    @Getter
+    @Setter
+    @ToString.Include
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "1")
     private String codigo;
 

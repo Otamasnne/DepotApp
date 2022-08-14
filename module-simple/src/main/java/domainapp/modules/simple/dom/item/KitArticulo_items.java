@@ -18,9 +18,8 @@ public class KitArticulo_items {
     private final KitArticulo kitArticulo;
 
     public List<ItemKit> coll() {
-        return  itemKitRepository.Listar(kitArticulo);
+        return itemKitRepository.buscarItemPorKit(kitArticulo) ;
     }
 
     @Inject ItemKitRepository itemKitRepository;
-
 }
