@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
+import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
@@ -90,8 +91,11 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "3")
     private EstadoKit estadoKit;
 
+    @Getter @Setter
+    @PropertyLayout(fieldSetId = "kitArticulo", sequence = "4")
+    private EstadoHabDes estadoHabDes;
 
-
+/*
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
@@ -103,6 +107,9 @@ public class KitArticulo implements Comparable<KitArticulo>{
         repositoryService.removeAndFlush(this);
         return "Se borró el Kit " + nombre;
     }
+
+*/
+
 
     //Pasa el Kit a estado PREPARADO, para que este pueda ser utilizado por las distintas operaciones y que no se le puedan agregar mas items.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
@@ -141,7 +148,46 @@ public class KitArticulo implements Comparable<KitArticulo>{
     }
 
 
-    //Prueba
+
+    //ESTADO GENERAL
+    //Además de los estados MODIFICABLE Y PREPARADO, el Kit también podrá encontrarse habilitado o deshabilitado. Los deshabilitados no podrán utilizarse para operaciones tal como los
+    //que se encuentren en estado de kit MODIFICABLE pero si se podran realizar acciones sobre ellos mismos (es decir agregar mas items, pasar a PREPARADO para que este inmediatamente
+    //utilizable al pasarse al estado general HABILITADO)
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Habilita el kit")
+    public String habilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' habilitado", title));
+        this.setEstadoHabDes(EstadoHabDes.HABILITADO);
+        return "Se habilitó el kit " + nombre;
+    }
+
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Deshabilita el kit.")
+    public String deshabilitar() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' deshabilitado", title));
+        this.setEstadoHabDes(EstadoHabDes.DESHABILITADO);
+        return "Se deshabilitó el kit " + nombre;
+    }
+
+    public boolean hideHabilitar() {
+        return this.getEstadoHabDes()== EstadoHabDes.HABILITADO;
+    }
+
+    public boolean hideDeshabilitar() {
+        return this.getEstadoHabDes()== EstadoHabDes.DESHABILITADO;
+    }
+
+
     private final static Comparator<KitArticulo> comparator =
             Comparator.comparing(KitArticulo::getCodigo);
     @Override

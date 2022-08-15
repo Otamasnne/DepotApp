@@ -1,7 +1,6 @@
 package domainapp.modules.simple.dom.cliente;
 
-import domainapp.modules.simple.dom.EstadoACP;
-import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.cliente.CodigoCliente;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
@@ -17,7 +16,6 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import java.util.Comparator;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
@@ -81,7 +79,7 @@ public class Cliente implements Comparable<Cliente>{
         cliente.setCodigo(codigo);
         cliente.setDni(dni);
         cliente.setRazonSocial(razonSocial);
-        cliente.setEstado(EstadoACP.HABILITADO);
+        cliente.setEstado(EstadoHabDes.HABILITADO);
         return cliente;
     }
 
@@ -93,7 +91,7 @@ public class Cliente implements Comparable<Cliente>{
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
-        this.setEstado(EstadoACP.HABILITADO);
+        this.setEstado(EstadoHabDes.HABILITADO);
         return "Se habilitó el cliente " + nombre;
     }
 
@@ -105,16 +103,16 @@ public class Cliente implements Comparable<Cliente>{
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
-        this.setEstado(EstadoACP.DESHABILITADO);
+        this.setEstado(EstadoHabDes.DESHABILITADO);
         return "Se deshabilitó el cliente " + nombre;
     }
 
-    public String disableHabilitar() {
-        return this.getEstado()==EstadoACP.HABILITADO ? "Ya se encuentra habilitado" : null;
+    public boolean hideHabilitar() {
+        return this.getEstado()== EstadoHabDes.HABILITADO;
     }
 
-    public String disableDeshabilitar() {
-        return this.getEstado()==EstadoACP.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
+    public boolean hideDeshabilitar() {
+        return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
 
@@ -141,10 +139,10 @@ public class Cliente implements Comparable<Cliente>{
     @Setter
     @Getter
     @PropertyLayout(fieldSetId = "cliente", sequence = "4")
-    private EstadoACP estado;
+    private EstadoHabDes estado;
 
 
-
+/* LAS ENTIDADES NO DEBERÍAN PODER SER BORRADAS, SOLO DESHABILITADAS Y HABILITADAS.
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
@@ -157,7 +155,7 @@ public class Cliente implements Comparable<Cliente>{
         repositoryService.removeAndFlush(this);
         return "Se borró el artículo " + nombre;
     }
-
+*/
 
     private final static Comparator<Cliente> comparator =
             Comparator.comparing(Cliente::getCodigo);

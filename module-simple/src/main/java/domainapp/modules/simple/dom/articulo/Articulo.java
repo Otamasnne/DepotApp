@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.articulo;
 
 
-import domainapp.modules.simple.dom.EstadoACP;
+import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -86,11 +86,11 @@ public  class Articulo implements Comparable<Articulo> {
         articulo.setCodigo(codigo);
         articulo.setDescripcion(descripcion);
         articulo.setStock(0);
-        articulo.setEstado(EstadoACP.HABILITADO);
+        articulo.setEstado(EstadoHabDes.HABILITADO);
         return articulo;
     }
 
-
+/* LAS ENTIDADES NO DEBERÍAN PODER SER BORRADAS, SOLO DESHABILITADAS Y HABILITADAS.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
@@ -102,6 +102,7 @@ public  class Articulo implements Comparable<Articulo> {
         repositoryService.removeAndFlush(this);
         return "Se borró el artículo " + nombre;
     }
+*/
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
@@ -111,7 +112,7 @@ public  class Articulo implements Comparable<Articulo> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
-        this.setEstado(EstadoACP.HABILITADO);
+        this.setEstado(EstadoHabDes.HABILITADO);
         return "Se habilitó el artículo " + nombre;
     }
 
@@ -124,16 +125,16 @@ public  class Articulo implements Comparable<Articulo> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
-        this.setEstado(EstadoACP.DESHABILITADO);
+        this.setEstado(EstadoHabDes.DESHABILITADO);
         return "Se deshabilitó el artículo " + nombre;
     }
 
-    public String disableHabilitar() {
-        return this.getEstado()==EstadoACP.HABILITADO ? "Ya se encuentra habilitado" : null;
+    public boolean hideHabilitar() {
+        return this.getEstado()== EstadoHabDes.HABILITADO;
     }
 
-    public String disableDeshabilitar() {
-        return this.getEstado()==EstadoACP.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
+    public boolean hideDeshabilitar() {
+        return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
 
@@ -164,7 +165,7 @@ public  class Articulo implements Comparable<Articulo> {
     @Getter
     @Setter
     @ToString.Include
-    private EstadoACP estado;
+    private EstadoHabDes estado;
 
 
     private final static Comparator<Articulo> comparator =

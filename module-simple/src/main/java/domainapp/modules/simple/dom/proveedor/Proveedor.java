@@ -1,7 +1,6 @@
 package domainapp.modules.simple.dom.proveedor;
 
-import domainapp.modules.simple.dom.EstadoACP;
-import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
@@ -92,7 +91,7 @@ public class Proveedor implements Comparable<Proveedor>{
        codigo = ("000000" + codigo).substring(codigo.length());
        proveedor.setCodigo(codigo);
        proveedor.setRazonSocial(razonSocial);
-       proveedor.setEstado(EstadoACP.HABILITADO);
+       proveedor.setEstado(EstadoHabDes.HABILITADO);
        return proveedor;
    }
 
@@ -104,7 +103,7 @@ public class Proveedor implements Comparable<Proveedor>{
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
-        this.setEstado(EstadoACP.HABILITADO);
+        this.setEstado(EstadoHabDes.HABILITADO);
         return "Se habilitó el proveedor " + nombre;
     }
 
@@ -116,16 +115,16 @@ public class Proveedor implements Comparable<Proveedor>{
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
-        this.setEstado(EstadoACP.DESHABILITADO);
+        this.setEstado(EstadoHabDes.DESHABILITADO);
         return "Se deshabilitó el proveedor " + nombre;
     }
 
     public String disableHabilitar() {
-        return this.getEstado()==EstadoACP.HABILITADO ? "Ya se encuentra habilitado" : null;
+        return this.getEstado()== EstadoHabDes.HABILITADO ? "Ya se encuentra habilitado" : null;
     }
 
     public String disableDeshabilitar() {
-        return this.getEstado()==EstadoACP.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
+        return this.getEstado()== EstadoHabDes.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
     }
 
 
@@ -161,7 +160,7 @@ public class Proveedor implements Comparable<Proveedor>{
     @Getter
     @Setter
     @ToString.Include
-    private EstadoACP estado;
+    private EstadoHabDes estado;
 
     /**
      * PENDIENTE: agregar metodos para actualizar campos

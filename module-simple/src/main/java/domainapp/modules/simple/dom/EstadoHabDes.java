@@ -1,6 +1,6 @@
 package domainapp.modules.simple.dom;
 
-public enum EstadoACP {
+public enum EstadoHabDes {
     HABILITADO,
     DESHABILITADO,
 }
