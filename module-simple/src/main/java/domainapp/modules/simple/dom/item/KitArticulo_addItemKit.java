@@ -38,11 +38,17 @@ public class KitArticulo_addItemKit {
         return repositoryService.allInstances(Articulo.class);
     }
 
+    public String validate0Act(final Articulo articulo) {
+        return itemKitRepository.buscarItemPorKitYArticulo(kitArticulo, articulo).isPresent()
+                ? String.format("El artículo ingresado ya se encuentra en la lista de artículos de este Kit.")
+                : null;
+    }
+
     //Esta acción se esconde si el Kit tiene estado PREPARADO, para que no se puedan agregar mas items en un kit que se encuentra en uso.
     public boolean hideAct(){
         return kitArticulo.getEstadoKit() == EstadoKit.PREPARADO;
     }
     @Inject
     RepositoryService repositoryService;
-
+    @Inject ItemKitRepository itemKitRepository;
 }
