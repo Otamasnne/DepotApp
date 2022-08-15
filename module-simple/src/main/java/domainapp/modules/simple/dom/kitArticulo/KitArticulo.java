@@ -104,6 +104,42 @@ public class KitArticulo implements Comparable<KitArticulo>{
         return "Se borró el Kit " + nombre;
     }
 
+    //Pasa el Kit a estado PREPARADO, para que este pueda ser utilizado por las distintas operaciones y que no se le puedan agregar mas items.
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Permite que el Kit sea utilizado para operaciones.")
+    public String preparado() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' preparado.", title));
+        this.setEstadoKit(EstadoKit.PREPARADO);
+        return "Se pasó el Kit " + nombre + " a Preparado.";
+    }
+
+    //Devuelve el Kit al estado MODIFICABLE (estado por defecto) para que se le puedan agregar mas items. El kit no se va a poder utilizar en operaciones mientras este
+    //en este estado.
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Permite que el Kit sea modificado.")
+    public String modificable() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' modificable.", title));
+        this.setEstadoKit(EstadoKit.MODIFICABLE);
+        return "Se pasó el Kit " + nombre + " a Modificable.";
+    }
+
+    //La acción correspondiente a cada estado no va a ser visible si el Kit ya se encuentra en dicho estado.
+    public boolean hidePreparado() {
+        return this.getEstadoKit()==EstadoKit.PREPARADO;
+    }
+
+    public boolean hideModificable() {
+        return this.getEstadoKit()==EstadoKit.MODIFICABLE;
+    }
+
 
     //Prueba
     private final static Comparator<KitArticulo> comparator =
