@@ -66,6 +66,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
 
     public static KitArticulo withName(String codigo, String descripcion) {
         val kitArticulo = new KitArticulo();
+        kitArticulo.setEstadoKit(EstadoKit.MODIFICABLE);
         codigo = ("000000" + codigo).substring(codigo.length());
         kitArticulo.setCodigo(codigo);
         kitArticulo.setDescripcion(descripcion);
@@ -84,6 +85,10 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @Getter @Setter @ToString.Include
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "2")
     private String descripcion;
+
+    @Getter @Setter
+    @PropertyLayout(fieldSetId = "kitArticulo", sequence = "3")
+    private EstadoKit estadoKit;
 
 
 
