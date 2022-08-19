@@ -4,6 +4,7 @@ import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
+import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
@@ -16,7 +17,7 @@ import java.util.List;
         logicalTypeName = "depotapp.Pedidos"
 )
 @javax.annotation.Priority(PriorityPrecedence.EARLY)
-@lombok.RequiredArgsConstructor(onConstructor_ = {@Inject} )
+@RequiredArgsConstructor(onConstructor_ = {@Inject} )
 public class Pedidos {
 
     final RepositoryService repositoryService;

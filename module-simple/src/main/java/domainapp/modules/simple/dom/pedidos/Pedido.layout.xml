@@ -102,7 +102,7 @@ http://isis.apache.org/applib/layout/grid/bootstrap3/bootstrap3.xsd"
                 <bs3:tab name="Articulos">                   <!--.-->
                     <bs3:row>
                         <bs3:col span="12">
-                            <c:collection id="articulos"/>
+                            <c:collection id="itemPedidos"/>
                         </bs3:col>
                     </bs3:row>
                 </bs3:tab>

@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.pedidos;
 
-import domainapp.modules.simple.dom.Item;
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.itemPedido.ItemPedido;
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
 import lombok.*;
@@ -11,12 +11,11 @@ import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.VersionStrategy;
+import javax.jdo.annotations.*;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 import java.util.List;
@@ -26,23 +25,35 @@ import java.util.Vector;
         schema = "depotapp",
         identityType= IdentityType.DATASTORE
 )
-@javax.jdo.annotations.Unique(
+@Unique(
         name = "Pedido_codigo_UNQ", members = {"codigo"}
 )
-@javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
-@javax.jdo.annotations.Version(strategy= VersionStrategy.DATE_TIME, column="version")
+@DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
+@Version(strategy= VersionStrategy.DATE_TIME, column="version")
 @DomainObject(logicalTypeName = "depotapp.Pedido", entityChangePublishing = Publishing.ENABLED)
 @DomainObjectLayout()
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
-@javax.persistence.Table(schema = "SIMPLE")
-@javax.jdo.annotations.Queries({
+@Table(schema = "SIMPLE")
+@Queries({
         @javax.jdo.annotations.Query(
                 name = Pedido.findByPedido,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
                         "WHERE pedido == :pedido "
+        ),
+        @javax.jdo.annotations.Query(
+                name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_LIKE,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.pedidos.Pedido" +
+                        "WHERE codigo.indexOf(:codigo) >= 0"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.pedidos.Pedido" +
+                        "WHERE codigo == :codigo"
         )
 })
 public class Pedido implements Comparable<Pedido> {
@@ -54,18 +65,25 @@ public class Pedido implements Comparable<Pedido> {
     TitleService titleService;
     @Inject
     MessageService messageService;
+    @Inject
+    JdoSupportService jdoSupportService;
 
     static final String findByPedido = "Articulo.findByCodigoExact";
+    static final String NAMED_QUERY_FIND_BY_CODIGO_EXACT = "pedido.findByCodigoExact";
+    static final String NAMED_QUERY_FIND_BY_CODIGO_LIKE = "pedido.findByCodigoLike";
 
     @Title
     @CodigoPedido
     @Getter@Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "pedido", sequence = "1")
     private String codigo;
 
-    @Getter@Setter@ToString.Include
-    @Collection
-    @PropertyLayout(fieldSetId = "pedido", sequence ="3" )
-    private Vector<Item> items;
+//    @Getter@Setter@ToString.Include
+//    @Collection
+//    @PropertyLayout(fieldSetId = "pedido", sequence ="3" )
+//    private Vector<Item> items;
+
+
 
 
     public static Pedido withName(String codigo) {
@@ -75,12 +93,12 @@ public class Pedido implements Comparable<Pedido> {
         return pedido;
     }
 
-    public Articulo findByCodigoExact(final String codigo) {
-        return repositoryService.firstMatch(
-                        Query.named(Articulo.class, Pedido.findByPedido)
-                                .withParameter("codigo", codigo))
-                .orElse(null);
-    }
+//    public Articulo findByCodigoExact(final String codigo) {
+//        return repositoryService.firstMatch(
+//                        Query.named(Articulo.class, Pedido.findByPedido)
+//                                .withParameter("codigo", codigo))
+//                .orElse(null);
+//    }
 
 
 //    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
@@ -125,14 +143,12 @@ public class Pedido implements Comparable<Pedido> {
 //
 //    }
 
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    //@ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    @ActionLayout(associateWith = "articulos")
-    public void addArticulo(Articulo item, int cantidad){
-        Item objetivo = Item.creacionItem(item, cantidad);
-
-        repositoryService.persist(items.add(objetivo));
-    }
+//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+//    //@ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+//    @ActionLayout(associateWith = "item")
+//    public void addArticulo(Articulo item, int cantidad){
+//
+//    }
 //    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
 //    //@ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
 //    @ActionLayout(associateWith = "articulos")

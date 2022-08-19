@@ -13,7 +13,6 @@ import org.apache.isis.applib.jaxb.PersistentEntitiesAdapter;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
-import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.*;
@@ -26,14 +25,14 @@ import java.util.Comparator;
         identityType = IdentityType.DATASTORE
 )
 @Unique(
-        name = "ItemPedido_articulo_pedido_UNQQ", members = {"articulo","kitArticulo"}
+        name = "ItemPedido_articulo_pedido_UNQQ", members = {"articulo","pedido"}
 )
 @Queries(
         {
                 @Query(
                         name = ItemPedido.NAMED_QUERY_BUSCAR_ITEM_POR_PEDIDO,
                         value = "SELECT " +
-                                "FROM domainapp.modules.simple.dom.item.ItemPedido " +
+                                "FROM domainapp.modules.simple.dom.itemPedido.ItemPedido " +
                                 "WHERE pedido.indexOf(:Pedido) >= 0 "
                 )
         }
@@ -58,9 +57,19 @@ public class ItemPedido implements Comparable<ItemPedido> {
     static final String NAMED_QUERY_BUSCAR_ITEM_POR_PEDIDO = "ItemPedido.buscarItemPorPedido";
 
     ItemPedido(Pedido pedido, Articulo articulo, int cantidad){
-        val item = new ItemPedido();
-
+        //val item = new ItemPedido();
+        this.pedido = pedido;
+        this.articulo = articulo;
+        this.cantidad = cantidad;
     }
+
+//    public static ItemPedido creacionItemPedido (Pedido pedido, Articulo articulo, int cantidad){
+//        val itemPedido = new ItemPedido();
+//        itemPedido.setArticulo(articulo);
+//        itemPedido.setCantidad(cantidad);
+//        itemPedido.setPedido(pedido);
+//        return itemPedido;
+//    }
 
     @Getter@Setter@ToString.Include
     @Column(allowsNull = "false") //REVISAR ESTO
@@ -74,7 +83,7 @@ public class ItemPedido implements Comparable<ItemPedido> {
 
     @Getter@Setter@ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "ItemPedido", sequence = "3")
+    @PropertyLayout(fieldSetId = "itemPedido", sequence = "3")
     private Pedido pedido;
 
 
