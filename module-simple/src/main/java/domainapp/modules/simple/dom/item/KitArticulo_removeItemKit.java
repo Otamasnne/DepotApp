@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.item;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.kitArticulo.EstadoKit;
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
@@ -33,7 +34,11 @@ public class KitArticulo_removeItemKit {
 
     }
 
-    public boolean hideAct() {return itemKitRepository.buscarItemPorKit(kitArticulo).isEmpty();}
+    //public boolean hideAct() {return itemKitRepository.buscarItemPorKit(kitArticulo).isEmpty();}
+
+    public boolean hideAct() {
+        return itemKitRepository.buscarItemPorKit(kitArticulo).isEmpty() || kitArticulo.getEstadoKit() == EstadoKit.PREPARADO;
+    }
 
     public List<Articulo> choices0Act() {
         return itemKitRepository.buscarItemPorKit(kitArticulo).stream()
