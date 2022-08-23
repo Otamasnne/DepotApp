@@ -78,10 +78,14 @@ public class Pedido implements Comparable<Pedido> {
     @PropertyLayout(fieldSetId = "pedido", sequence = "1")
     private String codigo;
 
-//    @Getter@Setter@ToString.Include
-//    @Collection
-//    @PropertyLayout(fieldSetId = "pedido", sequence ="3" )
-//    private Vector<Item> items;
+//    @javax.jdo.annotations.Column(allowsNull = "true", name = "estado")
+//    @Property()
+    @Getter@Setter
+    @PropertyLayout(fieldSetId = "pedido", sequence = "3")
+    private EstadoPedido estadoPedido;
+
+    //private EstadoHabDes estadoHabDes;
+
 
 
 
