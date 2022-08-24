@@ -124,6 +124,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
         return "Se pasó el Kit " + nombre + " a Preparado.";
     }
 
+
     //Devuelve el Kit al estado MODIFICABLE (estado por defecto) para que se le puedan agregar mas items. El kit no se va a poder utilizar en operaciones mientras este
     //en este estado.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
