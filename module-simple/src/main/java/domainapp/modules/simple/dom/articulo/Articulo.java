@@ -1,9 +1,7 @@
 package domainapp.modules.simple.dom.articulo;
 
 
-
-import domainapp.modules.simple.dom.EstadoACP;
-import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
+import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -18,12 +16,8 @@ import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
-import java.util.EmptyStackException;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -57,6 +51,12 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.articulo.Articulo " +
                         "WHERE estado == 'DESHABILITADO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Articulo.NAMED_QUERY__FIND_BY_KIT,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
+                        "WHERE estado == 'DESHABILITADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -70,10 +70,10 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 public  class Articulo implements Comparable<Articulo> {
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Articulo.findByCodigoLike";
-    static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
+    public static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Articulo.findByDeshabilitado";
-
+    static final String NAMED_QUERY__FIND_BY_KIT = "Articulo.findByKit";
     @Inject RepositoryService repositoryService;
     @Inject TitleService titleService;
     @Inject MessageService messageService;
@@ -86,11 +86,11 @@ public  class Articulo implements Comparable<Articulo> {
         articulo.setCodigo(codigo);
         articulo.setDescripcion(descripcion);
         articulo.setStock(0);
-        articulo.setEstado(EstadoACP.HABILITADO);
+        articulo.setEstado(EstadoHabDes.HABILITADO);
         return articulo;
     }
 
-
+/* LAS ENTIDADES NO DEBERÍAN PODER SER BORRADAS, SOLO DESHABILITADAS Y HABILITADAS.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
@@ -102,6 +102,7 @@ public  class Articulo implements Comparable<Articulo> {
         repositoryService.removeAndFlush(this);
         return "Se borró el artículo " + nombre;
     }
+*/
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
@@ -111,7 +112,7 @@ public  class Articulo implements Comparable<Articulo> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
-        this.setEstado(EstadoACP.HABILITADO);
+        this.setEstado(EstadoHabDes.HABILITADO);
         return "Se habilitó el artículo " + nombre;
     }
 
@@ -124,24 +125,19 @@ public  class Articulo implements Comparable<Articulo> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
-        this.setEstado(EstadoACP.DESHABILITADO);
+        this.setEstado(EstadoHabDes.DESHABILITADO);
         return "Se deshabilitó el artículo " + nombre;
     }
 
-    public String disableHabilitar() {
-        return this.getEstado()==EstadoACP.HABILITADO ? "Ya se encuentra habilitado" : null;
+    public boolean hideHabilitar() {
+        return this.getEstado()== EstadoHabDes.HABILITADO;
     }
 
-    public String disableDeshabilitar() {
-        return this.getEstado()==EstadoACP.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
+    public boolean hideDeshabilitar() {
+        return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Getter @Setter
-//    @PropertyLayout(fieldSetId = "metadata", sequence = "1")
-//    private Long id;
 
     @Title
     @CodigoArticulo
@@ -169,12 +165,7 @@ public  class Articulo implements Comparable<Articulo> {
     @Getter
     @Setter
     @ToString.Include
-    private EstadoACP estado;
-
-    //private Proveedor proveedor;
-
-//    @Getter@Setter
-//    private KitArticulo kitArticulo;
+    private EstadoHabDes estado;
 
 
     private final static Comparator<Articulo> comparator =
