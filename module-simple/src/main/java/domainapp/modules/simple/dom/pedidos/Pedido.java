@@ -97,70 +97,16 @@ public class Pedido implements Comparable<Pedido> {
         return pedido;
     }
 
-//    public Articulo findByCodigoExact(final String codigo) {
-//        return repositoryService.firstMatch(
-//                        Query.named(Articulo.class, Pedido.findByPedido)
-//                                .withParameter("codigo", codigo))
-//                .orElse(null);
-//    }
+    // Pasa un pedido a estado Preparado
+    public String preparado() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'$s' preparado.", title));
+        this.setEstadoPedido(EstadoPedido.PREPARADO);
+        return "Se paso el pedido " + nombre + " a Preparado.";
+    }
 
 
-//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-//    //@ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-//    @ActionLayout(associateWith = "articulos")
-//    public void addItem(Articulo newItem){
-//
-//        //comprobar si ya existe este item en el pedido
-//        int index = items.indexOf(newItem);
-//
-//        // fragmento de evento de pedido
-//        if (index == -1) {
-//            // Si el item es nuevo lo agrego
-//            items.addElement(newItem);
-//        }else {
-//            //si ya existe, agrego cantidad
-//            Articulo currItem = (Articulo) items.elementAt(index);
-//
-//            //currItem.add(newItem);
-//        }
-//
-//    }
-
-//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-//    //@ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-//    @ActionLayout(associateWith = "articulos")
-//    public void addItem(Articulo newItem){
-//
-//        //comprobar si ya existe este item en el pedido
-//        int index = items.indexOf(newItem);
-//
-//        // fragmento de evento de pedido
-//        if (index == -1) {
-//            // Si el item es nuevo lo agrego
-//            items.addElement(newItem);
-//        }else {
-//            //si ya existe, agrego cantidad
-//            Articulo currItem = (Articulo) items.elementAt(index);
-//
-//            //currItem.add(newItem);
-//        }
-//
-//    }
-
-//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-//    //@ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-//    @ActionLayout(associateWith = "item")
-//    public void addArticulo(Articulo item, int cantidad){
-//
-//    }
-//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-//    //@ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-//    @ActionLayout(associateWith = "articulos")
-//    public void addArticulo(String item){
-//        Item objetivo = findByCodigoExact(item);
-//
-//        repositoryService.persist(items.add(objetivo));;
-//    }
 
     private final static Comparator<Pedido> comparator =
             Comparator.comparing(Pedido::getCodigo);
