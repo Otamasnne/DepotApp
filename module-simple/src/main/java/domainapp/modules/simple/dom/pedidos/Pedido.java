@@ -127,6 +127,7 @@ public class Pedido implements Comparable<Pedido> {
     }
 
     // Deshabilita la accion dependiendo el estado actual.
+    //Deberiamos hacer que cuando el pedido se cree comience en estado modificable?
     public boolean hidePreparado() {
         return this.getEstadoPedido()==EstadoPedido.PREPARADO;
     }

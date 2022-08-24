@@ -6,6 +6,7 @@ import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
@@ -36,5 +37,11 @@ public class Pedidos {
         return repositoryService.allInstances(Pedido.class);
     }
 
+    public Pedido findByCodigoExact (final String codigo) {
+        return repositoryService.firstMatch(
+                Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT)
+                        .withParameter("codigo", codigo))
+                .orElse(null);
+    }
 
 }
