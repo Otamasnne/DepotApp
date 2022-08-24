@@ -1,7 +1,9 @@
 package domainapp.modules.simple.dom.articulo;
 
 
+
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.pedidos.Pedido;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -16,6 +18,8 @@ import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
+
+import javax.persistence.Column;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 
@@ -165,7 +169,20 @@ public  class Articulo implements Comparable<Articulo> {
     @Getter
     @Setter
     @ToString.Include
+
     private EstadoHabDes estado;
+
+
+//    @Column(name="CODIGO_PEDIDO")
+//    @PropertyLayout(fieldSetId = "name", sequence = "1")
+//    @Getter@Setter
+//    private Pedido pedido;
+
+    //private Proveedor proveedor;
+
+//    @Getter@Setter
+//    private KitArticulo kitArticulo;
+
 
 
     private final static Comparator<Articulo> comparator =
