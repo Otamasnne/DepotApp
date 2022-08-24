@@ -106,6 +106,13 @@ public class Pedido implements Comparable<Pedido> {
         return "Se paso el pedido " + nombre + " a Preparado.";
     }
 
+    public String modificable() {
+        String nombre = this.getCodigo();
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'$s' modificable.", title));
+        this.setEstadoPedido(EstadoPedido.MODIFICABLE);
+        return "Se paso el pedido " + nombre + " a Modificable";
+    }
 
 
     private final static Comparator<Pedido> comparator =
