@@ -97,7 +97,13 @@ public class Pedido implements Comparable<Pedido> {
         return pedido;
     }
 
-    // Pasa un pedido a estado Preparado
+
+    // ESTADO PREPARADO
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Permite que el pedido este listo"
+    )
     public String preparado() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
@@ -106,6 +112,12 @@ public class Pedido implements Comparable<Pedido> {
         return "Se paso el pedido " + nombre + " a Preparado.";
     }
 
+    //ESTADO MODIFICABLE
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Permite que el pedido sea modificado"
+    )
     public String modificable() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
@@ -114,6 +126,14 @@ public class Pedido implements Comparable<Pedido> {
         return "Se paso el pedido " + nombre + " a Modificable";
     }
 
+    // Deshabilita la accion dependiendo el estado actual.
+    public boolean hidePreparado() {
+        return this.getEstadoPedido()==EstadoPedido.PREPARADO;
+    }
+
+    public boolean hideModificable() {
+        return this.getEstadoPedido()==EstadoPedido.MODIFICABLE;
+    }
 
     private final static Comparator<Pedido> comparator =
             Comparator.comparing(Pedido::getCodigo);
