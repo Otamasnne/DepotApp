@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.itemPedido;
+package domainapp.modules.simple.dom.item.itemPedido;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.pedidos.EstadoPedido;

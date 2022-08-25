@@ -1,13 +1,9 @@
 package domainapp.modules.simple.dom.pedidos;
 
-import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.itemPedido.ItemPedido;
-import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
-import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
@@ -18,8 +14,6 @@ import javax.jdo.annotations.*;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Vector;
 
 @PersistenceCapable(
         schema = "depotapp",

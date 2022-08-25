@@ -1,11 +1,10 @@
-package domainapp.modules.simple.dom.itemPedido;
+package domainapp.modules.simple.dom.item.itemPedido;
 
 import domainapp.modules.simple.dom.pedidos.Pedido;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Collection;
 import org.apache.isis.applib.annotation.CollectionLayout;
-import org.apache.isis.applib.services.repository.RepositoryService;
 
 import javax.inject.Inject;
 import java.util.List;
