@@ -32,7 +32,7 @@ import java.util.Comparator;
                 @Query(
                         name = ItemPedido.NAMED_QUERY_BUSCAR_ITEM_POR_PEDIDO,
                         value = "SELECT " +
-                                "FROM domainapp.modules.simple.dom.itemPedido.ItemPedido " +
+                                "FROM domainapp.modules.simple.dom.item.itemPedido.ItemPedido " +
                                 "WHERE pedido.indexOf(:Pedido) >= 0 "
                 )
         }
