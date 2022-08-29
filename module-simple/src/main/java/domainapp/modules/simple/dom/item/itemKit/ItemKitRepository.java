@@ -17,7 +17,6 @@ public class ItemKitRepository {
     private final RepositoryService repositoryService;
 
     public List<ItemKit> buscarItemPorKit(KitArticulo kitArticulo) {
-        //return itemsKit.listAll(kitArticulo);
         return repositoryService.allInstances(ItemKit.class).stream()
                 .filter(x -> x.getKitArticulo().equals(kitArticulo))
                 .collect(Collectors.toList());
