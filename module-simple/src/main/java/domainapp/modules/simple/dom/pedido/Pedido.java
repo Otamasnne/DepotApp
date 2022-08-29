@@ -44,7 +44,7 @@ import java.util.Comparator;
         )
 })
 public class Pedido implements Comparable<Pedido> {
-    
+                                            
     @Inject
     TitleService titleService;
     @Inject
