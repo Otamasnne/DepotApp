@@ -2,7 +2,7 @@ package domainapp.modules.simple.dom.item.itemPedido;
 
 
 import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.pedidos.EstadoPedido;
+import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.pedidos.Pedido;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
@@ -34,7 +34,7 @@ public class Pedido_removeItemPedido {
     }
 
     public boolean hideAct() {
-        return itemPedidoRepository.buscarItemPorPedido(pedido).isEmpty() || pedido.getEstadoPedido() == EstadoPedido.PREPARADO;
+        return itemPedidoRepository.buscarItemPorPedido(pedido).isEmpty() || pedido.getEstadoOperativo() == EstadoOperativo.PREPARADO;
     }
 
     public List<Articulo> choices0Act(){

@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.item.itemPedido;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.pedidos.EstadoPedido;
+import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.pedidos.Pedido;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
@@ -48,7 +48,7 @@ public class Pedido_addItemPedido {
 
     //Esconde el pedido si esta en estado PREPARADO
     public boolean hideAct() {
-        return pedido.getEstadoPedido() == EstadoPedido.PREPARADO;
+        return pedido.getEstadoOperativo() == EstadoOperativo.PREPARADO;
     }
 
     @Inject

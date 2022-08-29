@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.kitArticulo;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
@@ -67,7 +68,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
 
     public static KitArticulo withName(String codigo, String descripcion) {
         val kitArticulo = new KitArticulo();
-        kitArticulo.setEstadoKit(EstadoKit.MODIFICABLE);
+        kitArticulo.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         codigo = ("000000" + codigo).substring(codigo.length());
         kitArticulo.setCodigo(codigo);
         kitArticulo.setDescripcion(descripcion);
@@ -89,7 +90,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
 
     @Getter @Setter
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "3")
-    private EstadoKit estadoKit;
+    private EstadoOperativo estadoOperativo;
 
     @Getter @Setter
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "4")
@@ -120,7 +121,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' preparado.", title));
-        this.setEstadoKit(EstadoKit.PREPARADO);
+        this.setEstadoOperativo(EstadoOperativo.PREPARADO);
         return "Se pasó el Kit " + nombre + " a Preparado.";
     }
 
@@ -135,17 +136,17 @@ public class KitArticulo implements Comparable<KitArticulo>{
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' modificable.", title));
-        this.setEstadoKit(EstadoKit.MODIFICABLE);
+        this.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         return "Se pasó el Kit " + nombre + " a Modificable.";
     }
 
     //La acción correspondiente a cada estado no va a ser visible si el Kit ya se encuentra en dicho estado.
     public boolean hidePreparado() {
-        return this.getEstadoKit()==EstadoKit.PREPARADO;
+        return this.getEstadoOperativo()==EstadoOperativo.PREPARADO;
     }
 
     public boolean hideModificable() {
-        return this.getEstadoKit()==EstadoKit.MODIFICABLE;
+        return this.getEstadoOperativo()==EstadoOperativo.MODIFICABLE;
     }
 
 

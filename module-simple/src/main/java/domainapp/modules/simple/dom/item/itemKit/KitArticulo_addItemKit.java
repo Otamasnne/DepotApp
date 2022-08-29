@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.item.itemKit;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.kitArticulo.EstadoKit;
+import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
@@ -46,7 +46,7 @@ public class KitArticulo_addItemKit {
 
     //Esta acción se esconde si el Kit tiene estado PREPARADO, para que no se puedan agregar mas items en un kit que se encuentra en uso.
     public boolean hideAct(){
-        return kitArticulo.getEstadoKit() == EstadoKit.PREPARADO;
+        return kitArticulo.getEstadoOperativo() == EstadoOperativo.PREPARADO;
     }
     @Inject
     RepositoryService repositoryService;

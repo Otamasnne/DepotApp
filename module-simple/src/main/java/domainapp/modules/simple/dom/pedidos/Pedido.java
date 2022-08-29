@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dom.pedidos;
 
+import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
@@ -76,13 +77,9 @@ public class Pedido implements Comparable<Pedido> {
 //    @Property()
     @Getter@Setter
     @PropertyLayout(fieldSetId = "pedido", sequence = "3")
-    private EstadoPedido estadoPedido;
+    private EstadoOperativo estadoOperativo;
 
     //private EstadoHabDes estadoHabDes;
-
-
-
-
 
     public static Pedido withName(String codigo) {
         val pedido = new Pedido();
@@ -102,7 +99,7 @@ public class Pedido implements Comparable<Pedido> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'$s' preparado.", title));
-        this.setEstadoPedido(EstadoPedido.PREPARADO);
+        this.setEstadoOperativo(EstadoOperativo.PREPARADO);
         return "Se paso el pedido " + nombre + " a Preparado.";
     }
 
@@ -116,18 +113,18 @@ public class Pedido implements Comparable<Pedido> {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'$s' modificable.", title));
-        this.setEstadoPedido(EstadoPedido.MODIFICABLE);
+        this.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         return "Se paso el pedido " + nombre + " a Modificable";
     }
 
     // Deshabilita la accion dependiendo el estado actual.
     //Deberiamos hacer que cuando el pedido se cree comience en estado modificable?
     public boolean hidePreparado() {
-        return this.getEstadoPedido()==EstadoPedido.PREPARADO;
+        return this.getEstadoOperativo()==EstadoOperativo.PREPARADO;
     }
 
     public boolean hideModificable() {
-        return this.getEstadoPedido()==EstadoPedido.MODIFICABLE;
+        return this.getEstadoOperativo()==EstadoOperativo.MODIFICABLE;
     }
 
     private final static Comparator<Pedido> comparator =
