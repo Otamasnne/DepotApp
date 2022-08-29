@@ -3,7 +3,6 @@ package domainapp.modules.simple.dom.articulo;
 
 
 import domainapp.modules.simple.dom.EstadoHabDes;
-import domainapp.modules.simple.dom.pedidos.Pedido;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -19,7 +18,6 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 
-import javax.persistence.Column;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 

@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.pedidos;
+package domainapp.modules.simple.dom.pedido;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
@@ -6,9 +6,7 @@ import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
-import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
-import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.*;
@@ -33,37 +31,25 @@ import java.util.Comparator;
 @Table(schema = "SIMPLE")
 @Queries({
         @javax.jdo.annotations.Query(
-                name = Pedido.findByPedido,
-                value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.articulo.Articulo " +
-                        "WHERE pedido == :pedido "
-        ),
-        @javax.jdo.annotations.Query(
                 name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.pedidos.Pedido" +
+                        "FROM domainapp.modules.simple.dom.pedido.Pedido" +
                         "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.pedidos.Pedido" +
+                        "FROM domainapp.modules.simple.dom.pedido.Pedido" +
                         "WHERE codigo == :codigo"
         )
 })
 public class Pedido implements Comparable<Pedido> {
-
-
-    @Inject
-    RepositoryService repositoryService;
+    
     @Inject
     TitleService titleService;
     @Inject
     MessageService messageService;
-    @Inject
-    JdoSupportService jdoSupportService;
 
-    static final String findByPedido = "Articulo.findByCodigoExact";
     static final String NAMED_QUERY_FIND_BY_CODIGO_EXACT = "pedido.findByCodigoExact";
     static final String NAMED_QUERY_FIND_BY_CODIGO_LIKE = "pedido.findByCodigoLike";
 
@@ -73,18 +59,16 @@ public class Pedido implements Comparable<Pedido> {
     @PropertyLayout(fieldSetId = "pedido", sequence = "1")
     private String codigo;
 
-//    @javax.jdo.annotations.Column(allowsNull = "true", name = "estado")
-//    @Property()
     @Getter@Setter
     @PropertyLayout(fieldSetId = "pedido", sequence = "3")
     private EstadoOperativo estadoOperativo;
 
-    //private EstadoHabDes estadoHabDes;
 
     public static Pedido withName(String codigo) {
         val pedido = new Pedido();
         codigo = ("000000" + codigo).substring(codigo.length());
         pedido.setCodigo(codigo);
+        pedido.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         return pedido;
     }
 
@@ -117,8 +101,7 @@ public class Pedido implements Comparable<Pedido> {
         return "Se paso el pedido " + nombre + " a Modificable";
     }
 
-    // Deshabilita la accion dependiendo el estado actual.
-    //Deberiamos hacer que cuando el pedido se cree comience en estado modificable?
+    // Esconde la acción dependiendo del estado actual.
     public boolean hidePreparado() {
         return this.getEstadoOperativo()==EstadoOperativo.PREPARADO;
     }

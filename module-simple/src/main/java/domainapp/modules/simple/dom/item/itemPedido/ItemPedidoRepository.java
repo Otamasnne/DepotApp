@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.item.itemPedido;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.pedidos.Pedido;
+import domainapp.modules.simple.dom.pedido.Pedido;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.springframework.stereotype.Repository;

@@ -1,13 +1,7 @@
 package domainapp.modules.simple.dom.articulo;
 
-import domainapp.modules.simple.dom.pedidos.Pedido;
 import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
-import javax.jdo.JDOQLTypedQuery;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
 import java.util.List;
 
 @Repository

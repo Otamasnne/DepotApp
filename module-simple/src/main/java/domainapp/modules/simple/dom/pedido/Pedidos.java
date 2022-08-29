@@ -1,8 +1,5 @@
-package domainapp.modules.simple.dom.pedidos;
+package domainapp.modules.simple.dom.pedido;
 
-import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.types.articulo.CodigoArticulo;
-import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.pedido.CodigoPedido;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
