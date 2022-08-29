@@ -1,7 +1,7 @@
-package domainapp.modules.simple.dom.item.itemPositivo;
+package domainapp.modules.simple.dom.item.itemAjuste;
 
+import domainapp.modules.simple.dom.ajuste.Ajuste;
 import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
 import domainapp.modules.simple.types.comprobante.CantidadMueve;
 import lombok.*;
 import org.apache.isis.applib.annotation.DomainObject;
@@ -21,39 +21,39 @@ import java.util.Comparator;
         schema = "depotapp",
         identityType= IdentityType.DATASTORE)
 @javax.jdo.annotations.Unique(
-        name = "ItemPositivo_articulo_ajustePositivo_UNQ", members = {"articulo", "ajustePositivo"}
+        name = "ItemAjuste_articulo_ajuste_UNQ", members = {"articulo", "ajuste"}
 )
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
-                name = ItemPositivo.NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTEPOSITIVO,
+                name = ItemAjuste.NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.item.itemPositivo.ItemPositivo " +
-                        "WHERE ajustePositivo.indexOf(:ajustePositivo) >= 0 "
+                        "FROM domainapp.modules.simple.dom.item.itemAjuste.ItemAjuste " +
+                        "WHERE ajuste.indexOf(:ajuste) >= 0 "
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
 @javax.jdo.annotations.Version(strategy= VersionStrategy.DATE_TIME, column="version")
-@DomainObject(logicalTypeName = "depotapp.ItemPositivo", entityChangePublishing = Publishing.ENABLED)
+@DomainObject(logicalTypeName = "depotapp.ItemAjuste", entityChangePublishing = Publishing.ENABLED)
 @DomainObjectLayout()
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @XmlJavaTypeAdapter(PersistentEntityAdapter.class)
 @ToString(onlyExplicitlyIncluded = true)
 @javax.persistence.Table(schema = "SIMPLE")
-public class ItemPositivo implements Comparable<ItemPositivo>{
+public class ItemAjuste implements Comparable<ItemAjuste>{
 
-    static final String NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTEPOSITIVO = "ItemKit.buscarItemPorAjustePositivo";
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE = "ItemKit.buscarItemPorAjuste";
 
-    ItemPositivo(AjustePositivo ajustePositivo, Articulo articulo, int cantidad){
-        this.ajustePositivo = ajustePositivo;
+    ItemAjuste(Ajuste ajuste, Articulo articulo, int cantidad){
+        this.ajuste = ajuste;
         this.articulo = articulo;
         this.cantidad = cantidad;
     }
 
-    public static ItemPositivo creacionItem(AjustePositivo ajustePositivo,Articulo articulo, int cantidad) {
-        val item = new ItemPositivo();
+    public static ItemAjuste creacionItem(Ajuste ajuste, Articulo articulo, int cantidad) {
+        val item = new ItemAjuste();
         item.setArticulo(articulo);
         item.setCantidad(cantidad);
-        item.setAjustePositivo(ajustePositivo);
+        item.setAjuste(ajuste);
         return item;
     }
 
@@ -76,12 +76,12 @@ public class ItemPositivo implements Comparable<ItemPositivo>{
     @ToString.Include
     @Column(allowsNull = "false")
     @PropertyLayout(fieldSetId = "itemPositivo", sequence = "3")
-    private AjustePositivo ajustePositivo;
+    private Ajuste ajuste;
 
-    private final static Comparator<ItemPositivo> comparator =
-            Comparator.comparing(ItemPositivo::getAjustePositivo).thenComparing(ItemPositivo::getArticulo);
+    private final static Comparator<ItemAjuste> comparator =
+            Comparator.comparing(ItemAjuste::getAjuste).thenComparing(ItemAjuste::getArticulo);
     @Override
-    public int compareTo(final ItemPositivo other) {
+    public int compareTo(final ItemAjuste other) {
         return comparator.compare(this, other);
     }
 

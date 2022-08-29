@@ -1,7 +1,6 @@
 package domainapp.modules.simple.dom.ajuste;
 
-import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.types.comprobante.CantidadMueve;
+import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import domainapp.modules.simple.types.comprobante.FechaAlta;
 import lombok.*;
@@ -11,7 +10,6 @@ import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Publishing;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 
-import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
@@ -55,13 +53,11 @@ public class Ajuste implements Comparable<Ajuste>{
         return getTipoAjuste() + "-" + getCodigoCo();
     }
 
-    //TODO: Reemplazar artículo por item
-    public static Ajuste creacion(Articulo articulo, int cantidad, TipoAjuste tipoAjuste) {
+    public static Ajuste creacion(TipoAjuste tipoAjuste, Cliente cliente) {
         val ajuste = new Ajuste();
         ajuste.setTipoAjuste(tipoAjuste);
-        ajuste.setArticulo(articulo);
-        ajuste.setCantidadMueve(cantidad);
         ajuste.setFechaAlta(LocalDateTime.now());
+        ajuste.setCliente(cliente);
         return ajuste;
     }
 
@@ -88,16 +84,8 @@ public class Ajuste implements Comparable<Ajuste>{
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "articulos", sequence = "1")
-    @Column(name="articulo_id", allowsNull = "false")
-    private Articulo articulo;
-
-    @CantidadMueve
-    @Getter
-    @Setter
-    @ToString.Include
-    @PropertyLayout(fieldSetId = "articulos", sequence = "2")
-    private int cantidadMueve;
+    @PropertyLayout(fieldSetId = "encabezado", sequence = "4")
+    private Cliente cliente;
 
     private final static Comparator<Ajuste> comparator =
             Comparator.comparing(Ajuste::getCodigoCo);
