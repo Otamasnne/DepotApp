@@ -16,6 +16,6 @@ public class Ajuste_ItemAjustes {
     private final Ajuste ajuste;
 
     public List<ItemAjuste> coll() { return itemAjusteRepository.buscarItemPorAjuste(ajuste) ; }
-    
+
     @Inject ItemAjusteRepository itemAjusteRepository;
 }

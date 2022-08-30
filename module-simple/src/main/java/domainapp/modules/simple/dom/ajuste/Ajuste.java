@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dom.ajuste;
 
+import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import domainapp.modules.simple.types.comprobante.FechaAlta;
@@ -86,6 +87,12 @@ public class Ajuste implements Comparable<Ajuste>{
     @ToString.Include
     @PropertyLayout(fieldSetId = "encabezado", sequence = "4")
     private Cliente cliente;
+
+    @Getter
+    @Setter
+    @ToString.Include
+    @PropertyLayout(fieldSetId = "encabezado", sequence = "5")
+    private EstadoOperativo estadoOperativo;
 
     private final static Comparator<Ajuste> comparator =
             Comparator.comparing(Ajuste::getCodigoCo);
