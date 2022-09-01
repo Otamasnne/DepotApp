@@ -19,6 +19,7 @@ import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -73,18 +74,20 @@ public class Ajuste implements Comparable<Ajuste>{
         return ajuste;
     }
 
+    //TODO: AGREGAR UN RETORNO AL FINAL, VERIFICAR VALIDACION
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
-            describedAs = "Permite que el Kit sea modificado.")
+            describedAs = "Procesa el ajuste.")
     public void procesar() {
-        ItemAjuste[] items = (ItemAjuste[]) itemAjusteRepository.buscarItemPorAjuste(this).toArray();
-        for (int i = 0; i< items.length; i++ ) {
-            Articulo articulo = items[i].getArticulo();
+        List<ItemAjuste> items = itemAjusteRepository.buscarItemPorAjuste(this);
+        for (int i = 0; i< items.size(); i++ ) {
+            ItemAjuste item = items.get(i);
+            Articulo articulo = item.getArticulo();
             if (this.getTipoAjuste() == TipoAjuste.AJP) {
-                articulo.setStock(articulo.getStock() + items[i].getCantidad());
+                articulo.setStock(articulo.getStock() + item.getCantidad());
             } else {
-                articulo.setStock(articulo.getStock() - items[i].getCantidad());
+                articulo.setStock(articulo.getStock() - item.getCantidad());
             }
         }
         final String title = titleService.titleOf(this);

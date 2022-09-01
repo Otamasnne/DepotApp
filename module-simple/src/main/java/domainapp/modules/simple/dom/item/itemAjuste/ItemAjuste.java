@@ -41,7 +41,7 @@ import java.util.Comparator;
 @javax.persistence.Table(schema = "SIMPLE")
 public class ItemAjuste implements Comparable<ItemAjuste>{
 
-    static final String NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE = "ItemKit.buscarItemPorAjuste";
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE = "ItemAjuste.buscarItemPorAjuste";
 
     ItemAjuste(Ajuste ajuste, Articulo articulo, int cantidad){
         this.ajuste = ajuste;

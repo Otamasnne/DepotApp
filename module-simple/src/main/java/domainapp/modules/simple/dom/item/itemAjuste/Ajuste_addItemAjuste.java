@@ -21,7 +21,7 @@ import java.util.List;
 @ActionLayout(associateWith = "itemsAjuste", sequence = "1")
 @RequiredArgsConstructor
 public class Ajuste_addItemAjuste {
-
+    //TODO: VERIFICAR VALIDACION
     private final Ajuste ajuste;
 
     public Ajuste act(
