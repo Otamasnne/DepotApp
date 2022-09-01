@@ -53,7 +53,7 @@ public class Ajuste implements Comparable<Ajuste>{
         return getTipoAjuste() + "-" + getCodigoCo();
     }
 
-    public static Ajuste creacion(TipoAjuste tipoAjuste, String codigoCo) {
+    public static Ajuste creacion(TipoAjuste tipoAjuste) {
         val ajuste = new Ajuste();
         ajuste.setTipoAjuste(tipoAjuste);
         ajuste.setFechaAlta(LocalDateTime.now());

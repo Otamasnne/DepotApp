@@ -23,19 +23,19 @@ public class Ajustes {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Ajuste ajustePositivo(
-            @CodigoCo String codigo
+            boolean proceder
     )
     {
-        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJP,codigo));
+        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJP));
     }
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Ajuste ajusteNegativo(
-            @CodigoCo String codigo
+            boolean proceder
     )
     {
-        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJN,codigo));
+        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJN));
     }
 
 
