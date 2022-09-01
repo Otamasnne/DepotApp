@@ -54,11 +54,12 @@ public class Ajuste implements Comparable<Ajuste>{
         return getTipoAjuste() + "-" + getCodigoCo();
     }
 
-    public static Ajuste creacion(TipoAjuste tipoAjuste, Cliente cliente) {
+    public static Ajuste creacion(TipoAjuste tipoAjuste, String codigoCo, Cliente cliente) {
         val ajuste = new Ajuste();
         ajuste.setTipoAjuste(tipoAjuste);
         ajuste.setFechaAlta(LocalDateTime.now());
         ajuste.setCliente(cliente);
+        ajuste.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         return ajuste;
     }
 
