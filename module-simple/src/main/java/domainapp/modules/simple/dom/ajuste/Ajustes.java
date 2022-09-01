@@ -1,6 +1,5 @@
 package domainapp.modules.simple.dom.ajuste;
 
-import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
@@ -23,23 +22,22 @@ public class Ajustes {
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Ajuste AjustePositivo(
-            Cliente cliente,
+    public Ajuste ajustePositivo(
             @CodigoCo String codigo
     )
     {
-        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJP,codigo , cliente));
+        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJP,codigo));
     }
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Ajuste AjusteNegativo(
-            Cliente cliente,
+    public Ajuste ajusteNegativo(
             @CodigoCo String codigo
     )
     {
-        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJN,codigo, cliente));
+        return repositoryService.persist(Ajuste.creacion(TipoAjuste.AJN,codigo));
     }
+
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)

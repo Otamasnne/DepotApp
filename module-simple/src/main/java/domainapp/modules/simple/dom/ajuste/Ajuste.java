@@ -1,7 +1,6 @@
 package domainapp.modules.simple.dom.ajuste;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
-import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import domainapp.modules.simple.types.comprobante.FechaAlta;
 import lombok.*;
@@ -54,11 +53,10 @@ public class Ajuste implements Comparable<Ajuste>{
         return getTipoAjuste() + "-" + getCodigoCo();
     }
 
-    public static Ajuste creacion(TipoAjuste tipoAjuste, String codigoCo, Cliente cliente) {
+    public static Ajuste creacion(TipoAjuste tipoAjuste, String codigoCo) {
         val ajuste = new Ajuste();
         ajuste.setTipoAjuste(tipoAjuste);
         ajuste.setFechaAlta(LocalDateTime.now());
-        ajuste.setCliente(cliente);
         ajuste.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         return ajuste;
     }
@@ -82,12 +80,6 @@ public class Ajuste implements Comparable<Ajuste>{
     @ToString.Include
     @PropertyLayout(fieldSetId = "encabezado", sequence = "3")
     private LocalDateTime fechaAlta;
-
-    @Getter
-    @Setter
-    @ToString.Include
-    @PropertyLayout(fieldSetId = "encabezado", sequence = "4")
-    private Cliente cliente;
 
     @Getter
     @Setter
