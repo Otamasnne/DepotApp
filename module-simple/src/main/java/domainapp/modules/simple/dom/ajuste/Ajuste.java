@@ -1,21 +1,26 @@
 package domainapp.modules.simple.dom.ajuste;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.item.itemAjuste.ItemAjuste;
+import domainapp.modules.simple.dom.item.itemAjuste.ItemAjusteRepository;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import domainapp.modules.simple.types.comprobante.FechaAlta;
 import lombok.*;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Publishing;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
+import org.apache.isis.applib.services.message.MessageService;
+import org.apache.isis.applib.services.title.TitleService;
 
+import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+
+import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
 @javax.jdo.annotations.PersistenceCapable(
         schema = "depotapp",
@@ -49,6 +54,13 @@ public class Ajuste implements Comparable<Ajuste>{
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Ajuste.findByCodigoLike";
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Ajuste.findByCodigoExact";
 
+    @Inject
+    TitleService titleService;
+    @Inject
+    MessageService messageService;
+
+    @Inject ItemAjusteRepository itemAjusteRepository;
+
     public String title() {
         return getTipoAjuste() + "-" + getCodigoCo();
     }
@@ -59,6 +71,28 @@ public class Ajuste implements Comparable<Ajuste>{
         ajuste.setFechaAlta(LocalDateTime.now());
         ajuste.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         return ajuste;
+    }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Permite que el Kit sea modificado.")
+    public void procesar() {
+        ItemAjuste[] items = (ItemAjuste[]) itemAjusteRepository.buscarItemPorAjuste(this).toArray();
+        for (int i = 0; i< items.length; i++ ) {
+            Articulo articulo = items[i].getArticulo();
+            if (this.getTipoAjuste() == TipoAjuste.AJP) {
+                articulo.setStock(articulo.getStock() + items[i].getCantidad());
+            } else {
+                articulo.setStock(articulo.getStock() - items[i].getCantidad());
+            }
+        }
+        final String title = titleService.titleOf(this);
+        this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
+        messageService.informUser(String.format("Se realizaron los ajustes de stock indicados bajo el '%s'", title));
+    }
+    public boolean hideProcesar() {
+        return this.getEstadoOperativo()==EstadoOperativo.COMPLETADO;
     }
 
     @Getter
