@@ -61,21 +61,21 @@ public class ItemAjuste implements Comparable<ItemAjuste>{
     @Setter
     @ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "itemPositivo", sequence = "1")
+    @PropertyLayout(fieldSetId = "itemAjuste", sequence = "1")
     private Articulo articulo;
 
     @CantidadMueve
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "itemPositivo", sequence = "2")
+    @PropertyLayout(fieldSetId = "itemAjuste", sequence = "2")
     private int cantidad;
 
     @Getter
     @Setter
     @ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "itemPositivo", sequence = "3")
+    @PropertyLayout(fieldSetId = "itemAjuste", sequence = "3")
     private Ajuste ajuste;
 
     private final static Comparator<ItemAjuste> comparator =
