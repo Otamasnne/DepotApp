@@ -79,7 +79,7 @@ public class Ajuste implements Comparable<Ajuste>{
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Procesa el ajuste.")
-    public void procesar() {
+    public Ajuste procesar() {
         List<ItemAjuste> items = itemAjusteRepository.buscarItemPorAjuste(this);
         for (int i = 0; i< items.size(); i++ ) {
             ItemAjuste item = items.get(i);
@@ -93,6 +93,7 @@ public class Ajuste implements Comparable<Ajuste>{
         final String title = titleService.titleOf(this);
         this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
         messageService.informUser(String.format("Se realizaron los ajustes de stock indicados bajo el '%s'", title));
+        return this;
     }
     public boolean hideProcesar() {
         return this.getEstadoOperativo()==EstadoOperativo.COMPLETADO;
