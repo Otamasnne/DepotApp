@@ -80,6 +80,7 @@ public class ItemAjuste implements Comparable<ItemAjuste>{
 
     private final static Comparator<ItemAjuste> comparator =
             Comparator.comparing(ItemAjuste::getAjuste).thenComparing(ItemAjuste::getArticulo);
+
     @Override
     public int compareTo(final ItemAjuste other) {
         return comparator.compare(this, other);

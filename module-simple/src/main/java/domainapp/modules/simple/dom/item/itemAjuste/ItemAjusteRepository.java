@@ -28,6 +28,5 @@ public class ItemAjusteRepository {
                 .filter(x -> x.getAjuste().equals(ajuste))
                 .filter(x -> x.getArticulo().equals(articulo))
                 .findFirst();
-
     }
 }

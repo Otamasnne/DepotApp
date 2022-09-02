@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @ActionLayout(associateWith = "itemsAjuste", sequence = "2")
 @RequiredArgsConstructor
 public class Ajuste_removeItemAjuste {
-    //TODO: VERIFICAR VALIDACION
+
     private final Ajuste ajuste;
 
     public Ajuste act(final Articulo articulo) {
@@ -48,7 +48,6 @@ public class Ajuste_removeItemAjuste {
 
     @Inject
     ItemAjusteRepository itemAjusteRepository;
-
     @Inject
     RepositoryService repositoryService;
 }
