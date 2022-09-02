@@ -42,7 +42,7 @@ public class Ajuste_addItemAjuste {
                 : null;
     }
 
-    public boolean hideAct() { return ajuste.getEstadoOperativo() == EstadoOperativo.PREPARADO; }
+    public boolean hideAct() { return ajuste.getEstadoOperativo() == EstadoOperativo.COMPLETADO; }
     @Inject
     RepositoryService repositoryService;
     @Inject
