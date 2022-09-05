@@ -46,7 +46,7 @@ public class Ingresos {
                         .withParameter("codigo", codigo));
     }
 
-    
+
     @Programmatic
     public Ingreso porCodigoExacto(final String codigo) {
         return repositoryService.firstMatch(

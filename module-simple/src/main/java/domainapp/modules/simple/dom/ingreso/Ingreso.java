@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.ingreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import lombok.*;
@@ -83,6 +84,10 @@ public class Ingreso implements Comparable<Ingreso>{
     @Getter @Setter
     @PropertyLayout(fieldSetId = "ingreso", sequence = "3")
     private EstadoOperativo estadoOperativo;
+
+    @Getter @Setter
+    @PropertyLayout(fieldSetId = "ingreso", sequence = "4")
+    private Proveedor proveedor;
 
     //Manda el ingreso a procesar, lo cual lo envía a la app de Android
     //TODO: ENVIAR EL INGRESO A LA APLICACIÓN CUANDO SE PASE A ESTE ESTADO.
