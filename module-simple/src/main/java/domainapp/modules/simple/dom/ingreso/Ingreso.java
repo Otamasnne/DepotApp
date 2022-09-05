@@ -58,7 +58,7 @@ public class Ingreso implements Comparable<Ingreso>{
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Ingreso.findByCodigoLike";
 
 
-    public static Ingreso withName(String codigo, String descripcion) {
+    public static Ingreso crear(String codigo, String descripcion) {
         val ingreso = new Ingreso();
         ingreso.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         codigo = ("000000" + codigo).substring(codigo.length());
