@@ -40,7 +40,7 @@ public class Ingreso_removeItemIngreso {
                 .map(ItemIngreso::getArticulo).collect(Collectors.toList()); //Levanta el listado de artículos contenidos por los distintos items en el Ingreso
     }
 
-    //Devuelve el primer artículo de item por defecto si no hay mas que un solo item en la lista del Ingreso.
+    //Devuelve el primer artículo de la lista de items por defecto si no hay mas que un solo item en la lista del Ingreso.
     public Articulo default0Act() {
         List<Articulo> articulos = choices0Act(); //La lista se rellena a partir de lo que levanta como valores posibles el metodo choices0Act()
         return articulos.size() == 1 ? articulos.get(0) : null;
