@@ -8,6 +8,7 @@ import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.Publishing;
 import org.apache.isis.applib.annotation.SemanticsOf;
+import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
 
 import javax.inject.Inject;
@@ -37,15 +38,19 @@ public class Ajuste_addItemAjuste {
     }
 
     public String validate0Act(final Articulo articulo) {
-        return itemAjusteRepository.buscarItemPorAjusteYArticulo(ajuste, articulo).isPresent()
+
+        return repositoryService.firstMatch(
+                Query.named(ItemAjuste.class, ItemAjuste.NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE_Y_ARTICULO)
+                        .withParameter("ajuste", ajuste)
+                        .withParameter("articulo", articulo)).isPresent()
                 ? String.format("El artículo ingresado ya se encuentra en la lista de artículos de este ajuste.")
                 : null;
+
     }
 
     public boolean hideAct() { return ajuste.getEstadoOperativo() == EstadoOperativo.COMPLETADO; }
 
     @Inject
     RepositoryService repositoryService;
-    @Inject
-    ItemAjusteRepository itemAjusteRepository;
+
 }

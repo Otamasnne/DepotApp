@@ -35,7 +35,7 @@ import java.util.Comparator;
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.item.itemAjuste.ItemAjuste " +
                         "WHERE ajuste == :ajuste " +
-                        "AND articulo == :articulo "
+                        "&& articulo == :articulo "
         )
 
 })
