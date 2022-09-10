@@ -28,8 +28,16 @@ import java.util.Comparator;
                 name = ItemAjuste.NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.item.itemAjuste.ItemAjuste " +
-                        "WHERE ajuste.indexOf(:ajuste) >= 0 "
+                        "WHERE ajuste == :ajuste"
+        ),
+        @javax.jdo.annotations.Query(
+                name = ItemAjuste.NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE_Y_ARTICULO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.item.itemAjuste.ItemAjuste " +
+                        "WHERE ajuste == :ajuste " +
+                        "AND articulo == :articulo "
         )
+
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
 @javax.jdo.annotations.Version(strategy= VersionStrategy.DATE_TIME, column="version")
@@ -42,7 +50,7 @@ import java.util.Comparator;
 public class ItemAjuste implements Comparable<ItemAjuste>{
 
     static final String NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE = "ItemAjuste.buscarItemPorAjuste";
-
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE_Y_ARTICULO = "ItemAjuste.buscarItemPorAjusteYArticulo";
     ItemAjuste(Ajuste ajuste, Articulo articulo, int cantidad){
         this.ajuste = ajuste;
         this.articulo = articulo;
