@@ -9,11 +9,7 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Publishing;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
-import org.apache.isis.applib.services.message.MessageService;
-import org.apache.isis.applib.services.repository.RepositoryService;
-import org.apache.isis.applib.services.title.TitleService;
 
-import javax.inject.Inject;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -32,7 +28,14 @@ import java.util.Comparator;
                 name = ItemKit.NAMED_QUERY__BUSCAR_ITEM_POR_KIT,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.item.itemKit.ItemKit " +
-                        "WHERE kitArticulo.indexOf(:kitArticulo) >= 0 "
+                        "WHERE kitArticulo == :kitArticulo "
+        ),
+        @javax.jdo.annotations.Query(
+                name = ItemKit.NAMED_QUERY__BUSCAR_ITEM_POR_KIT_Y_ARTICULO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.item.itemKit.ItemKit " +
+                        "WHERE kitArticulo == :kitArticulo " +
+                        "&& articulo == :articulo "
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -44,16 +47,11 @@ import java.util.Comparator;
 @ToString(onlyExplicitlyIncluded = true)
 @javax.persistence.Table(schema = "SIMPLE")
 public class ItemKit implements Comparable<ItemKit>{
-
-    @Inject
-    RepositoryService repositoryService;
-    @Inject
-    TitleService titleService;
-    @Inject
-    MessageService messageService;
-
-
+    
     static final String NAMED_QUERY__BUSCAR_ITEM_POR_KIT = "ItemKit.buscarItemPorKit";
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_KIT_Y_ARTICULO = "ItemKit.buscarItemPorKitYArticulo";
+
+
     ItemKit(KitArticulo kitArticulo, Articulo articulo, int cantidad){
         this.kitArticulo = kitArticulo;
         this.articulo = articulo;
