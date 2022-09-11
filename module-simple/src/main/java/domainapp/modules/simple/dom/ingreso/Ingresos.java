@@ -24,11 +24,10 @@ public class Ingresos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Ingreso persistir(
-            @CodigoArticulo final String codigo,
             @Descripcion final String descripcion
     )
     {
-        return repositoryService.persist(Ingreso.crear(codigo, descripcion));
+        return repositoryService.persist(Ingreso.crear(descripcion));
     }
 
     @Action(semantics = SemanticsOf.SAFE)
