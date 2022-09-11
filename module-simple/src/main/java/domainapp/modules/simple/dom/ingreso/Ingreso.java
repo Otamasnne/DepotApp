@@ -45,6 +45,12 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.ingreso.Ingreso " +
                         "WHERE codigo == :codigo"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ingreso.NAMED_QUERY__BUSCAR_POR_PROVEEDOR,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.ingreso.Ingreso " +
+                        "WHERE proveedor == :proveedor"
         )
 })
 public class Ingreso implements Comparable<Ingreso>{
@@ -57,7 +63,7 @@ public class Ingreso implements Comparable<Ingreso>{
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Ingreso.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Ingreso.findByCodigoLike";
-
+    static final String NAMED_QUERY__BUSCAR_POR_PROVEEDOR = "Ingreso.buscarPorProveedor";
 
     public static Ingreso crear(String codigo, String descripcion) {
         val ingreso = new Ingreso();

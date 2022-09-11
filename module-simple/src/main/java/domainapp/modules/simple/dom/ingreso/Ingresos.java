@@ -9,7 +9,6 @@ import org.apache.isis.applib.services.repository.RepositoryService;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @DomainService(
         nature = NatureOfService.VIEW,
@@ -53,9 +52,13 @@ public class Ingresos {
     public List<Ingreso> porProveedor(
             final Proveedor proveedor
             ) {
-        return repositoryService.allInstances(Ingreso.class).stream()
-                .filter(x -> x.getProveedor().equals(proveedor))
-                .collect(Collectors.toList());
+        return repositoryService.allMatches(
+                Query.named(Ingreso.class, Ingreso.NAMED_QUERY__BUSCAR_POR_PROVEEDOR)
+                        .withParameter("proveedor", proveedor));
+    }
+
+    public List<Proveedor> choices0PorProveedor(){
+        return repositoryService.allInstances(Proveedor.class);
     }
 
     @Programmatic
