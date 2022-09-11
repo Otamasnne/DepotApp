@@ -34,8 +34,6 @@ public class KitArticulo_removeItemKit {
 
     }
 
-    //public boolean hideAct() {return itemKitRepository.buscarItemPorKit(kitArticulo).isEmpty();}
-
     public boolean hideAct() {
         return itemKitRepository.buscarItemPorKit(kitArticulo).isEmpty() || kitArticulo.getEstadoOperativo() == EstadoOperativo.PREPARADO;
     }
