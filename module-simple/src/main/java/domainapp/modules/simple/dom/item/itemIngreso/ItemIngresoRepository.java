@@ -19,13 +19,13 @@ public class ItemIngresoRepository {
 
     public List<ItemIngreso> buscarItemPorIngreso(Ingreso ingreso) {
         return repositoryService.allMatches(
-                Query.named(ItemIngreso.class, ItemIngreso.NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO)
+                Query.named(ItemIngreso.class, ItemIngreso.NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO)
                         .withParameter("ingreso", ingreso));
     }
 
     public Optional<ItemIngreso> buscarItemPorIngresoYArticulo(Ingreso ingreso, Articulo articulo) {
         return repositoryService.firstMatch(
-                Query.named(ItemIngreso.class, ItemIngreso.NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO)
+                Query.named(ItemIngreso.class, ItemIngreso.NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO)
                         .withParameter("ingreso", ingreso)
                         .withParameter("articulo", articulo));
     }

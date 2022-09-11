@@ -10,11 +10,7 @@ import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Publishing;
 import org.apache.isis.applib.jaxb.PersistentEntitiesAdapter;
-import org.apache.isis.applib.services.message.MessageService;
-import org.apache.isis.applib.services.repository.RepositoryService;
-import org.apache.isis.applib.services.title.TitleService;
 
-import javax.inject.Inject;
 import javax.jdo.annotations.*;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -30,10 +26,17 @@ import java.util.Comparator;
 @Queries(
         {
                 @Query(
-                        name = ItemPedido.NAMED_QUERY_BUSCAR_ITEM_POR_PEDIDO,
+                        name = ItemPedido.NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO,
                         value = "SELECT " +
                                 "FROM domainapp.modules.simple.dom.item.itemPedido.ItemPedido " +
-                                "WHERE pedido.indexOf(:Pedido) >= 0 "
+                                "WHERE pedido == :pedido "
+                ),
+                @Query(
+                        name = ItemPedido.NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO_Y_ARTICULO,
+                        value = "SELECT " +
+                                "FROM domainapp.modules.simple.dom.item.itemPedido.ItemPedido " +
+                                "WHERE pedido == :pedido " +
+                                "&& articulo == :articulo "
                 )
         }
 )
@@ -47,14 +50,8 @@ import java.util.Comparator;
 @Table(schema = "SIMPLE")
 public class ItemPedido implements Comparable<ItemPedido> {
 
-    @Inject
-    RepositoryService repositoryService;
-    @Inject
-    TitleService titleService;
-    @Inject
-    MessageService messageService;
-
-    static final String NAMED_QUERY_BUSCAR_ITEM_POR_PEDIDO = "ItemPedido.buscarItemPorPedido";
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO = "ItemPedido.buscarItemPorPedido";
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO_Y_ARTICULO = "ItemPedido.buscarItemPorPedidoYArticulo";
 
     ItemPedido(Pedido pedido, Articulo articulo, int cantidad){
         //val item = new ItemPedido();
@@ -62,14 +59,6 @@ public class ItemPedido implements Comparable<ItemPedido> {
         this.articulo = articulo;
         this.cantidad = cantidad;
     }
-
-//    public static ItemPedido creacionItemPedido (Pedido pedido, Articulo articulo, int cantidad){
-//        val itemPedido = new ItemPedido();
-//        itemPedido.setArticulo(articulo);
-//        itemPedido.setCantidad(cantidad);
-//        itemPedido.setPedido(pedido);
-//        return itemPedido;
-//    }
 
     @Getter@Setter@ToString.Include
     @Column(allowsNull = "false") //REVISAR ESTO

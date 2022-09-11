@@ -26,17 +26,17 @@ import java.util.Comparator;
 @Queries(
         {
                 @Query(
-                        name = ItemIngreso.NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO,
+                        name = ItemIngreso.NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO,
                         value = "SELECT " +
                                 "FROM domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso " +
                                 "WHERE ingreso == :ingreso "
                 ),
                 @Query(
-                        name = ItemIngreso.NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO,
+                        name = ItemIngreso.NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO,
                         value = "SELECT " +
                                 "FROM domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso " +
                                 "WHERE ingreso == :ingreso " +
-                                "AND articulo == :articulo "
+                                "&& articulo == :articulo "
                 )
         }
 )
@@ -50,8 +50,8 @@ import java.util.Comparator;
 @Table(schema = "SIMPLE")
 public class ItemIngreso implements Comparable<ItemIngreso> {
 
-    static final String NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO = "ItemIngreso.buscarItemPorIngreso";
-    static final String NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO = "ItemIngreso.buscarItemPorIngresoYArticulo";
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO = "ItemIngreso.buscarItemPorIngreso";
+    static final String NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO = "ItemIngreso.buscarItemPorIngresoYArticulo";
     ItemIngreso(Ingreso ingreso, Articulo articulo, int cantidad){
         this.ingreso = ingreso;
         this.articulo = articulo;
