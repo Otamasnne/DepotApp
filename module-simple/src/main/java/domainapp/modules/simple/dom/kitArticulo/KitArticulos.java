@@ -24,11 +24,10 @@ public class KitArticulos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public KitArticulo create(
-            @CodigoArticulo final String codigo,
             @Descripcion final String descripcion
             )
             {
-        return repositoryService.persist(KitArticulo.withName(codigo, descripcion));
+        return repositoryService.persist(KitArticulo.withName(descripcion));
     }
 
     @Action(semantics = SemanticsOf.SAFE)

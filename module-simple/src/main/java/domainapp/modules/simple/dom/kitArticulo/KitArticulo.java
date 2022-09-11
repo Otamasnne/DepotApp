@@ -66,11 +66,9 @@ public class KitArticulo implements Comparable<KitArticulo>{
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "KitArticulo.findByCodigoLike";
 
 
-    public static KitArticulo withName(String codigo, String descripcion) {
+    public static KitArticulo withName(String descripcion) {
         val kitArticulo = new KitArticulo();
         kitArticulo.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
-        codigo = ("000000" + codigo).substring(codigo.length());
-        kitArticulo.setCodigo(codigo);
         kitArticulo.setDescripcion(descripcion);
         kitArticulo.setEstadoHabDes(EstadoHabDes.HABILITADO);
         return kitArticulo;
