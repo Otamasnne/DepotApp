@@ -29,7 +29,14 @@ import java.util.Comparator;
                         name = ItemIngreso.NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO,
                         value = "SELECT " +
                                 "FROM domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso " +
-                                "WHERE ingreso.indexOf(:Ingreso) >= 0 "
+                                "WHERE ingreso == :ingreso "
+                ),
+                @Query(
+                        name = ItemIngreso.NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO,
+                        value = "SELECT " +
+                                "FROM domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso " +
+                                "WHERE ingreso == :ingreso " +
+                                "AND articulo == :articulo "
                 )
         }
 )
@@ -44,7 +51,7 @@ import java.util.Comparator;
 public class ItemIngreso implements Comparable<ItemIngreso> {
 
     static final String NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO = "ItemIngreso.buscarItemPorIngreso";
-
+    static final String NAMED_QUERY_BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO = "ItemIngreso.buscarItemPorIngresoYArticulo";
     ItemIngreso(Ingreso ingreso, Articulo articulo, int cantidad){
         this.ingreso = ingreso;
         this.articulo = articulo;
