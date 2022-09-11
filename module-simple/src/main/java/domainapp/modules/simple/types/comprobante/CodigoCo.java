@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
 @ParameterLayout(named = "CodigoCo")
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
+@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 public @interface CodigoCo {
 
 }

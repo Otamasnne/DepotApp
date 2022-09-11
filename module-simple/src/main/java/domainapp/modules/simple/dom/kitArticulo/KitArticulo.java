@@ -2,8 +2,8 @@ package domainapp.modules.simple.dom.kitArticulo;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.dom.EstadoOperativo;
-import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
+import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
@@ -77,7 +77,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
     }
 
     @Title
-    @CodigoKit
+    @CodigoCo
     @Getter
     @Setter
     @ToString.Include

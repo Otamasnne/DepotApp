@@ -2,8 +2,8 @@ package domainapp.modules.simple.dom.ingreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
-import domainapp.modules.simple.types.articulo.CodigoKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
+import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
@@ -75,7 +75,7 @@ public class Ingreso implements Comparable<Ingreso>{
     }
 
     @Title
-    @CodigoKit //TODO: REVISAR LOS TYPE
+    @CodigoCo
     @Getter
     @Setter
     @ToString.Include

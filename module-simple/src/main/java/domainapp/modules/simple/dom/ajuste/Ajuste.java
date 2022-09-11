@@ -66,11 +66,12 @@ public class Ajuste implements Comparable<Ajuste>{
         return getTipoAjuste() + "-" + getCodigoCo();
     }
 
-    public static Ajuste creacion(TipoAjuste tipoAjuste) {
+    public static Ajuste creacion(TipoAjuste tipoAjuste, String descripcion) {
         val ajuste = new Ajuste();
         ajuste.setTipoAjuste(tipoAjuste);
         ajuste.setFechaAlta(LocalDateTime.now());
         ajuste.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
+        ajuste.setDescripcion(descripcion); 
         return ajuste;
     }
 
@@ -124,6 +125,12 @@ public class Ajuste implements Comparable<Ajuste>{
     @ToString.Include
     @PropertyLayout(fieldSetId = "encabezado", sequence = "5")
     private EstadoOperativo estadoOperativo;
+
+    @Getter
+    @Setter
+    @ToString.Include
+    @PropertyLayout(fieldSetId = "encabezado", sequence = "6")
+    private String descripcion;
 
     private final static Comparator<Ajuste> comparator =
             Comparator.comparing(Ajuste::getCodigoCo);
