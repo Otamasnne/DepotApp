@@ -46,7 +46,6 @@ public class KitArticulos {
                         .withParameter("codigo", codigo));
     }
 
-
     @Programmatic
     public KitArticulo findByCodigoExact(final String codigo) {
         return repositoryService.firstMatch(
@@ -55,6 +54,12 @@ public class KitArticulos {
                 .orElse(null);
     }
 
-
+    public List<KitArticulo> buscarPorDescripcion(
+            final String descripcion
+    ) {
+        return repositoryService.allMatches(
+                Query.named(KitArticulo.class, KitArticulo.NAMED_QUERY__BUSCAR_POR_DESCRIPCION)
+                        .withParameter("descripcion", descripcion));
+    }
 
 }

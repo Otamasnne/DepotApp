@@ -48,6 +48,12 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.kitArticulo.KitArticulo " +
                         "WHERE codigo == :codigo"
+        ),
+        @javax.jdo.annotations.Query(
+                name = KitArticulo.NAMED_QUERY__BUSCAR_POR_DESCRIPCION,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.kitArticulo.KitArticulo " +
+                        "WHERE descripcion.toLowerCase().startsWith(:descripcion.toLowerCase()) "
         )
 })
 public class KitArticulo implements Comparable<KitArticulo>{
@@ -64,6 +70,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "KitArticulo.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "KitArticulo.findByCodigoLike";
+    static final String NAMED_QUERY__BUSCAR_POR_DESCRIPCION = "KitArticulo.buscarPorDescripcion";
 
 
     public static KitArticulo withName(String descripcion) {
@@ -95,21 +102,6 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "4")
     private EstadoHabDes estadoHabDes;
 
-/*
-    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
-    @ActionLayout(
-            position = ActionLayout.Position.PANEL,
-            describedAs = "Borra el kit y sus existencias.")
-    public String borrar() {
-        String nombre = this.getCodigo();
-        final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'%s' borrado", title));
-        repositoryService.removeAndFlush(this);
-        return "Se borró el Kit " + nombre;
-    }
-
-*/
-
 
     //Pasa el Kit a estado PREPARADO, para que este pueda ser utilizado por las distintas operaciones y que no se le puedan agregar mas items.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
@@ -123,7 +115,6 @@ public class KitArticulo implements Comparable<KitArticulo>{
         this.setEstadoOperativo(EstadoOperativo.PREPARADO);
         return this;
     }
-
 
     //Devuelve el Kit al estado MODIFICABLE (estado por defecto) para que se le puedan agregar mas items. El kit no se va a poder utilizar en operaciones mientras este
     //en este estado.
@@ -149,7 +140,6 @@ public class KitArticulo implements Comparable<KitArticulo>{
     }
 
 
-
     //ESTADO GENERAL
     //Además de los estados MODIFICABLE Y PREPARADO, el Kit también podrá encontrarse habilitado o deshabilitado. Los deshabilitados no podrán utilizarse para operaciones tal como los
     //que se encuentren en estado de kit MODIFICABLE pero si se podran realizar acciones sobre ellos mismos (es decir agregar mas items, pasar a PREPARADO para que este inmediatamente
@@ -166,7 +156,6 @@ public class KitArticulo implements Comparable<KitArticulo>{
         this.setEstadoHabDes(EstadoHabDes.HABILITADO);
         return this;
     }
-
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
