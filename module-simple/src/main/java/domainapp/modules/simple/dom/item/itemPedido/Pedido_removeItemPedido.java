@@ -34,17 +34,13 @@ public class Pedido_removeItemPedido {
     }
 
     public boolean hideAct() {
-        return itemPedidoRepository.buscarItemPorPedido(pedido).isEmpty() || pedido.getEstadoOperativo() == EstadoOperativo.PREPARADO;
+        return itemPedidoRepository.buscarItemPorPedido(pedido).isEmpty() || pedido.getEstadoOperativo() == EstadoOperativo.PROCESANDO;
     }
 
     public List<Articulo> choices0Act(){
         return itemPedidoRepository.buscarItemPorPedido(pedido).stream()
                 .map(ItemPedido::getArticulo).collect(Collectors.toList());
     }
-
-
-
-
 
     @Inject
     RepositoryService repositoryService;

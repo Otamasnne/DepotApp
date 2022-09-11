@@ -36,19 +36,15 @@ public class Pedido_addItemPedido {
         return repositoryService.allInstances(Articulo.class);
     }
 
-
-    //Agregar metodo para modificar cantidad?
-
-
     public String validate0Act(final Articulo articulo){
         return itemPedidoRepository.buscarItemPorPedidoYArticulo(pedido, articulo).isPresent()
-                ? String.format("El articulo ingresado ya se encuentra")
+                ? String.format("El artículo ingresado ya se encuentra en el pedido")
                 : null;
     }
 
-    //Esconde el pedido si esta en estado PREPARADO
+    //Esconde la acción para agregar items si está en estado PREPARADO
     public boolean hideAct() {
-        return pedido.getEstadoOperativo() == EstadoOperativo.PREPARADO;
+        return pedido.getEstadoOperativo() == EstadoOperativo.PROCESANDO;
     }
 
     @Inject

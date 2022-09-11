@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 
+import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
+
 @PersistenceCapable(
         schema = "depotapp",
         identityType= IdentityType.DATASTORE
@@ -72,42 +74,20 @@ public class Pedido implements Comparable<Pedido> {
         return pedido;
     }
 
-
-    // ESTADO PREPARADO
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
-            describedAs = "Permite que el pedido este listo"
-    )
-    public String preparado() {
+            describedAs = "Envía el pedido a ser procesado.")
+    public String procesar() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'$s' preparado.", title));
-        this.setEstadoOperativo(EstadoOperativo.PREPARADO);
-        return "Se paso el pedido " + nombre + " a Preparado.";
+        messageService.informUser(String.format("'%s' siendo procesado.", title));
+        this.setEstadoOperativo(EstadoOperativo.PROCESANDO);
+        return "Se envió el Pedido " + nombre + " a procesamiento.";
     }
 
-    //ESTADO MODIFICABLE
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
-    @ActionLayout(
-            position = ActionLayout.Position.PANEL,
-            describedAs = "Permite que el pedido sea modificado"
-    )
-    public String modificable() {
-        String nombre = this.getCodigo();
-        final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'$s' modificable.", title));
-        this.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
-        return "Se paso el pedido " + nombre + " a Modificable";
-    }
-
-    // Esconde la acción dependiendo del estado actual.
-    public boolean hidePreparado() {
-        return this.getEstadoOperativo()==EstadoOperativo.PREPARADO;
-    }
-
-    public boolean hideModificable() {
-        return this.getEstadoOperativo()==EstadoOperativo.MODIFICABLE;
+    public boolean hideProcesar() {
+        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO;
     }
 
     private final static Comparator<Pedido> comparator =
