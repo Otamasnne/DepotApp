@@ -72,6 +72,7 @@ public class KitArticulo implements Comparable<KitArticulo>{
         codigo = ("000000" + codigo).substring(codigo.length());
         kitArticulo.setCodigo(codigo);
         kitArticulo.setDescripcion(descripcion);
+        kitArticulo.setEstadoHabDes(EstadoHabDes.HABILITADO);
         return kitArticulo;
     }
 
@@ -117,12 +118,12 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Permite que el Kit sea utilizado para operaciones.")
-    public String preparado() {
+    public KitArticulo preparado() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'%s' preparado.", title));
+        messageService.informUser(String.format("Kit '%s' se pasó a preparado.", title));
         this.setEstadoOperativo(EstadoOperativo.PREPARADO);
-        return "Se pasó el Kit " + nombre + " a Preparado.";
+        return this;
     }
 
 
@@ -132,12 +133,12 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Permite que el Kit sea modificado.")
-    public String modificable() {
+    public KitArticulo modificable() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'%s' modificable.", title));
+        messageService.informUser(String.format("Kit '%s' se pasó a modificable.", title));
         this.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
-        return "Se pasó el Kit " + nombre + " a Modificable.";
+        return this;
     }
 
     //La acción correspondiente a cada estado no va a ser visible si el Kit ya se encuentra en dicho estado.
@@ -160,12 +161,12 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Habilita el kit")
-    public String habilitar() {
+    public KitArticulo habilitar() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'%s' habilitado", title));
+        messageService.informUser(String.format("Kit '%s' habilitado", title));
         this.setEstadoHabDes(EstadoHabDes.HABILITADO);
-        return "Se habilitó el kit " + nombre;
+        return this;
     }
 
 
@@ -173,12 +174,12 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Deshabilita el kit.")
-    public String deshabilitar() {
+    public KitArticulo deshabilitar() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'%s' deshabilitado", title));
+        messageService.informUser(String.format("Kit '%s' deshabilitado", title));
         this.setEstadoHabDes(EstadoHabDes.DESHABILITADO);
-        return "Se deshabilitó el kit " + nombre;
+        return this;
     }
 
     public boolean hideHabilitar() {
