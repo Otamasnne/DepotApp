@@ -62,14 +62,18 @@ public class Pedido implements Comparable<Pedido> {
     private String codigo;
 
     @Getter@Setter
-    @PropertyLayout(fieldSetId = "pedido", sequence = "3")
+    @PropertyLayout(fieldSetId = "pedido", sequence = "2")
     private EstadoOperativo estadoOperativo;
 
+    @Getter
+    @Setter
+    @PropertyLayout(fieldSetId = "pedido", sequence = "3")
+    private String descripcion;
 
-    public static Pedido withName(String codigo) {
+
+    public static Pedido withName(String descripcion) {
         val pedido = new Pedido();
-        codigo = ("000000" + codigo).substring(codigo.length());
-        pedido.setCodigo(codigo);
+        pedido.setDescripcion(descripcion);
         pedido.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         return pedido;
     }

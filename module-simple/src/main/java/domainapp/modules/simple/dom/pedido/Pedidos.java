@@ -1,6 +1,5 @@
 package domainapp.modules.simple.dom.pedido;
 
-import domainapp.modules.simple.types.pedido.CodigoPedido;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
@@ -24,8 +23,8 @@ public class Pedidos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Pedido create(
-            @CodigoPedido final String codigo) {
-        return repositoryService.persist(Pedido.withName(codigo));
+            final String descripcion) {
+        return repositoryService.persist(Pedido.withName(descripcion));
     }
 
     @Action(semantics = SemanticsOf.SAFE)
