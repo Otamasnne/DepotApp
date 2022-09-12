@@ -2,14 +2,12 @@ package domainapp.modules.simple.dom.encabezado.kitArticulo;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.dom.EstadoOperativo;
-import domainapp.modules.simple.dom.kitArticulo.QKitArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
-import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
@@ -59,8 +57,6 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 })
 public class KitArticulo implements Comparable<KitArticulo>{
 
-    @Inject
-    RepositoryService repositoryService;
     @Inject
     TitleService titleService;
     @Inject
