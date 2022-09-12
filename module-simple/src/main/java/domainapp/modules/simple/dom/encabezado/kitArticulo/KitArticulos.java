@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.kitArticulo;
+package domainapp.modules.simple.dom.encabezado.kitArticulo;
 
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;

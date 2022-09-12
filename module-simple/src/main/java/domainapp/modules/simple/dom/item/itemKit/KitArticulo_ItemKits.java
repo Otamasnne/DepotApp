@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.item.itemKit;
 
 
-import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
+import domainapp.modules.simple.dom.encabezado.kitArticulo.KitArticulo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Collection;

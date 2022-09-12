@@ -1,7 +1,8 @@
-package domainapp.modules.simple.dom.kitArticulo;
+package domainapp.modules.simple.dom.encabezado.kitArticulo;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.kitArticulo.QKitArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
@@ -40,19 +41,19 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
         @javax.jdo.annotations.Query(
                 name = KitArticulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.kitArticulo.KitArticulo " +
+                        "FROM domainapp.modules.simple.dom.encabezado.kitArticulo.KitArticulo " +
                         "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = KitArticulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.kitArticulo.KitArticulo " +
+                        "FROM domainapp.modules.simple.dom.encabezado.kitArticulo.KitArticulo " +
                         "WHERE codigo == :codigo"
         ),
         @javax.jdo.annotations.Query(
                 name = KitArticulo.NAMED_QUERY__BUSCAR_POR_DESCRIPCION,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.kitArticulo.KitArticulo " +
+                        "FROM domainapp.modules.simple.dom.encabezado.kitArticulo.KitArticulo " +
                         "WHERE descripcion.toLowerCase().startsWith(:descripcion.toLowerCase()) "
         )
 })

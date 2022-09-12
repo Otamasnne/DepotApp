@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.ajuste;
+package domainapp.modules.simple.dom.encabezado.ajuste;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.articulo.Articulo;
@@ -33,13 +33,13 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
         @javax.jdo.annotations.Query(
                 name = Ajuste.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.ajuste.Ajuste " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ajuste.Ajuste " +
                         "WHERE codigoCo.indexOf(:codigoCo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = Ajuste.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.ajuste.Ajuste " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ajuste.Ajuste " +
                         "WHERE codigoCo == :codigoCo"
         )
 })

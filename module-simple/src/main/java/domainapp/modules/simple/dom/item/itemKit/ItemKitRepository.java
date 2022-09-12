@@ -1,7 +1,7 @@
 package domainapp.modules.simple.dom.item.itemKit;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.kitArticulo.KitArticulo;
+import domainapp.modules.simple.dom.encabezado.kitArticulo.KitArticulo;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;

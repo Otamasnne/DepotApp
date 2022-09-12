@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.ingreso;
+package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
@@ -37,19 +37,19 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
         @javax.jdo.annotations.Query(
                 name = Ingreso.NAMED_QUERY__FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.ingreso.Ingreso " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
                         "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = Ingreso.NAMED_QUERY__FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.ingreso.Ingreso " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
                         "WHERE codigo == :codigo"
         ),
         @javax.jdo.annotations.Query(
                 name = Ingreso.NAMED_QUERY__BUSCAR_POR_PROVEEDOR,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.ingreso.Ingreso " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
                         "WHERE proveedor == :proveedor"
         )
 })

@@ -2,7 +2,7 @@ package domainapp.modules.simple.dom.item.itemIngreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.articulo.Articulo;
-import domainapp.modules.simple.dom.ingreso.Ingreso;
+import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;

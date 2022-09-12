@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.pedido;
+package domainapp.modules.simple.dom.encabezado.pedido;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;

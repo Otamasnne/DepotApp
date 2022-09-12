@@ -1,6 +1,6 @@
 package domainapp.modules.simple.dom.item.itemPedido;
 
-import domainapp.modules.simple.dom.pedido.Pedido;
+import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Collection;

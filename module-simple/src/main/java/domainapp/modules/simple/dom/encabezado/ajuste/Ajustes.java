@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.ajuste;
+package domainapp.modules.simple.dom.encabezado.ajuste;
 
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import org.apache.isis.applib.annotation.*;

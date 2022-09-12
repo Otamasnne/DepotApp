@@ -1,6 +1,6 @@
 package domainapp.modules.simple.dom.item.itemAjuste;
 
-import domainapp.modules.simple.dom.ajuste.Ajuste;
+import domainapp.modules.simple.dom.encabezado.ajuste.Ajuste;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Collection;
 import org.apache.isis.applib.annotation.CollectionLayout;

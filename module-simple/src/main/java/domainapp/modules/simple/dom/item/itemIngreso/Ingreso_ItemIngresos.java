@@ -1,6 +1,6 @@
 package domainapp.modules.simple.dom.item.itemIngreso;
 
-import domainapp.modules.simple.dom.ingreso.Ingreso;
+import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Collection;
 import org.apache.isis.applib.annotation.CollectionLayout;

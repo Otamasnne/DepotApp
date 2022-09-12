@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.pedido;
+package domainapp.modules.simple.dom.encabezado.pedido;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
@@ -35,13 +35,13 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
         @javax.jdo.annotations.Query(
                 name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.pedido.Pedido" +
+                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido" +
                         "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.pedido.Pedido" +
+                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido" +
                         "WHERE codigo == :codigo"
         )
 })

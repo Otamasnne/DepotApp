@@ -1,4 +1,4 @@
-package domainapp.modules.simple.dom.ingreso;
+package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
