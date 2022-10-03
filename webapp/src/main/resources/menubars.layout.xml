@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mb3:menuBars xsi:schemaLocation="http://isis.apache.org/applib/layout/menubars/bootstrap3 http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isis.apache.org/applib/layout/component http://isis.apache.org/applib/layout/component/component.xsd http://isis.apache.org/applib/layout/links http://isis.apache.org/applib/layout/links/links.xsd" xmlns:cpt="http://isis.apache.org/applib/layout/component" xmlns:lnk="http://isis.apache.org/applib/layout/links" xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<mb3:menuBars xsi:schemaLocation="..."
+              xmlns:cpt="http://isis.apache.org/applib/layout/component"
+              xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">>
     <mb3:primary>
-        <mb3:menu unreferencedActions="true">
-            <mb3:named>Artículos</mb3:named>
+        <mb3:menu>
+            <mb3:named>Articulos</mb3:named>
             <mb3:section>
-                <mb3:serviceAction objectType="articulo.Articulo" id="create"/>
-                <mb3:serviceAction objectType="articulo.Articulo" id="findByName"/>
-                <mb3:serviceAction objectType="articulo.Articulo" id="listAll"/>
-                <mb3:serviceAction objectType="articulo.Articulo" id="ajustePositivo"/>
-                <mb3:serviceAction objectType="articulo.Articulo" id="ajusteNegativo"/>
+                <mb3:serviceAction
+                        objectType="depotapp.Articulos"
+                        id="create">
+                    <cpt:named>Crear Artículo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction
+                        objectType="depotapp.Articulos"
+                        id="ajustePositivo">
+                    <cpt:named>Ajuste Positivo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction
+                        objectType="depotapp.Articulos"
+                        id="ajusteNegativo">
+                    <cpt:named>Ajuste Negativo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction
+                        objectType="depotapp.Articulos"
+                        id="findByCodigo">
+                    <cpt:named>Buscar Por Código</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction
+                        objectType="depotapp.Articulos"
+                        id="listAll">
+                    <cpt:named>Listar Todos los Artículos</cpt:named>
+                </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
 
-        <mb3:menu unreferencedActions="true">
-            <mb3:named>Proveedores</mb3:named>
-            <mb3:section>
-                <mb3:serviceAction objectType="proveedor.Proveedor" id="create"/>
-                <mb3:serviceAction objectType="proveedor.Proveedor" id="listAll"/>
-            </mb3:section>
-        </mb3:menu>
-
-        <mb3:menu unreferencedActions="true">
-            <mb3:named>KitArticulos</mb3:named>
-            <mb3:section>
-                <mb3:serviceAction objectType="kitArticulo.KitArticulo" id="create"/>
-                <mb3:serviceAction objectType="kitArticulo.KitArticulo" id="listAll"/>
-            </mb3:section>
-        </mb3:menu>
-
-
-
-
 
 
         <mb3:menu unreferencedActions="true">
-            <mb3:named>Cliente</mb3:named>
-            <mb3:section>
-                <mb3:serviceAction objectType="cliente.Cliente" id="create"/>
-                <mb3:serviceAction objectType="cliente.Cliente" id="findByName"/>
-                <mb3:serviceAction objectType="cliente.Cliente" id="listAll"/>
-            </mb3:section>
+            <mb3:named>Other</mb3:named>
         </mb3:menu>
-
     </mb3:primary>
 
     <mb3:secondary>
