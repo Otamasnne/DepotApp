@@ -4,7 +4,6 @@ package domainapp.modules.simple.dom.ubicacion;
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
-import domainapp.modules.simple.types.articulo.Stock;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
@@ -32,6 +31,24 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.ubicacion.Ubicacion " +
                         "WHERE codigo.indexOf(:codigo) >= 0"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ubicacion.NAMED_QUERY__BUSCAR_POR_CODIGO_EXACTO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.ubicacion.Ubicacion " +
+                        "WHERE codigo == :codigo"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ubicacion.NAMED_QUERY__BUSCAR_HABILITADOS,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.ubicacion.Ubicacion " +
+                        "WHERE estado == 'HABILITADO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ubicacion.NAMED_QUERY__BUSCAR_DESHABILITADOS,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.ubicacion.Ubicacion " +
+                        "WHERE estado == 'DESHABILITADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -44,13 +61,19 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 @javax.persistence.Table(schema = "SIMPLE")
 public  class Ubicacion implements Comparable<Ubicacion> {
 
-    static final String NAMED_QUERY__BUSCAR_POR_CODIGO_LIKE = "Articulo.buscarPorCodigoLike";
+    static final String NAMED_QUERY__BUSCAR_POR_CODIGO_LIKE = "Ubicacion.buscarPorCodigoLike";
+    static final String NAMED_QUERY__BUSCAR_POR_CODIGO_EXACTO = "Ubicacion.buscarPorCodigoExacto";
+    static final String NAMED_QUERY__BUSCAR_HABILITADOS = "Ubicacion.buscarHabilitados";
+    static final String NAMED_QUERY__BUSCAR_DESHABILITADOS = "Ubicacion.buscarDeshabilitados";
 
     @Inject TitleService titleService;
     @Inject MessageService messageService;
 
     public static Ubicacion creacion(String codigo, String descripcion) {
         Ubicacion ubicacion = new Ubicacion();
+        ubicacion.setCodigo(codigo);
+        ubicacion.setDescripcion(descripcion);
+        ubicacion.setEstado(EstadoHabDes.HABILITADO);
         return ubicacion;
     }
 
@@ -98,17 +121,10 @@ public  class Ubicacion implements Comparable<Ubicacion> {
     @PropertyLayout(fieldSetId = "ubicacion", sequence = "2")
     private String descripcion;
 
-    @Stock
     @Getter
     @Setter
     @ToString.Include
     @PropertyLayout(fieldSetId = "ubicacion", sequence = "3")
-    private Integer stock;
-
-    @Getter
-    @Setter
-    @ToString.Include
-    @PropertyLayout(fieldSetId = "ubicacion", sequence = "4")
     private EstadoHabDes estado;
 
     private final static Comparator<Ubicacion> comparator =
