@@ -3,6 +3,7 @@
               xmlns:cpt="http://isis.apache.org/applib/layout/component"
               xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">>
+
     <mb3:primary>
         <mb3:menu>
             <mb3:named>Articulos</mb3:named>
