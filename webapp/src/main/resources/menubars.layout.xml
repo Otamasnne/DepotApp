@@ -1,90 +1,309 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mb3:menuBars xsi:schemaLocation="..."
-              xmlns:cpt="http://isis.apache.org/applib/layout/component"
-              xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">>
-
+<mb3:menuBars xsi:schemaLocation="http://isis.apache.org/applib/layout/menubars/bootstrap3
+http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isis.apache.org/applib/layout/component http://isis.apache.org/applib/layout/component/component.xsd http://isis.apache.org/applib/layout/links http://isis.apache.org/applib/layout/links/links.xsd" xmlns:cpt="http://isis.apache.org/applib/layout/component" xmlns:lnk="http://isis.apache.org/applib/layout/links" xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <mb3:primary>
-        <mb3:menu>
+
+
+        <mb3:menu unreferencedActions="true">
             <mb3:named>Articulos</mb3:named>
             <mb3:section>
-                <mb3:serviceAction
-                        objectType="depotapp.Articulos"
-                        id="create">
+                <mb3:serviceAction id="create" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Crear Artículo</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction
-                        objectType="depotapp.Articulos"
-                        id="ajustePositivo">
+                <mb3:serviceAction id="ajustePositivo" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Ajuste Positivo</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction
-                        objectType="depotapp.Articulos"
-                        id="ajusteNegativo">
+                <mb3:serviceAction id="ajusteNegativo" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Ajuste Negativo</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction
-                        objectType="depotapp.Articulos"
-                        id="findByCodigo">
+                <mb3:serviceAction id="findByCodigo" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Buscar Por Código</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction
-                        objectType="depotapp.Articulos"
-                        id="listAll">
+                <mb3:serviceAction id="listAll" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Listar Todos los Artículos</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="articulosDeshabilitados" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
+                    <cpt:named>Articulos Deshabilitados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="articulosHabilitados" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
+                    <cpt:named>Articulos Habilitados</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
 
 
 
-        <mb3:menu unreferencedActions="true">
-            <mb3:named>Other</mb3:named>
-        </mb3:menu>
-    </mb3:primary>
+        <mb3:menu>
+            <mb3:named>Clientes</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction id="clientesDeshabilitados" objectType="depotapp.Clientes">
+                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
+                    <cpt:named>Clientes Deshabilitados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="clientesHabilitados" objectType="depotapp.Clientes">
+                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
+                    <cpt:named>Clientes Habilitados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="create" objectType="depotapp.Clientes">
+                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
+                    <cpt:named>Create</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="findByCodigo" objectType="depotapp.Clientes">
+                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
+                    <cpt:named>Find By Codigo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listAll" objectType="depotapp.Clientes">
+                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
+                    <cpt:named>List All</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
 
+        </mb3:menu>
+
+        <mb3:menu>
+            <mb3:named>KitArticulos</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction id="create" objectType="depotapp.KitArticulos">
+                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
+                    <cpt:named>Create</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="findByCodigo" objectType="depotapp.KitArticulos">
+                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
+                    <cpt:named>Find By Codigo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listAll" objectType="depotapp.KitArticulos">
+                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
+                    <cpt:named>List All</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="buscarPorDescripcion" objectType="depotapp.KitArticulos">
+                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
+                    <cpt:named>Buscar Por Descripcion</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
+
+
+        </mb3:menu>
+        <mb3:menu>
+            <mb3:named>Ubicaciones</mb3:named>
+
+            <mb3:section>
+                <mb3:serviceAction id="buscarPorCodigoExacto" objectType="depotapp.Ubicaciones">
+                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
+                    <cpt:named>Buscar Por Codigo Exacto</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="buscarPorCodigoLike" objectType="depotapp.Ubicaciones">
+                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
+                    <cpt:named>Buscar Por Codigo Like</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="create" objectType="depotapp.Ubicaciones">
+                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
+                    <cpt:named>Create</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listarTodos" objectType="depotapp.Ubicaciones">
+                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
+                    <cpt:named>Listar Todos</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="ubicacionesDeshabilitadas" objectType="depotapp.Ubicaciones">
+                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
+                    <cpt:named>Ubicaciones Deshabilitadas</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="ubicacionesHabilitadas" objectType="depotapp.Ubicaciones">
+                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
+                    <cpt:named>Ubicaciones Habilitadas</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
+
+        </mb3:menu>
+
+
+
+
+
+
+        <mb3:menu>
+            <mb3:named>Ajustes</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction id="ajusteNegativo" objectType="depotapp.Ajustes">
+                    <cpt:logicalTypeName>depotapp.Ajustes</cpt:logicalTypeName>
+                    <cpt:named>Ajuste Negativo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="ajustePositivo" objectType="depotapp.Ajustes">
+                    <cpt:logicalTypeName>depotapp.Ajustes</cpt:logicalTypeName>
+                    <cpt:named>Ajuste Positivo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="findByCodigo" objectType="depotapp.Ajustes">
+                    <cpt:logicalTypeName>depotapp.Ajustes</cpt:logicalTypeName>
+                    <cpt:named>Find By Codigo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listAll" objectType="depotapp.Ajustes">
+                    <cpt:logicalTypeName>depotapp.Ajustes</cpt:logicalTypeName>
+                    <cpt:named>List All</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
+        </mb3:menu>
+
+
+        <mb3:menu>
+            <mb3:named>Ingresos</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction id="listarTodos" objectType="depotapp.Ingresos">
+                    <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
+                    <cpt:named>Listar Todos</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="persistir" objectType="depotapp.Ingresos">
+                    <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
+                    <cpt:named>Persistir</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="porCodigo" objectType="depotapp.Ingresos">
+                    <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
+                    <cpt:named>Por Codigo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="porProveedor" objectType="depotapp.Ingresos">
+                    <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
+                    <cpt:named>Por Proveedor</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
+        </mb3:menu>
+
+
+        <mb3:menu>
+            <mb3:named>Pedidos</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction id="create" objectType="depotapp.Pedidos">
+                    <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
+                    <cpt:named>Create</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listAll" objectType="depotapp.Pedidos">
+                    <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
+                    <cpt:named>List All</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="findByCodigoExact" objectType="depotapp.Pedidos">
+                    <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
+                    <cpt:named>Find By Codigo Exact</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
+
+        </mb3:menu>
+       <mb3:menu>
+        <mb3:named>Proveedores</mb3:named>
+           <mb3:section>
+               <mb3:serviceAction id="create" objectType="depotapp.Proveedores">
+                   <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
+                   <cpt:named>Create</cpt:named>
+               </mb3:serviceAction>
+               <mb3:serviceAction id="findByCodigo" objectType="depotapp.Proveedores">
+                   <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
+                   <cpt:named>Find By Codigo</cpt:named>
+               </mb3:serviceAction>
+               <mb3:serviceAction id="listAll" objectType="depotapp.Proveedores">
+                   <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
+                   <cpt:named>List All</cpt:named>
+               </mb3:serviceAction>
+               <mb3:serviceAction id="proveedoresDeshabilitados" objectType="depotapp.Proveedores">
+                   <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
+                   <cpt:named>Proveedores Deshabilitados</cpt:named>
+               </mb3:serviceAction>
+               <mb3:serviceAction id="proveedoresHabilitados" objectType="depotapp.Proveedores">
+                   <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
+                   <cpt:named>Proveedores Habilitados</cpt:named>
+               </mb3:serviceAction>
+           </mb3:section>
+
+       </mb3:menu>
+    </mb3:primary>
     <mb3:secondary>
         <mb3:menu>
             <mb3:named>Prototyping</mb3:named>
             <mb3:section>
                 <mb3:named>Fixtures</mb3:named>
-                <mb3:serviceAction objectType="isis.testing.fixtures.FixtureScripts" id="runFixtureScript"/>
-                <mb3:serviceAction objectType="isis.testing.fixtures.FixtureScripts" id="recreateObjectsAndReturnFirst"/>
+                <mb3:serviceAction id="runFixtureScript" objectType="isis.testing.fixtures.FixtureScripts">
+                    <cpt:logicalTypeName>isis.testing.fixtures.FixtureScripts</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="recreateObjectsAndReturnFirst" objectType="isis.testing.fixtures.FixtureScripts">
+                    <cpt:logicalTypeName>isis.testing.fixtures.FixtureScripts</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>Layouts</mb3:named>
-                <mb3:serviceAction objectType="isis.applib.LayoutServiceMenu" id="downloadLayouts"/>
-                <mb3:serviceAction objectType="isis.applib.LayoutServiceMenu" id="downloadMenuBarsLayout"/>
+                <mb3:serviceAction id="downloadLayouts" objectType="isis.applib.LayoutServiceMenu">
+                    <cpt:logicalTypeName>isis.applib.LayoutServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="downloadMenuBarsLayout" objectType="isis.applib.LayoutServiceMenu">
+                    <cpt:logicalTypeName>isis.applib.LayoutServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>Meta Model and Features</mb3:named>
-                <mb3:serviceAction objectType="isis.applib.MetaModelServiceMenu" id="downloadMetaModelXml"/>
-                <mb3:serviceAction objectType="isis.applib.MetaModelServiceMenu" id="downloadMetaModelCsv"/>
-                <mb3:serviceAction objectType="isis.applib.MetaModelServiceMenu" id="downloadMetaModelAscii"/>
-                <mb3:serviceAction objectType="isis.applib.MetaModelServiceMenu" id="downloadMetaModelDiff"/>
-                <mb3:serviceAction objectType="isis.feat.ApplicationFeatureMenu" id="allNamespaces"/>
-                <mb3:serviceAction objectType="isis.feat.ApplicationFeatureMenu" id="allTypes"/>
-                <mb3:serviceAction objectType="isis.feat.ApplicationFeatureMenu" id="allActions"/>
-                <mb3:serviceAction objectType="isis.feat.ApplicationFeatureMenu" id="allProperties"/>
-                <mb3:serviceAction objectType="isis.feat.ApplicationFeatureMenu" id="allCollections"/>
+                <mb3:serviceAction id="downloadMetaModelXml" objectType="isis.applib.MetaModelServiceMenu">
+                    <cpt:logicalTypeName>isis.applib.MetaModelServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="downloadMetaModelCsv" objectType="isis.applib.MetaModelServiceMenu">
+                    <cpt:logicalTypeName>isis.applib.MetaModelServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="downloadMetaModelAscii" objectType="isis.applib.MetaModelServiceMenu">
+                    <cpt:logicalTypeName>isis.applib.MetaModelServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="downloadMetaModelDiff" objectType="isis.applib.MetaModelServiceMenu">
+                    <cpt:logicalTypeName>isis.applib.MetaModelServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="allNamespaces" objectType="isis.feat.ApplicationFeatureMenu">
+                    <cpt:logicalTypeName>isis.feat.ApplicationFeatureMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="allTypes" objectType="isis.feat.ApplicationFeatureMenu">
+                    <cpt:logicalTypeName>isis.feat.ApplicationFeatureMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="allActions" objectType="isis.feat.ApplicationFeatureMenu">
+                    <cpt:logicalTypeName>isis.feat.ApplicationFeatureMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="allProperties" objectType="isis.feat.ApplicationFeatureMenu">
+                    <cpt:logicalTypeName>isis.feat.ApplicationFeatureMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="allCollections" objectType="isis.feat.ApplicationFeatureMenu">
+                    <cpt:logicalTypeName>isis.feat.ApplicationFeatureMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>Persistence</mb3:named>
-                <mb3:serviceAction objectType="isis.persistence.jdo.JdoMetamodelMenu" id="downloadMetamodels"/>
-                <mb3:serviceAction objectType="isis.ext.h2Console.H2ManagerMenu" id="openH2Console"/>
+                <mb3:serviceAction id="downloadMetamodels" objectType="isis.persistence.jdo.JdoMetamodelMenu">
+                    <cpt:logicalTypeName>isis.persistence.jdo.JdoMetamodelMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="openH2Console" objectType="isis.ext.h2Console.H2ManagerMenu">
+                    <cpt:logicalTypeName>isis.ext.h2Console.H2ManagerMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>REST API</mb3:named>
-                <mb3:serviceAction objectType="isis.viewer.restfulobjects.SwaggerServiceMenu" id="openSwaggerUi"/>
-                <mb3:serviceAction objectType="isis.viewer.restfulobjects.SwaggerServiceMenu" id="openRestApi"/>
-                <mb3:serviceAction objectType="isis.viewer.restfulobjects.SwaggerServiceMenu" id="downloadSwaggerSchemaDefinition"/>
+                <mb3:serviceAction id="openSwaggerUi" objectType="isis.viewer.restfulobjects.SwaggerServiceMenu">
+                    <cpt:logicalTypeName>isis.viewer.restfulobjects.SwaggerServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="openRestApi" objectType="isis.viewer.restfulobjects.SwaggerServiceMenu">
+                    <cpt:logicalTypeName>isis.viewer.restfulobjects.SwaggerServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="downloadSwaggerSchemaDefinition" objectType="isis.viewer.restfulobjects.SwaggerServiceMenu">
+                    <cpt:logicalTypeName>isis.viewer.restfulobjects.SwaggerServiceMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>i18n</mb3:named>
-                <mb3:serviceAction objectType="isis.applib.TranslationServicePoMenu" id="downloadTranslations"/>
-                <mb3:serviceAction objectType="isis.applib.TranslationServicePoMenu" id="resetTranslationCache"/>
-                <mb3:serviceAction objectType="isis.applib.TranslationServicePoMenu" id="switchToReadingTranslations"/>
-                <mb3:serviceAction objectType="isis.applib.TranslationServicePoMenu" id="switchToWritingTranslations"/>
+                <mb3:serviceAction id="downloadTranslations" objectType="isis.applib.TranslationServicePoMenu">
+                    <cpt:logicalTypeName>isis.applib.TranslationServicePoMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="resetTranslationCache" objectType="isis.applib.TranslationServicePoMenu">
+                    <cpt:logicalTypeName>isis.applib.TranslationServicePoMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="switchToReadingTranslations" objectType="isis.applib.TranslationServicePoMenu">
+                    <cpt:logicalTypeName>isis.applib.TranslationServicePoMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="switchToWritingTranslations" objectType="isis.applib.TranslationServicePoMenu">
+                    <cpt:logicalTypeName>isis.applib.TranslationServicePoMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>Manual Testing</mb3:named>
@@ -97,21 +316,33 @@
     </mb3:secondary>
     <mb3:tertiary>
         <mb3:menu>
-            <mb3:named/>
+            <mb3:named></mb3:named>
             <mb3:section>
                 <mb3:named>Configuration</mb3:named>
-                <mb3:serviceAction objectType="isis.conf.ConfigurationMenu" id="configuration"/>
+                <mb3:serviceAction id="configuration" objectType="isis.conf.ConfigurationMenu">
+                    <cpt:logicalTypeName>isis.conf.ConfigurationMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>Impersonate</mb3:named>
-                <mb3:serviceAction objectType="isis.sudo.ImpersonateMenu" id="impersonate"/>
-                <mb3:serviceAction objectType="isis.sudo.ImpersonateMenu" id="impersonateWithRoles"/>
-                <mb3:serviceAction objectType="isis.applib.ImpersonateStopMenu" id="stopImpersonating"/>
+                <mb3:serviceAction id="impersonate" objectType="isis.sudo.ImpersonateMenu">
+                    <cpt:logicalTypeName>isis.sudo.ImpersonateMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="impersonateWithRoles" objectType="isis.sudo.ImpersonateMenu">
+                    <cpt:logicalTypeName>isis.sudo.ImpersonateMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="stopImpersonating" objectType="isis.applib.ImpersonateStopMenu">
+                    <cpt:logicalTypeName>isis.applib.ImpersonateStopMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
             <mb3:section>
                 <mb3:named>Security</mb3:named>
-                <mb3:serviceAction objectType="isis.applib.UserMenu" id="me"/>
-                <mb3:serviceAction objectType="isis.security.LogoutMenu" id="logout"/>
+                <mb3:serviceAction id="me" objectType="isis.applib.UserMenu">
+                    <cpt:logicalTypeName>isis.applib.UserMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="logout" objectType="isis.security.LogoutMenu">
+                    <cpt:logicalTypeName>isis.security.LogoutMenu</cpt:logicalTypeName>
+                </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
     </mb3:tertiary>
