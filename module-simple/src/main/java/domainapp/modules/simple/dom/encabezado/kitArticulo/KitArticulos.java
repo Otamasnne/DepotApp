@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dom.encabezado.kitArticulo;
 
+import domainapp.modules.simple.dom.item.itemKit.ItemKit;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import org.apache.isis.applib.annotation.*;
@@ -60,6 +61,16 @@ public class KitArticulos {
         return repositoryService.allMatches(
                 Query.named(KitArticulo.class, KitArticulo.NAMED_QUERY__BUSCAR_POR_DESCRIPCION)
                         .withParameter("descripcion", descripcion));
+    }
+
+    public List<ItemKit> buscarItemsPorKit(
+            final KitArticulo kitArticulo
+    ) {
+        return kitArticulo.getItems();
+    }
+
+    public List<KitArticulo> choices0BuscarItemsPorKit() {
+        return repositoryService.allInstances(KitArticulo.class);
     }
 
 }

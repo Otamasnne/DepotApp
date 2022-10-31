@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.encabezado.kitArticulo;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.item.itemKit.ItemKit;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
@@ -15,9 +16,11 @@ import javax.inject.Inject;
 import javax.jdo.JDOQLTypedQuery;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -78,6 +81,13 @@ public class KitArticulo implements Comparable<KitArticulo>{
         return kitArticulo;
     }
 
+    // @Programmatic le indica al framework que este metodo no debe visualizarse ni en la UI ni en los REST
+    @Programmatic
+    public void agregarItem(ItemKit item) {
+        this.items.add(item);
+        jdoSupportService.refresh(this);
+    }
+
     @Title
     @CodigoCo
     @Getter
@@ -99,6 +109,10 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @PropertyLayout(fieldSetId = "kitArticulo", sequence = "4")
     private EstadoHabDes estadoHabDes;
 
+    @Getter @Setter
+    @Persistent(mappedBy="kitArticulo")
+    @PropertyLayout(hidden = Where.EVERYWHERE)
+    List<ItemKit> items;
 
     //Pasa el Kit a estado PREPARADO, para que este pueda ser utilizado por las distintas operaciones y que no se le puedan agregar mas items.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
@@ -174,7 +188,6 @@ public class KitArticulo implements Comparable<KitArticulo>{
         return this.getEstadoHabDes()== EstadoHabDes.DESHABILITADO;
     }
 
-
     private final static Comparator<KitArticulo> comparator =
             Comparator.comparing(KitArticulo::getCodigo);
     @Override
@@ -185,12 +198,10 @@ public class KitArticulo implements Comparable<KitArticulo>{
     @Programmatic
     public void ping() {
         JDOQLTypedQuery<KitArticulo> q = jdoSupportService.newTypesafeQuery(KitArticulo.class);
-        final QKitArticulo candidate = QKitArticulo.candidate();
+        final domainapp.modules.simple.dom.encabezado.kitArticulo.QKitArticulo candidate = domainapp.modules.simple.dom.encabezado.kitArticulo.QKitArticulo.candidate();
         q.range(0,2);
         q.orderBy(candidate.codigo.asc());
         q.executeList();
     }
-
-
 
 }

@@ -86,6 +86,10 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
                     <cpt:named>Buscar Por Descripcion</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction id="buscarItemsPorKit" objectType="depotapp.KitArticulos">
+                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
+                    <cpt:named>Buscar Items por Kit</cpt:named>
+                </mb3:serviceAction>
             </mb3:section>
 
 

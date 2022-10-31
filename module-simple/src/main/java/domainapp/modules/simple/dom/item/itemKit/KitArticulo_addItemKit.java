@@ -30,7 +30,8 @@ public class KitArticulo_addItemKit {
             final Articulo articulo,
             final int cantidad
     ) {
-       repositoryService.persist(new ItemKit(kitArticulo,articulo,cantidad));
+       ItemKit item = repositoryService.persist(new ItemKit(kitArticulo,articulo,cantidad));
+       kitArticulo.agregarItem(item);
        return kitArticulo;
     }
 
