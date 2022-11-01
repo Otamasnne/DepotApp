@@ -80,6 +80,7 @@ public class ItemKit implements Comparable<ItemKit>{
     @PropertyLayout(fieldSetId = "itemKit", sequence = "2")
     private int cantidad;
 
+
     @Getter
     @Setter
     @ToString.Include

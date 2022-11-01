@@ -15,13 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class KitArticulo_ItemKits {
 
-
     @Getter
     private final KitArticulo kitArticulo;
 
-    public List<ItemKit> coll() {
-        return itemKitRepository.buscarItemPorKit(kitArticulo) ;
-    }
+    public List<ItemKit> coll() { return kitArticulo.getItems(); }
 
-    @Inject ItemKitRepository itemKitRepository;
 }

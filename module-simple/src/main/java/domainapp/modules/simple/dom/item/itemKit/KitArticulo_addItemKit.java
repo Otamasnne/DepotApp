@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.item.itemKit;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.articulo.Articulos;
 import domainapp.modules.simple.dom.encabezado.kitArticulo.KitArticulo;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
@@ -11,7 +12,9 @@ import org.apache.isis.applib.annotation.SemanticsOf;
 import org.apache.isis.applib.services.repository.RepositoryService;
 
 import javax.inject.Inject;
+import javax.mail.FetchProfile;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Action(
