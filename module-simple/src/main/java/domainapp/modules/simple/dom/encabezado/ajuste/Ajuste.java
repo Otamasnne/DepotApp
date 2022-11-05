@@ -11,10 +11,12 @@ import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
@@ -62,6 +64,9 @@ public class Ajuste implements Comparable<Ajuste>{
 
     @Inject ItemAjusteRepository itemAjusteRepository;
 
+    @Inject
+    JdoSupportService jdoSupportService;
+
     public String title() {
         return getTipoAjuste() + "-" + getCodigoCo();
     }
@@ -73,6 +78,13 @@ public class Ajuste implements Comparable<Ajuste>{
         ajuste.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         ajuste.setDescripcion(descripcion); 
         return ajuste;
+    }
+
+    // @Programmatic le indica al framework que este metodo no debe visualizarse ni en la UI ni en los REST
+    @Programmatic
+    public void agregarItem(ItemAjuste item) {
+        this.items.add(item);
+        jdoSupportService.refresh(this);
     }
 
     //TODO: AGREGAR UN RETORNO AL FINAL, VERIFICAR VALIDACION
@@ -131,6 +143,11 @@ public class Ajuste implements Comparable<Ajuste>{
     @ToString.Include
     @PropertyLayout(fieldSetId = "encabezado", sequence = "6")
     private String descripcion;
+
+    @Getter @Setter
+    @Persistent(mappedBy="ajuste")
+    @PropertyLayout(hidden = Where.EVERYWHERE)
+    List<ItemAjuste> items;
 
     private final static Comparator<Ajuste> comparator =
             Comparator.comparing(Ajuste::getCodigoCo);

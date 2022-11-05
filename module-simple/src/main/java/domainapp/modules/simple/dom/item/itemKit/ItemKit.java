@@ -4,10 +4,7 @@ import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.encabezado.kitArticulo.KitArticulo;
 import domainapp.modules.simple.types.comprobante.CantidadMueve;
 import lombok.*;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Publishing;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 
 import javax.jdo.annotations.Column;
@@ -85,7 +82,7 @@ public class ItemKit implements Comparable<ItemKit>{
     @Setter
     @ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "itemKit", sequence = "3")
+    @PropertyLayout(hidden = Where.EVERYWHERE)
     private KitArticulo kitArticulo;
 
     private final static Comparator<ItemKit> comparator =

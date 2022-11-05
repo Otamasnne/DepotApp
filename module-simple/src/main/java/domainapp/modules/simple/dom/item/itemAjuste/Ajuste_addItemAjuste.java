@@ -28,7 +28,8 @@ public class Ajuste_addItemAjuste {
             final Articulo articulo,
             final int cantidad
     ) {
-        repositoryService.persist(new ItemAjuste(ajuste,articulo,cantidad));
+        ItemAjuste item = repositoryService.persist(new ItemAjuste(ajuste,articulo,cantidad));
+        ajuste.agregarItem(item);
         return ajuste;
     }
 

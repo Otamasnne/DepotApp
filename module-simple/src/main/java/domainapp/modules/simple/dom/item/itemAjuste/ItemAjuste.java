@@ -4,10 +4,7 @@ import domainapp.modules.simple.dom.encabezado.ajuste.Ajuste;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.comprobante.CantidadMueve;
 import lombok.*;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Publishing;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 
 import javax.jdo.annotations.Column;
@@ -23,6 +20,7 @@ import java.util.Comparator;
 @javax.jdo.annotations.Unique(
         name = "ItemAjuste_articulo_ajuste_UNQ", members = {"articulo", "ajuste"}
 )
+//TODO: Revisar si se pueden borrar estas queries
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
                 name = ItemAjuste.NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE,
@@ -83,7 +81,7 @@ public class ItemAjuste implements Comparable<ItemAjuste>{
     @Setter
     @ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "itemAjuste", sequence = "3")
+    @PropertyLayout(hidden = Where.EVERYWHERE)
     private Ajuste ajuste;
 
     private final static Comparator<ItemAjuste> comparator =

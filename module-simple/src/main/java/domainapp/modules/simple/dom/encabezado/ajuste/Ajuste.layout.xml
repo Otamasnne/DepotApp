@@ -41,7 +41,7 @@
         </bs3:col>
         <bs3:col span="6">
             <bs3:tabGroup  unreferencedCollections="true" collapseIfOne="false">
-                <bs3:tab name="Items">                   <!--.-->
+                <bs3:tab name="Items">
                     <bs3:row>
                         <bs3:col span="12">
                             <cpt:collection id="itemsAjuste"/>
