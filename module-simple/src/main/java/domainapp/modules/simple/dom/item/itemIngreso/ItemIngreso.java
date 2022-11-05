@@ -5,10 +5,7 @@ import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
 import domainapp.modules.simple.types.comprobante.CantidadMueve;
 import lombok.*;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Publishing;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntitiesAdapter;
 
 import javax.jdo.annotations.*;
@@ -70,7 +67,7 @@ public class ItemIngreso implements Comparable<ItemIngreso> {
 
     @Getter @Setter @ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "itemPedido", sequence = "3")
+    @PropertyLayout(hidden = Where.EVERYWHERE)
     private Ingreso ingreso;
 
     private final static Comparator<ItemIngreso> comparator =

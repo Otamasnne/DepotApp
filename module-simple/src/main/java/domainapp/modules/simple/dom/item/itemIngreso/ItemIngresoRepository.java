@@ -3,7 +3,6 @@ package domainapp.modules.simple.dom.item.itemIngreso;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
 import lombok.RequiredArgsConstructor;
-import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.springframework.stereotype.Repository;
 
@@ -18,16 +17,11 @@ public class ItemIngresoRepository {
     private final RepositoryService repositoryService;
 
     public List<ItemIngreso> buscarItemPorIngreso(Ingreso ingreso) {
-        return repositoryService.allMatches(
-                Query.named(ItemIngreso.class, ItemIngreso.NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO)
-                        .withParameter("ingreso", ingreso));
+        return ingreso.getItems();
     }
 
     public Optional<ItemIngreso> buscarItemPorIngresoYArticulo(Ingreso ingreso, Articulo articulo) {
-        return repositoryService.firstMatch(
-                Query.named(ItemIngreso.class, ItemIngreso.NAMED_QUERY__BUSCAR_ITEM_POR_INGRESO_Y_ARTICULO)
-                        .withParameter("ingreso", ingreso)
-                        .withParameter("articulo", articulo));
+        return ingreso.getItems().stream().filter(item -> item.getArticulo().equals(articulo)).findFirst();
     }
 
 }

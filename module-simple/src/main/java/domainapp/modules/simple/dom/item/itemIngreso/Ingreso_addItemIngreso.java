@@ -30,7 +30,8 @@ public class Ingreso_addItemIngreso {
             final Articulo articulo,
             final int cantidad
     ) {
-        repositoryService.persist(new ItemIngreso(ingreso,articulo,cantidad));
+        ItemIngreso item = repositoryService.persist(new ItemIngreso(ingreso,articulo,cantidad));
+        ingreso.agregarItem(item);
         return ingreso;
     }
 

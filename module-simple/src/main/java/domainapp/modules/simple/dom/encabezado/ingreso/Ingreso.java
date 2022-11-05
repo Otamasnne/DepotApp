@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
@@ -9,13 +10,16 @@ import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -60,6 +64,9 @@ public class Ingreso implements Comparable<Ingreso>{
     @Inject
     MessageService messageService;
 
+    @Inject
+    JdoSupportService jdoSupportService;
+
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Ingreso.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Ingreso.findByCodigoLike";
@@ -70,6 +77,12 @@ public class Ingreso implements Comparable<Ingreso>{
         ingreso.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
         ingreso.setDescripcion(descripcion);
         return ingreso;
+    }
+
+    @Programmatic
+    public void agregarItem(ItemIngreso item) {
+        this.items.add(item);
+        jdoSupportService.refresh(this);
     }
 
     @Title
@@ -89,9 +102,15 @@ public class Ingreso implements Comparable<Ingreso>{
     @PropertyLayout(fieldSetId = "ingreso", sequence = "3")
     private EstadoOperativo estadoOperativo;
 
+    //TODO: Pasar esto a la creación
     @Getter @Setter
     @PropertyLayout(fieldSetId = "ingreso", sequence = "4")
     private Proveedor proveedor;
+
+    @Getter @Setter
+    @Persistent(mappedBy="ingreso")
+    @PropertyLayout(hidden = Where.EVERYWHERE)
+    List<ItemIngreso> items;
 
     //Manda el ingreso a procesar, lo cual lo envía a la app de Android
     //TODO: ENVIAR EL INGRESO A LA APLICACIÓN CUANDO SE PASE A ESTE ESTADO.
