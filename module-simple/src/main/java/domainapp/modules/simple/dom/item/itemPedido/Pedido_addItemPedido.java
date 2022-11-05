@@ -28,7 +28,8 @@ public class Pedido_addItemPedido {
             final Articulo articulo,
             final int cantidad
             ) {
-        repositoryService.persist(new ItemPedido(pedido,articulo,cantidad));
+        ItemPedido item = repositoryService.persist(new ItemPedido(pedido,articulo,cantidad));
+        pedido.agregarItem(item);
         return pedido;
     }
 

@@ -42,6 +42,11 @@ public class Pedido_removeItemPedido {
                 .map(ItemPedido::getArticulo).collect(Collectors.toList());
     }
 
+    public Articulo default0Act() {
+        List<Articulo> articulos = choices0Act(); //La lista se rellena a partir de lo que levanta como valores posibles el metodo choices0Act()
+        return articulos.size() == 1 ? articulos.get(0) : null;
+    }
+
     @Inject
     RepositoryService repositoryService;
     @Inject
