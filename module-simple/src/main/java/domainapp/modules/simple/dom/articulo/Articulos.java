@@ -3,15 +3,19 @@ package domainapp.modules.simple.dom.articulo;
 
 import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
 import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
+import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.value.Blob;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import javax.jdo.JDOQLTypedQuery;
+import java.io.IOException;
 import java.util.List;
 
 @DomainService(
@@ -69,9 +73,13 @@ public class Articulos {
         return "Se realizó el ajuste negativo para el artículo " + articulo + " por " + cantidad + " unidades. " +
                 "Comprobante: " + comprobante.title();
     }
-
-
-
+    //REPORTE ARTICULO
+    @Action
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Blob reporteArticulo() throws JRException, IOException {
+        reportePadre ReportePadre = new reportePadre();
+        return ReportePadre.ListadoArticulosPDF();
+    }
 
 
     @Action(semantics = SemanticsOf.SAFE)

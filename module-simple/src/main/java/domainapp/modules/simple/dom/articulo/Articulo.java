@@ -3,6 +3,7 @@ package domainapp.modules.simple.dom.articulo;
 
 
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.reportes.RepoArticulo;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -189,5 +190,4 @@ public  class Articulo implements Comparable<Articulo> {
     public int compareTo(final Articulo other) {
         return comparator.compare(this, other);
     }
-
 }
