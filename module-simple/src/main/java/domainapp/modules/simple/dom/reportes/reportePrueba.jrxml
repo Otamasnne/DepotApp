@@ -112,6 +112,7 @@
 		<field name="codigo" class="net.sf.jasperreports.engine.data.JRBeanArrayDataSource"/>
 		<field name="descripcion" class="net.sf.jasperreports.engine.data.JRBeanArrayDataSource"/>
 		<field name="stock" class="net.sf.jasperreports.engine.data.JRBeanArrayDataSource"/>
+		<field name="estado" class="net.sf.jasperreports.engine.data.JRBeanArrayDataSource"/>
 	</subDataset>
 	<parameter name="ds" class="net.sf.jasperreports.engine.data.JRBeanArrayDataSource"/>
 	<queryString>
@@ -217,6 +218,21 @@
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="271d1c32-a967-45a6-8be9-b62a02db1828"/>
 								<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="f63fd706-da9d-4764-948f-5f118c42cee6">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="f806752e-21bd-49b3-9aac-f76ebf19f9a7"/>
+								<text><![CDATA[Estado]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="30" uuid="753a784b-556e-4f0c-8dee-bf5fa198c70d"/>
+								<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

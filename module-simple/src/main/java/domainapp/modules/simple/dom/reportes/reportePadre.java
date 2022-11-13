@@ -26,17 +26,12 @@ public class reportePadre {
         repoArticulos.add(new RepoArticulo());
 
         for (Articulo articulo : articulos) {
-            RepoArticulo repoArticulo = new RepoArticulo();
+            RepoArticulo repoArticulo = new RepoArticulo(articulo.getCodigo(),articulo.getDescripcion(),articulo.getStock(),articulo.getEstado());
             repoArticulos.add(repoArticulo);
         }
 
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoArticulos);
         return GenerarArchivoPDF("reportePrueba.jrxml", "Listado de Articulos.pdf", ds);
-    }
-
-    public Blob ListadoArticulosPDF() throws JRException, IOException {
-
-        return GenerarArchivoPDF("reportePrueba.jrxml", "Listado de Equipos.pdf", null);
     }
 
     private Blob GenerarArchivoPDF(String archivoDesing, String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {

@@ -16,6 +16,7 @@ import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 import javax.inject.Inject;
 import javax.jdo.JDOQLTypedQuery;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @DomainService(
@@ -74,11 +75,12 @@ public class Articulos {
                 "Comprobante: " + comprobante.title();
     }
     //REPORTE ARTICULO
-    @Action
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Blob reporteArticulo() throws JRException, IOException {
+    @Programmatic
+    public Blob generarReporteArticulo() throws JRException, IOException {
+        List<Articulo> articulos = new ArrayList<Articulo>();
         reportePadre ReportePadre = new reportePadre();
-        return ReportePadre.ListadoArticulosPDF();
+        articulos = repositoryService.allInstances(Articulo.class);
+        return ReportePadre.ListadoArticulosPDF(articulos);
     }
 
 
