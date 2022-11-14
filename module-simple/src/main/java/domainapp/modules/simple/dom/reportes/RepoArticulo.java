@@ -8,6 +8,8 @@ import lombok.Setter;
 
 
 public class RepoArticulo {
+    @Getter @Setter
+    private int id;
     @Getter   @Setter
     private String codigo;
     @Getter   @Setter
@@ -26,4 +28,5 @@ public class RepoArticulo {
         this.stock = stock;
         this.estado = estado;
     }
+
 }

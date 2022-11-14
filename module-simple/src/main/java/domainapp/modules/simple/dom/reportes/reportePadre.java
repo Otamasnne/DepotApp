@@ -31,12 +31,12 @@ public class reportePadre {
         }
 
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoArticulos);
-        return GenerarArchivoPDF("reportePrueba.jrxml", "Listado de Articulos.pdf", ds);
+        return GenerarArchivoPDF(ds);
     }
 
-    private Blob GenerarArchivoPDF(String archivoDesing, String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {
+    private Blob GenerarArchivoPDF(JRBeanCollectionDataSource ds) throws JRException, IOException {
 
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(archivoDesing);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("reportePrueba.jrxml");
         JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         Map<String, Object> parameters = new HashMap<String, Object>();
@@ -44,6 +44,6 @@ public class reportePadre {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
         byte[] contentBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-        return new Blob(nombreSalida, "application/pdf", contentBytes);
+        return new Blob("Listado de Articulos.pdf", "application/pdf", contentBytes);
     }
 }

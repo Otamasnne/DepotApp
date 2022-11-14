@@ -5,7 +5,7 @@
   <username>tesism</username>
   <password>12345</password>
   <url>jdbc:postgresql://localhost/stockdb</url>
-  <database></database>
+  <database>stockdb</database>
   <savePassword>true</savePassword>
   <serverAddress></serverAddress>
 </jdbcDataAdapter>
