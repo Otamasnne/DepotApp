@@ -29,20 +29,5 @@ public class RepoArticulo {
     public RepoArticulo() {
 
     }
-
-    public String getCodigo(){
-        return codigo;
-    }
-
-    public String getDescripcion(){
-        return descripcion;
-    }
-
-    public Integer getStock(){
-        return stock;
-    }
-
-    public EstadoHabDes getEstado(){
-        return estado;
-    }
+    
 }

@@ -12,6 +12,7 @@ import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.*;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
@@ -67,19 +68,21 @@ public class Pedido implements Comparable<Pedido> {
     @PropertyLayout(fieldSetId = "pedido", sequence = "1")
     private String codigo;
 
-    @Getter@Setter
+    @Getter@Setter @ToString.Include
     @PropertyLayout(fieldSetId = "pedido", sequence = "2")
     private EstadoOperativo estadoOperativo;
 
     @Getter
-    @Setter
+    @Setter @ToString.Include
     @PropertyLayout(fieldSetId = "pedido", sequence = "3")
     private String descripcion;
 
-    @Getter @Setter
+    @Getter @Setter @ToString.Include
     @Persistent(mappedBy="pedido")
     @PropertyLayout(hidden = Where.EVERYWHERE)
     List<ItemPedido> items;
+
+
 
     public static Pedido withName(String descripcion) {
         val pedido = new Pedido();

@@ -1,4 +1,5 @@
 package domainapp.modules.simple.dom.reportes;
+import com.sun.tools.ws.wsdl.document.Input;
 import domainapp.modules.simple.dom.cliente.Cliente;
 import org.apache.isis.applib.value.Blob;
 import domainapp.modules.simple.dom.articulo.Articulo;
@@ -12,6 +13,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -51,7 +53,10 @@ public class reportePadre {
 
     private Blob GenerarArchivoPDF(String archivoDesign,String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {
 
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(archivoDesign);
+
+        //InputStream inputStream = getClass().getClassLoader().getResourceAsStream(archivoDesign);
+//        InputStream is = new FileInputStream("assets/PerfilPaciente.jrxml");
+        InputStream inputStream = new FileInputStream("/home/im4s/workspace-tesis/depotAppV1/webapp/src/main/resources/repoArticulos.jrxml");
         JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         Map<String, Object> parameters = new HashMap<String, Object>();
