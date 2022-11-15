@@ -2,26 +2,23 @@ package domainapp.modules.simple.dom.reportes;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
 
+import domainapp.modules.simple.dom.EstadoOperativo;
 import lombok.Getter;
 import lombok.Setter;
 
 
 
 public class RepoArticulo {
-    @Getter @Setter
-    private int id;
     @Getter   @Setter
     private String codigo;
     @Getter   @Setter
     private String descripcion;
     @Getter   @Setter
-    private int stock;
+    private Integer stock;
     @Getter @Setter
     private EstadoHabDes estado;
 
 
-
-    public RepoArticulo(){}
     public RepoArticulo(String codigo, String descripcion, Integer stock, EstadoHabDes estado) {
         this.codigo = codigo;
         this.descripcion = descripcion;
@@ -29,4 +26,23 @@ public class RepoArticulo {
         this.estado = estado;
     }
 
+    public RepoArticulo() {
+
+    }
+
+    public String getCodigo(){
+        return codigo;
+    }
+
+    public String getDescripcion(){
+        return descripcion;
+    }
+
+    public Integer getStock(){
+        return stock;
+    }
+
+    public EstadoHabDes getEstado(){
+        return estado;
+    }
 }

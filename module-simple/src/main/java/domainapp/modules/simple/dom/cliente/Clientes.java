@@ -1,16 +1,21 @@
 package domainapp.modules.simple.dom.cliente;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.types.cliente.CodigoCliente;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.value.Blob;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import javax.jdo.JDOQLTypedQuery;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @DomainService(
@@ -89,5 +94,11 @@ public class Clientes {
     }
 
 
-
+    @Programmatic
+    public Blob generarReporteCliente() throws JRException, IOException {
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        reportePadre ReportePadre = new reportePadre();
+        clientes = repositoryService.allInstances(Cliente.class);
+        return ReportePadre.ListadoClientesPDF(clientes);
+    }
 }

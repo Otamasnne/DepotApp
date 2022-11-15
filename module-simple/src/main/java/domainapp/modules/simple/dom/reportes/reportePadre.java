@@ -1,4 +1,5 @@
 package domainapp.modules.simple.dom.reportes;
+import domainapp.modules.simple.dom.cliente.Cliente;
 import org.apache.isis.applib.value.Blob;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import net.sf.jasperreports.engine.JRException;
@@ -31,12 +32,26 @@ public class reportePadre {
         }
 
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoArticulos);
-        return GenerarArchivoPDF(ds);
+        return GenerarArchivoPDF("repoArticulos.jrxml","ListadoClientes.pdf",ds);
     }
 
-    private Blob GenerarArchivoPDF(JRBeanCollectionDataSource ds) throws JRException, IOException {
+    public Blob ListadoClientesPDF(List<Cliente> clientes) throws JRException, IOException {
 
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("reportePrueba.jrxml");
+        List<RepoCliente> repoClientes = new ArrayList<RepoCliente>();
+        repoClientes.add(new RepoCliente());
+
+        for (Cliente cliente : clientes) {
+            RepoCliente repoCliente = new RepoCliente(cliente.getCodigo(),cliente.getDni(),cliente.getRazonSocial());
+            repoClientes.add(repoCliente);
+        }
+
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoClientes);
+        return GenerarArchivoPDF("repoClientes.jrxml","ListadoClientes.pdf",ds);
+    }
+
+    private Blob GenerarArchivoPDF(String archivoDesign,String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(archivoDesign);
         JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         Map<String, Object> parameters = new HashMap<String, Object>();
@@ -44,6 +59,6 @@ public class reportePadre {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
         byte[] contentBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-        return new Blob("Listado de Articulos.pdf", "application/pdf", contentBytes);
+        return new Blob(nombreSalida, "application/pdf", contentBytes);
     }
 }
