@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repoClientes" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="144e28da-11d5-47ec-8e40-c5582696ba73">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="dni" class="java.lang.Integer"/>
+	<field name="razonSocial" class="java.lang.String"/>
+	<title>
+		<band height="163" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="260" height="50" uuid="5aa0f50c-1579-4f01-ab65-01d515dae13c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Cantarell Extra Bold" size="30"/>
+				</textElement>
+				<text><![CDATA[DEPOTAPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="70" width="190" height="40" uuid="4533ec6e-035b-43a9-9755-ac7cced8bd14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[CLIENTES]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="160" height="160" uuid="89d7d5e6-29db-4b5d-8efa-7cb777c687e4"/>
+				<imageExpression><![CDATA["/home/ignaciootarola/Descargas/icon.png"]]></imageExpression>
+			</image>
+			<textField evaluationTime="Report">
+				<reportElement x="470" y="0" width="100" height="30" uuid="0bd152aa-1dc4-4084-8e48-4c078d4c037c"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="470" y="110" width="100" height="30" uuid="77608d0c-5ebb-4464-a363-1bf7c9e48d8a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="470" y="70" width="100" height="30" uuid="65e0c068-89d9-4c91-9d5a-396eac10aa87"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="170" height="40" uuid="8c379a8a-0d4e-4407-8875-4526c5cf1938"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="10" width="160" height="40" uuid="cf3db199-1a57-4b4b-805a-cac3ec0ca2b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="10" width="220" height="41" uuid="15db76b5-5c02-479f-98fe-7e94ccc719e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[RAZON SOCIAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="170" height="30" uuid="17848545-18a3-4ba3-9343-e3a430b95b96">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24139720-2335-4a04-b1c5-2d192579cd78"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="160" height="30" uuid="598bf08c-b72d-4fd5-948e-93ff43bfb264">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37d0d80f-05ca-4401-a4cc-603a67759e66"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="220" height="30" uuid="db84fda5-f576-4597-83fc-ac85305a5d1b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="75917ffd-a955-482e-ae3a-2f93facf266e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

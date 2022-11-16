@@ -1,6 +1,8 @@
 package domainapp.modules.simple.dom.reportes;
 import com.sun.tools.ws.wsdl.document.Input;
 import domainapp.modules.simple.dom.cliente.Cliente;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.apache.isis.applib.value.Blob;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import net.sf.jasperreports.engine.JRException;
@@ -13,6 +15,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +37,7 @@ public class reportePadre {
         }
 
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoArticulos);
-        return GenerarArchivoPDF("repoArticulos.jrxml","ListadoClientes.pdf",ds);
+        return GenerarArchivoPDF("repoArticulos.jrxml", "ListadoArticulos.pdf", ds);
     }
 
     public Blob ListadoClientesPDF(List<Cliente> clientes) throws JRException, IOException {
@@ -48,22 +51,26 @@ public class reportePadre {
         }
 
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoClientes);
-        return GenerarArchivoPDF("repoClientes.jrxml","ListadoClientes.pdf",ds);
+        return GenerarArchivoPDF("repoClientes.jrxml", "ListadoClientes.pdf", ds);
     }
 
-    private Blob GenerarArchivoPDF(String archivoDesign,String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {
+    private Blob GenerarArchivoPDF(String archivoDesign, String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {
 
 
         //InputStream inputStream = getClass().getClassLoader().getResourceAsStream(archivoDesign);
-//        InputStream is = new FileInputStream("assets/PerfilPaciente.jrxml");
-        InputStream inputStream = new FileInputStream("/home/im4s/workspace-tesis/depotAppV1/webapp/src/main/resources/repoArticulos.jrxml");
+        //InputStream is = new FileInputStream("assets/PerfilPaciente.jrxml");
+
+
+        InputStream inputStream = new FileInputStream("../webapp/src/main/resources/repoClientes.jrxml");
         JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("ds", ds);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
+
         byte[] contentBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
         return new Blob(nombreSalida, "application/pdf", contentBytes);
+
     }
 }

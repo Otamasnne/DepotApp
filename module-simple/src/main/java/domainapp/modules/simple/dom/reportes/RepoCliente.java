@@ -5,23 +5,36 @@ import lombok.Setter;
 
 public class RepoCliente {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String codigo;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private int dni;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String razonSocial;
 
 
-    public RepoCliente(String codigo, int dni, String razonSocial){
+    public RepoCliente(String codigo, Integer dni, String razonSocial) {
         this.codigo = codigo;
         this.dni = dni;
         this.razonSocial = razonSocial;
-
-
     }
 
-    public RepoCliente() {}
+    public RepoCliente(){}
+
+   /* public String getCodigo(){
+        return codigo;
+    }
+    public Integer getDni(){
+        return dni;
+    }
+    public String getRazonSocial(){
+        return razonSocial;
+    }*/
+
+
 }
