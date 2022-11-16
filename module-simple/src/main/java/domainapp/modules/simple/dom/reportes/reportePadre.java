@@ -57,11 +57,11 @@ public class reportePadre {
     private Blob GenerarArchivoPDF(String archivoDesign, String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {
 
 
-        //InputStream inputStream = getClass().getClassLoader().getResourceAsStream(archivoDesign);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(archivoDesign);
         //InputStream is = new FileInputStream("assets/PerfilPaciente.jrxml");
 
 
-        InputStream inputStream = new FileInputStream("../webapp/src/main/resources/repoClientes.jrxml");
+        //InputStream inputStream = new FileInputStream("../webapp/src/main/resources/repoClientes.jrxml");
         JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         Map<String, Object> parameters = new HashMap<String, Object>();
