@@ -4,6 +4,8 @@ package domainapp.modules.simple.dom.articulo;
 import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
 import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
 import domainapp.modules.simple.dom.reportes.reportePadre;
+import domainapp.modules.simple.dom.proveedor.Proveedor;
+import domainapp.modules.simple.dom.proveedor.Proveedores;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import net.sf.jasperreports.engine.JRException;
@@ -27,29 +29,23 @@ import java.util.List;
 @lombok.RequiredArgsConstructor(onConstructor_ = {@Inject} )
 public class Articulos {
 
-    final RepositoryService repositoryService;
-    final JdoSupportService jdoSupportService;
-
+    @Inject RepositoryService repositoryService;
+    @Inject JdoSupportService jdoSupportService;
+    @Inject Proveedores proveedores;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Articulo create(
             @CodigoArticulo final String codigo,
-            @Descripcion final String descripcion) {
-        return repositoryService.persist(Articulo.withName(codigo, descripcion));
+            @Descripcion final String descripcion,
+            final Proveedor proveedor) {
+        return repositoryService.persist(Articulo.withName(codigo, descripcion, proveedor));
     }
-/*
-    //Esta acción debe generar un comprobante de tipo AJP.
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public String ajustePositivo(String articulo, int cantidad){
-        Articulo objetivo = findByCodigoExact(articulo);
-        objetivo.setStock(objetivo.getStock()+cantidad);
-        AjustePositivo comprobante = repositoryService.persist(AjustePositivo.creacion(objetivo, cantidad));
-        return "Se realizó el ajuste positivo para el artículo " + articulo + " por " + cantidad + " unidades. " +
-                "Comprobante: " + comprobante.title();
+
+    public List<Proveedor> choices2Create() {
+        return proveedores.proveedoresHabilitados();
     }
-*/
+
 //Esta acción debe generar un comprobante de tipo AJP.
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
@@ -74,6 +70,7 @@ public class Articulos {
         return "Se realizó el ajuste negativo para el artículo " + articulo + " por " + cantidad + " unidades. " +
                 "Comprobante: " + comprobante.title();
     }
+
     //REPORTE ARTICULO
     @Programmatic
     public Blob generarReporteArticulo() throws JRException, IOException {
@@ -94,8 +91,6 @@ public class Articulos {
                         .withParameter("codigo", codigo));
     }
 
-
-
     @Programmatic
     public Articulo findByCodigoExact(final String codigo) {
         return repositoryService.firstMatch(
@@ -103,8 +98,6 @@ public class Articulos {
                                 .withParameter("codigo", codigo))
                 .orElse(null);
     }
-
-
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
@@ -128,12 +121,6 @@ public class Articulos {
         );
     }
 
-
-
-
-
-
-
    @Programmatic
   public void ping() {
        JDOQLTypedQuery<Articulo> q = jdoSupportService.newTypesafeQuery(Articulo.class);
@@ -142,8 +129,5 @@ public class Articulos {
         q.orderBy(candidate.codigo.asc());
         q.executeList();
     }
-
-
-
 
 }

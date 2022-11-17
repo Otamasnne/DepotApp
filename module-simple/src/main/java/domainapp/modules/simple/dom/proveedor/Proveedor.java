@@ -72,20 +72,6 @@ public class Proveedor implements Comparable<Proveedor>{
     @Inject
     MessageService messageService;
 
-//PRUEBO SOLO CON CODIGO Y RAZON SOCIAL LUEGO AGREGO RESTO
-//   public static Proveedor withName(String codigo, String direccion, String razonSocial, String telefono, String localidad, String email) {
-//       val proveedor = new Proveedor();
-//       codigo = ("000000" + codigo).substring(codigo.length());
-//       proveedor.setCodigo(codigo);
-//       proveedor.setDireccion(direccion);
-//       proveedor.setRazonSocial(razonSocial);
-//       proveedor.setTelefono(telefono);
-//       proveedor.setLocalidad(localidad);
-//       proveedor.setEmail(email);
-//       proveedor.setEstado(EstadoACP.HABILITADO);
-//       return proveedor;
-//   }
-
    public static Proveedor withName(String codigo, String razonSocial){
        val proveedor = new Proveedor();
        codigo = ("000000" + codigo).substring(codigo.length());

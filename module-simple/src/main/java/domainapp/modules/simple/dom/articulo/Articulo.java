@@ -4,6 +4,7 @@ package domainapp.modules.simple.dom.articulo;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.dom.reportes.RepoArticulo;
+import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -77,12 +78,11 @@ public  class Articulo implements Comparable<Articulo> {
     static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Articulo.findByDeshabilitado";
     static final String NAMED_QUERY__FIND_BY_KIT = "Articulo.findByKit";
-    @Inject RepositoryService repositoryService;
     @Inject TitleService titleService;
     @Inject MessageService messageService;
 
     // Agregar una entidad proveedor al constructor mas adelante.
-    public static Articulo withName(String codigo, String descripcion) {
+    public static Articulo withName(String codigo, String descripcion, Proveedor proveedor) {
         val articulo = new Articulo();
         articulo.setStock(0);
         codigo = ("000000" + codigo).substring(codigo.length());
@@ -90,22 +90,9 @@ public  class Articulo implements Comparable<Articulo> {
         articulo.setDescripcion(descripcion);
         articulo.setStock(0);
         articulo.setEstado(EstadoHabDes.HABILITADO);
+        articulo.setProveedor(proveedor);
         return articulo;
     }
-
-/* LAS ENTIDADES NO DEBERÍAN PODER SER BORRADAS, SOLO DESHABILITADAS Y HABILITADAS.
-    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
-    @ActionLayout(
-            position = ActionLayout.Position.PANEL,
-            describedAs = "Borra el artículo y sus existencias.")
-    public String borrar() {
-        String nombre = this.getCodigo();
-        final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'%s' borrado", title));
-        repositoryService.removeAndFlush(this);
-        return "Se borró el artículo " + nombre;
-    }
-*/
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
@@ -118,7 +105,6 @@ public  class Articulo implements Comparable<Articulo> {
         this.setEstado(EstadoHabDes.HABILITADO);
         return "Se habilitó el artículo " + nombre;
     }
-
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
@@ -141,7 +127,6 @@ public  class Articulo implements Comparable<Articulo> {
     }
 
 
-
     @Title
     @CodigoArticulo
     @Getter
@@ -157,7 +142,6 @@ public  class Articulo implements Comparable<Articulo> {
     @PropertyLayout(fieldSetId = "articulo", sequence = "2")
     private String descripcion;
 
-
     @Stock
     @Getter
     @Setter
@@ -168,19 +152,14 @@ public  class Articulo implements Comparable<Articulo> {
     @Getter
     @Setter
     @ToString.Include
-
     private EstadoHabDes estado;
 
+    @Getter
+    @Setter
+    @ToString.Include
+    private Proveedor proveedor;
 
-//    @Column(name="CODIGO_PEDIDO")
-//    @PropertyLayout(fieldSetId = "name", sequence = "1")
-//    @Getter@Setter
-//    private Pedido pedido;
 
-    //private Proveedor proveedor;
-
-//    @Getter@Setter
-//    private KitArticulo kitArticulo;
 
 
 
