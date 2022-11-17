@@ -31,7 +31,7 @@ public class ArticuloBuilder extends BuilderScriptWithResult<Articulo> {
         checkParam("codigo", ec, int.class);
         checkParam("descripcion", ec, String.class);
 
-        return wrap(articulos).create(codigo, descripcion, proveedor);
+        return wrap(articulos).create(descripcion, proveedor);
     }
 
     // -- DEPENDENCIES

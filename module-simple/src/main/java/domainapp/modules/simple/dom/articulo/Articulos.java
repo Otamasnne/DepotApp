@@ -36,13 +36,12 @@ public class Articulos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Articulo create(
-            @CodigoArticulo final String codigo,
             @Descripcion final String descripcion,
             final Proveedor proveedor) {
-        return repositoryService.persist(Articulo.withName(codigo, descripcion, proveedor));
+        return repositoryService.persist(Articulo.withName(descripcion, proveedor));
     }
 
-    public List<Proveedor> choices2Create() {
+    public List<Proveedor> choices1Create() {
         return proveedores.proveedoresHabilitados();
     }
 

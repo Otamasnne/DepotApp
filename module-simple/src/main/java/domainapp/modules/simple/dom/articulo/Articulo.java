@@ -82,11 +82,9 @@ public  class Articulo implements Comparable<Articulo> {
     @Inject MessageService messageService;
 
     // Agregar una entidad proveedor al constructor mas adelante.
-    public static Articulo withName(String codigo, String descripcion, Proveedor proveedor) {
+    public static Articulo withName(String descripcion, Proveedor proveedor) {
         val articulo = new Articulo();
         articulo.setStock(0);
-        codigo = ("000000" + codigo).substring(codigo.length());
-        articulo.setCodigo(codigo);
         articulo.setDescripcion(descripcion);
         articulo.setStock(0);
         articulo.setEstado(EstadoHabDes.HABILITADO);
@@ -126,7 +124,6 @@ public  class Articulo implements Comparable<Articulo> {
         return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
-
     @Title
     @CodigoArticulo
     @Getter
@@ -158,10 +155,6 @@ public  class Articulo implements Comparable<Articulo> {
     @Setter
     @ToString.Include
     private Proveedor proveedor;
-
-
-
-
 
     private final static Comparator<Articulo> comparator =
             Comparator.comparing(Articulo::getCodigo);
