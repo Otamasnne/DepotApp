@@ -72,6 +72,10 @@ public class Cliente implements Comparable<Cliente>{
     @Inject
     MessageService messageService;
 
+    public String title() {
+        return getCodigo() + " - " + getRazonSocial();
+    }
+
     public static Cliente creacion(String codigo, int dni, String razonSocial) {
         val cliente = new Cliente();
         codigo = ("000000" + codigo).substring(codigo.length());
@@ -116,7 +120,6 @@ public class Cliente implements Comparable<Cliente>{
 
 
     @CodigoCliente
-    @Title
     @Getter
     @Setter
     @PropertyLayout(fieldSetId = "cliente", sequence = "1")

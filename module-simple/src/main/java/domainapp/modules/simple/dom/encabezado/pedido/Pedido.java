@@ -108,12 +108,12 @@ public class Pedido implements Comparable<Pedido> {
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Envía el pedido a ser procesado.")
-    public String procesar() {
+    public Pedido procesar() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' siendo procesado.", title));
         this.setEstadoOperativo(EstadoOperativo.PROCESANDO);
-        return "Se envió el Pedido " + nombre + " a procesamiento.";
+        return this;
     }
 
     public boolean hideProcesar() {
