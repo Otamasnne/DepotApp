@@ -8,6 +8,8 @@ import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.Publishing;
 import org.apache.isis.applib.annotation.SemanticsOf;
+import org.apache.isis.applib.query.Query;
+import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 
 import javax.inject.Inject;
@@ -30,14 +32,16 @@ public class Ingreso_addItemIngreso {
             final Articulo articulo,
             final int cantidad
     ) {
+        if (articulo.getStock() < cantidad) {
+            messageService.warnUser("El " + articulo.title() + " se encuentra sin el stock necesario, el pedido podría tener una espera elevada.");
+        }
         ItemIngreso item = repositoryService.persist(new ItemIngreso(ingreso,articulo,cantidad));
         ingreso.agregarItem(item);
         return ingreso;
     }
 
-    //TODO: RESTRINGIR ESTA LISTA A LOS ARTICULOS QUE TENGAN COMO PROVEEDOR EL MISMO QUE EL INGRESO
     public List<Articulo> choices0Act() {
-        return repositoryService.allInstances(Articulo.class);
+        return repositoryService.allMatches(Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_HABILITADO));
     }
 
     public String validate0Act(final Articulo articulo) {
@@ -50,6 +54,9 @@ public class Ingreso_addItemIngreso {
     public boolean hideAct(){
         return ingreso.getEstadoOperativo() == EstadoOperativo.PROCESANDO;
     }
+
+    @Inject
+    MessageService messageService;
     @Inject
     RepositoryService repositoryService;
     @Inject

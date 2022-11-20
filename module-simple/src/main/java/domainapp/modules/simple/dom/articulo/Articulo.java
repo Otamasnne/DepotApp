@@ -76,7 +76,7 @@ public  class Articulo implements Comparable<Articulo> {
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Articulo.findByCodigoLike";
     public static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
-    static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
+    public static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Articulo.findByDeshabilitado";
     static final String NAMED_QUERY__FIND_BY_KIT = "Articulo.findByKit";
     @Inject TitleService titleService;
@@ -124,7 +124,10 @@ public  class Articulo implements Comparable<Articulo> {
         return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
-    @Title
+    public String title() {
+        return "Artículo " + getCodigo();
+    }
+
     @CodigoArticulo
     @Getter
     @Setter
