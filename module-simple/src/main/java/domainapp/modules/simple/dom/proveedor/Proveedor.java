@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.proveedor;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
+import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
@@ -64,18 +65,13 @@ public class Proveedor implements Comparable<Proveedor>{
     static final String NAMED_QUERY__FIND_BY_HABILITADO = "Proveedor.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Proveedor.findByDeshabilitado";
 
-
-    @Inject
-    RepositoryService repositoryService;
     @Inject
     TitleService titleService;
     @Inject
     MessageService messageService;
 
-   public static Proveedor withName(String codigo, String razonSocial){
+   public static Proveedor withName(String razonSocial){
        val proveedor = new Proveedor();
-       codigo = ("000000" + codigo).substring(codigo.length());
-       proveedor.setCodigo(codigo);
        proveedor.setRazonSocial(razonSocial);
        proveedor.setEstado(EstadoHabDes.HABILITADO);
        return proveedor;
@@ -85,24 +81,24 @@ public class Proveedor implements Comparable<Proveedor>{
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Habilita el proveedor")
-    public String habilitar() {
+    public Proveedor habilitar() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
         this.setEstado(EstadoHabDes.HABILITADO);
-        return "Se habilitó el proveedor " + nombre;
+        return this;
     }
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Deshabilita el proveedor.")
-    public String deshabilitar() {
+    public Proveedor deshabilitar() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
         this.setEstado(EstadoHabDes.DESHABILITADO);
-        return "Se deshabilitó el proveedor " + nombre;
+        return this;
     }
 
     public String disableHabilitar() {
@@ -120,7 +116,7 @@ public class Proveedor implements Comparable<Proveedor>{
 //    }
 
     // Por que no usar anotacion column?
-    @CodigoArticulo
+    @CodigoCo
     @Getter @Setter @ToString.Include
     @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
     private String codigo;

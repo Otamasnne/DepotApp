@@ -1,5 +1,7 @@
 package domainapp.modules.simple.dom.encabezado.pedido;
 
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.cliente.Cliente;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
@@ -23,8 +25,13 @@ public class Pedidos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Pedido create(
-            final String descripcion) {
-        return repositoryService.persist(Pedido.withName(descripcion));
+            final String descripcion,
+            final Cliente cliente) {
+        return repositoryService.persist(Pedido.withName(descripcion, cliente));
+    }
+
+    public List<Cliente> choices1Create () {
+        return repositoryService.allInstances(Cliente.class);
     }
 
     @Action(semantics = SemanticsOf.SAFE)

@@ -16,6 +16,7 @@ import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
 
 import javax.inject.Inject;
+import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
@@ -81,7 +82,6 @@ public  class Articulo implements Comparable<Articulo> {
     @Inject TitleService titleService;
     @Inject MessageService messageService;
 
-    // Agregar una entidad proveedor al constructor mas adelante.
     public static Articulo withName(String descripcion, Proveedor proveedor) {
         val articulo = new Articulo();
         articulo.setStock(0);
@@ -149,11 +149,13 @@ public  class Articulo implements Comparable<Articulo> {
     @Getter
     @Setter
     @ToString.Include
+    @Column(allowsNull = "false")
     private EstadoHabDes estado;
 
     @Getter
     @Setter
     @ToString.Include
+    @Column(allowsNull = "false")
     private Proveedor proveedor;
 
     private final static Comparator<Articulo> comparator =

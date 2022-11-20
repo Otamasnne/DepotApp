@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.encabezado.pedido;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
@@ -83,11 +84,16 @@ public class Pedido implements Comparable<Pedido> {
     List<ItemPedido> items;
 
 
+    @Getter @Setter
+    @PropertyLayout(fieldSetId = "pedido", sequence = "4")
+    @Column(allowsNull = "false")
+    private Cliente cliente;
 
-    public static Pedido withName(String descripcion) {
+    public static Pedido withName(String descripcion, Cliente cliente) {
         val pedido = new Pedido();
         pedido.setDescripcion(descripcion);
         pedido.setEstadoOperativo(EstadoOperativo.MODIFICABLE);
+        pedido.setCliente(cliente);
         return pedido;
     }
 

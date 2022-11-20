@@ -68,7 +68,6 @@ public class Cliente implements Comparable<Cliente>{
     static final String NAMED_QUERY__FIND_BY_HABILITADO = "Cliente.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Cliente.findByDeshabilitado";
 
-    @Inject RepositoryService repositoryService;
     @Inject TitleService titleService;
     @Inject
     MessageService messageService;
