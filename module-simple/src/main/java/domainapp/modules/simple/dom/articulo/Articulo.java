@@ -5,6 +5,7 @@ package domainapp.modules.simple.dom.articulo;
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.dom.reportes.RepoArticulo;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
+import domainapp.modules.simple.dom.ubicacion.Ubicacion;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.articulo.Stock;
@@ -153,13 +154,22 @@ public  class Articulo implements Comparable<Articulo> {
     @Setter
     @ToString.Include
     @Column(allowsNull = "false")
+    @PropertyLayout(fieldSetId = "articulo", sequence = "4")
     private EstadoHabDes estado;
 
     @Getter
     @Setter
     @ToString.Include
     @Column(allowsNull = "false")
+    @PropertyLayout(fieldSetId = "articulo", sequence = "5")
     private Proveedor proveedor;
+
+    @Getter
+    @Setter
+    @ToString.Include
+    @Column(allowsNull = "false")
+    @PropertyLayout(fieldSetId = "articulo", sequence = "6")
+    private Ubicacion ubicacion;
 
     private final static Comparator<Articulo> comparator =
             Comparator.comparing(Articulo::getCodigo);

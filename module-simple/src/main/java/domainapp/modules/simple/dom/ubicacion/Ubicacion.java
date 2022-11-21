@@ -106,7 +106,10 @@ public  class Ubicacion implements Comparable<Ubicacion> {
         return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
-    @Title
+    public String title() {
+        return this.descripcion;
+    }
+
     @CodigoArticulo
     @Getter
     @Setter
