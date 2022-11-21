@@ -20,7 +20,7 @@ import java.util.Comparator;
 @javax.jdo.annotations.Unique(
         name = "ItemAjuste_articulo_ajuste_UNQ", members = {"articulo", "ajuste"}
 )
-//TODO: Revisar si se pueden borrar estas queries
+
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
                 name = ItemAjuste.NAMED_QUERY__BUSCAR_ITEM_POR_AJUSTE,

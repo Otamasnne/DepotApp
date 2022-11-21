@@ -6,11 +6,13 @@ import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
 import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.dom.proveedor.Proveedores;
+import domainapp.modules.simple.dom.ubicacion.Ubicacion;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
+import org.apache.isis.applib.query.QueryRange;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.value.Blob;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
@@ -37,12 +39,16 @@ public class Articulos {
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Articulo create(
             @Descripcion final String descripcion,
-            final Proveedor proveedor) {
-        return repositoryService.persist(Articulo.withName(descripcion, proveedor));
+            final Proveedor proveedor,
+            final Ubicacion ubicacion) {
+        return repositoryService.persist(Articulo.withName(descripcion, proveedor, ubicacion));
     }
 
     public List<Proveedor> choices1Create() {
-        return proveedores.proveedoresHabilitados();
+        return repositoryService.allMatches(Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_HABILITADO));
+    }
+    public List<Ubicacion> choices2Create() {
+        return repositoryService.allMatches(Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_HABILITADOS));
     }
 
 //Esta acción debe generar un comprobante de tipo AJP.
@@ -58,6 +64,7 @@ public class Articulos {
     public List<Articulo> choices0AjustePositivo() {
         return repositoryService.allInstances(Articulo.class);
     }
+
 
     //Esta acción debe generar un comprobante de tipo AJN.
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)

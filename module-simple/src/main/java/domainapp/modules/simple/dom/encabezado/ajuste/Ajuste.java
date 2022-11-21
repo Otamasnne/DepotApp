@@ -87,7 +87,6 @@ public class Ajuste implements Comparable<Ajuste>{
         jdoSupportService.refresh(this);
     }
 
-    //TODO: AGREGAR UN RETORNO AL FINAL, VERIFICAR VALIDACION
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
@@ -109,7 +108,7 @@ public class Ajuste implements Comparable<Ajuste>{
         return this;
     }
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.COMPLETADO;
+        return this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
     }
 
 

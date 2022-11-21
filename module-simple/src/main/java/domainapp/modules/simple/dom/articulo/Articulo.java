@@ -83,13 +83,14 @@ public  class Articulo implements Comparable<Articulo> {
     @Inject TitleService titleService;
     @Inject MessageService messageService;
 
-    public static Articulo withName(String descripcion, Proveedor proveedor) {
+    public static Articulo withName(String descripcion, Proveedor proveedor, Ubicacion ubicacion) {
         val articulo = new Articulo();
         articulo.setStock(0);
         articulo.setDescripcion(descripcion);
         articulo.setStock(0);
         articulo.setEstado(EstadoHabDes.HABILITADO);
         articulo.setProveedor(proveedor);
+        articulo.setUbicacion(ubicacion);
         return articulo;
     }
 
@@ -125,10 +126,12 @@ public  class Articulo implements Comparable<Articulo> {
         return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
+    @Programmatic
     public void restarStock(int cantidad) {
         this.setStock(this.getStock() - cantidad);
     }
 
+    @Programmatic
     public void sumarStock(int cantidad) {
         this.setStock(this.getStock() + cantidad);
     }

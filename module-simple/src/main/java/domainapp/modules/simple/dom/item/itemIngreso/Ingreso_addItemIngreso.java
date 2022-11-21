@@ -32,9 +32,6 @@ public class Ingreso_addItemIngreso {
             final Articulo articulo,
             final int cantidad
     ) {
-        if (articulo.getStock() < cantidad) {
-            messageService.warnUser("El " + articulo.title() + " se encuentra sin el stock necesario, el pedido podría tener una espera elevada.");
-        }
         ItemIngreso item = repositoryService.persist(new ItemIngreso(ingreso,articulo,cantidad));
         ingreso.agregarItem(item);
         return ingreso;

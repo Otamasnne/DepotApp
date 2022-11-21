@@ -4,6 +4,7 @@ package domainapp.modules.simple.dom.ubicacion;
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
+import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
@@ -63,15 +64,14 @@ public  class Ubicacion implements Comparable<Ubicacion> {
 
     static final String NAMED_QUERY__BUSCAR_POR_CODIGO_LIKE = "Ubicacion.buscarPorCodigoLike";
     static final String NAMED_QUERY__BUSCAR_POR_CODIGO_EXACTO = "Ubicacion.buscarPorCodigoExacto";
-    static final String NAMED_QUERY__BUSCAR_HABILITADOS = "Ubicacion.buscarHabilitados";
+    public static final String NAMED_QUERY__BUSCAR_HABILITADOS = "Ubicacion.buscarHabilitados";
     static final String NAMED_QUERY__BUSCAR_DESHABILITADOS = "Ubicacion.buscarDeshabilitados";
 
     @Inject TitleService titleService;
     @Inject MessageService messageService;
 
-    public static Ubicacion creacion(String codigo, String descripcion) {
+    public static Ubicacion creacion(String descripcion) {
         Ubicacion ubicacion = new Ubicacion();
-        ubicacion.setCodigo(codigo);
         ubicacion.setDescripcion(descripcion);
         ubicacion.setEstado(EstadoHabDes.HABILITADO);
         return ubicacion;
@@ -110,7 +110,7 @@ public  class Ubicacion implements Comparable<Ubicacion> {
         return this.descripcion;
     }
 
-    @CodigoArticulo
+    @CodigoCo
     @Getter
     @Setter
     @ToString.Include

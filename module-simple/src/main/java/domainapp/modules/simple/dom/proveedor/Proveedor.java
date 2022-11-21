@@ -62,7 +62,7 @@ public class Proveedor implements Comparable<Proveedor>{
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Proveedor.findByCodigoLike";
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Proveedor.findByCodigoExact";
-    static final String NAMED_QUERY__FIND_BY_HABILITADO = "Proveedor.findByHabilitado";
+    public static final String NAMED_QUERY__FIND_BY_HABILITADO = "Proveedor.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Proveedor.findByDeshabilitado";
 
     @Inject
@@ -122,7 +122,6 @@ public class Proveedor implements Comparable<Proveedor>{
     @Getter @Setter @ToString.Include
     private String direccion;
 
-    @Title
     @Getter @Setter @ToString.Include
     private String razonSocial;
 

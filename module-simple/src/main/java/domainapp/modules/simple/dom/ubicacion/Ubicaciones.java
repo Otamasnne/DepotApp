@@ -26,9 +26,8 @@ public class Ubicaciones {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Ubicacion create(
-            @CodigoArticulo final String codigo,
             @Descripcion final String descripcion) {
-        return repositoryService.persist(Ubicacion.creacion(codigo, descripcion));
+        return repositoryService.persist(Ubicacion.creacion(descripcion));
     }
 
     @Action(semantics = SemanticsOf.SAFE)

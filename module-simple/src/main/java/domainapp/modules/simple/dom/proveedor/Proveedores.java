@@ -54,14 +54,6 @@ public class Proveedores {
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
-    public List<Proveedor> proveedoresHabilitados() {
-        return repositoryService.allMatches(
-                Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_HABILITADO)
-        );
-    }
-
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<Proveedor> proveedoresDeshabilitados() {
         return repositoryService.allMatches(
                 Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_DESHABILITADO)

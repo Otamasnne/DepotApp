@@ -120,7 +120,7 @@ public class Pedido implements Comparable<Pedido> {
     }
 
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO;
+        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getItems().size() == 0;
     }
 
     @Action

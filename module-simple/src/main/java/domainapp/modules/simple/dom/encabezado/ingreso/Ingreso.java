@@ -127,7 +127,7 @@ public class Ingreso implements Comparable<Ingreso>{
     }
 
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO;
+        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getItems().size() == 0;
     }
 
     @Action

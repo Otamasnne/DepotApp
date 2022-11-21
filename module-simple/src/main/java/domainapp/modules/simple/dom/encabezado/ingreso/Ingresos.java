@@ -20,7 +20,6 @@ public class Ingresos {
 
     @Inject RepositoryService repositoryService;
 
-    //TODO: REEMPLAZAR CODIGO POR CODIGO INCREMENTAL BD
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Ingreso persistir(

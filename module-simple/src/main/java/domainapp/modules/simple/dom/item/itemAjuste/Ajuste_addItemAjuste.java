@@ -3,6 +3,7 @@ package domainapp.modules.simple.dom.item.itemAjuste;
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.encabezado.ajuste.Ajuste;
 import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.encabezado.ajuste.TipoAjuste;
 import lombok.RequiredArgsConstructor;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
@@ -30,8 +31,8 @@ public class Ajuste_addItemAjuste {
             final Articulo articulo,
             final int cantidad
     ) {
-        if (articulo.getStock() < cantidad) {
-            messageService.warnUser("El " + articulo.title() + " se encuentra sin el stock necesario, el pedido podría tener una espera elevada.");
+        if (articulo.getStock() < cantidad & this.ajuste.getTipoAjuste() == TipoAjuste.AJN) {
+            messageService.warnUser("El ajuste negativo por " + cantidad + " dejaria al artículo " + articulo.getCodigo() + " con stock negativo, esto podría generar problemas de stock a largo plazo.");
         }
         ItemAjuste item = repositoryService.persist(new ItemAjuste(ajuste,articulo,cantidad));
         ajuste.agregarItem(item);
