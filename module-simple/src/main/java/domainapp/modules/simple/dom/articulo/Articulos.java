@@ -1,9 +1,12 @@
 package domainapp.modules.simple.dom.articulo;
 
+<<<<<<< HEAD
 
 import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
 import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
 import domainapp.modules.simple.dom.reportes.reportePadre;
+=======
+>>>>>>> aa250a5 (Issue #4: Retoques referidos a borrado de ajustes)
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.dom.proveedor.Proveedores;
 import domainapp.modules.simple.dom.ubicacion.Ubicacion;
@@ -12,7 +15,6 @@ import domainapp.modules.simple.types.articulo.Descripcion;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
-import org.apache.isis.applib.query.QueryRange;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.value.Blob;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
@@ -33,7 +35,6 @@ public class Articulos {
 
     @Inject RepositoryService repositoryService;
     @Inject JdoSupportService jdoSupportService;
-    @Inject Proveedores proveedores;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
@@ -51,31 +52,6 @@ public class Articulos {
         return repositoryService.allMatches(Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_HABILITADOS));
     }
 
-//Esta acción debe generar un comprobante de tipo AJP.
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public String ajustePositivo(Articulo articulo, int cantidad){
-        articulo.setStock(articulo.getStock()+cantidad);
-        AjustePositivo comprobante = repositoryService.persist(AjustePositivo.creacion(articulo, cantidad));
-        return "Se realizó el ajuste positivo para el artículo " + articulo + " por " + cantidad + " unidades. " +
-                "Comprobante: " + comprobante.title();
-    }
-
-    public List<Articulo> choices0AjustePositivo() {
-        return repositoryService.allInstances(Articulo.class);
-    }
-
-
-    //Esta acción debe generar un comprobante de tipo AJN.
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public String ajusteNegativo(String articulo, int cantidad){
-        Articulo objetivo = findByCodigoExact(articulo);
-        objetivo.setStock(objetivo.getStock()-cantidad);
-        AjusteNegativo comprobante = repositoryService.persist(AjusteNegativo.creacion(objetivo, cantidad));
-        return "Se realizó el ajuste negativo para el artículo " + articulo + " por " + cantidad + " unidades. " +
-                "Comprobante: " + comprobante.title();
-    }
 
     //REPORTE ARTICULO
     @Programmatic
