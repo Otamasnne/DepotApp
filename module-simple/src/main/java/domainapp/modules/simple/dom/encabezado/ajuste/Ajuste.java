@@ -68,7 +68,7 @@ public class Ajuste implements Comparable<Ajuste>{
     JdoSupportService jdoSupportService;
 
     public String title() {
-        return getTipoAjuste() + "-" + getCodigoCo();
+        return getTipoAjuste() == TipoAjuste.AJP ? "Ajuste Positivo " + getCodigoCo() : "Ajuste Negativo " + getCodigoCo();
     }
 
     public static Ajuste creacion(TipoAjuste tipoAjuste, String descripcion) {
@@ -111,6 +111,8 @@ public class Ajuste implements Comparable<Ajuste>{
     public boolean hideProcesar() {
         return this.getEstadoOperativo()==EstadoOperativo.COMPLETADO;
     }
+
+
 
     @Getter
     @Setter

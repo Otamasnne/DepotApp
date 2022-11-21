@@ -109,11 +109,9 @@ public class Proveedor implements Comparable<Proveedor>{
         return this.getEstado()== EstadoHabDes.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
     }
 
-
-    //Probando metodo title en lugar de anotacion (mejor personalizacion?)
-//    public String title(){
-//       return getCodigo() + getCodigo();
-//    }
+    public String title() {
+        return getCodigo() + " - " + getRazonSocial();
+    }
 
     // Por que no usar anotacion column?
     @CodigoCo

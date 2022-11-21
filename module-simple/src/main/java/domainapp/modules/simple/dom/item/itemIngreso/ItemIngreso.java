@@ -57,12 +57,12 @@ public class ItemIngreso implements Comparable<ItemIngreso> {
 
     @Getter @Setter @ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "itemPedido", sequence = "1")
+    @PropertyLayout(fieldSetId = "itemIngreso", sequence = "1")
     private Articulo articulo;
 
     @Getter @Setter @ToString.Include
     @CantidadMueve
-    @PropertyLayout(fieldSetId = "itemPedido", sequence = "2")
+    @PropertyLayout(fieldSetId = "itemIngreso", sequence = "2")
     private int cantidad;
 
     @Getter @Setter @ToString.Include

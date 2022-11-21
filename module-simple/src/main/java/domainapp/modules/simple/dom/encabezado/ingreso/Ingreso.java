@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.encabezado.ajuste.TipoAjuste;
 import domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.Descripcion;
@@ -63,7 +64,6 @@ public class Ingreso implements Comparable<Ingreso>{
     TitleService titleService;
     @Inject
     MessageService messageService;
-
     @Inject
     JdoSupportService jdoSupportService;
 
@@ -85,7 +85,10 @@ public class Ingreso implements Comparable<Ingreso>{
         jdoSupportService.refresh(this);
     }
 
-    @Title
+    public String title() {
+        return "Ingreso " + getCodigo();
+    }
+
     @CodigoCo
     @Getter
     @Setter
@@ -102,11 +105,6 @@ public class Ingreso implements Comparable<Ingreso>{
     @PropertyLayout(fieldSetId = "ingreso", sequence = "3")
     private EstadoOperativo estadoOperativo;
 
-    //TODO: Pasar esto a la creación
-    @Getter @Setter
-    @PropertyLayout(fieldSetId = "ingreso", sequence = "4")
-    private Proveedor proveedor;
-
     @Getter @Setter
     @Persistent(mappedBy="ingreso")
     @PropertyLayout(hidden = Where.EVERYWHERE)
@@ -114,17 +112,16 @@ public class Ingreso implements Comparable<Ingreso>{
 
     //Manda el ingreso a procesar, lo cual lo envía a la app de Android
     //TODO: ENVIAR EL INGRESO A LA APLICACIÓN CUANDO SE PASE A ESTE ESTADO.
-    //TODO: MODIFICAR RETORNO PARA COMPORTAMIENTO DESEADO.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Envía el ingreso a ser procesado.")
-    public String procesar() {
+    public Ingreso procesar() {
         String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' siendo procesado.", title));
         this.setEstadoOperativo(EstadoOperativo.PROCESANDO);
-        return "Se envió el Ingreso " + nombre + " a procesamiento.";
+        return this;
     }
 
     public boolean hideProcesar() {

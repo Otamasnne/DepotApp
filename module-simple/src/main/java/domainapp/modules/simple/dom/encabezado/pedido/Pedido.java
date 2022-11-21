@@ -63,7 +63,10 @@ public class Pedido implements Comparable<Pedido> {
     static final String NAMED_QUERY_FIND_BY_CODIGO_EXACT = "pedido.findByCodigoExact";
     static final String NAMED_QUERY_FIND_BY_CODIGO_LIKE = "pedido.findByCodigoLike";
 
-    @Title
+    public String title() {
+        return "Pedido " + getCodigo();
+    }
+
     @CodigoCo
     @Getter@Setter @ToString.Include
     @PropertyLayout(fieldSetId = "pedido", sequence = "1")
