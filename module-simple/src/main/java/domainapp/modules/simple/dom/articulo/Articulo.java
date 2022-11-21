@@ -125,6 +125,14 @@ public  class Articulo implements Comparable<Articulo> {
         return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
+    public void restarStock(int cantidad) {
+        this.setStock(this.getStock() - cantidad);
+    }
+
+    public void sumarStock(int cantidad) {
+        this.setStock(this.getStock() + cantidad);
+    }
+
     public String title() {
         return "Artículo " + getCodigo();
     }

@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.encabezado.ajuste.TipoAjuste;
+import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
 import domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.Descripcion;
@@ -11,7 +12,9 @@ import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.apache.isis.applib.services.wrapper.HiddenException;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -111,7 +114,6 @@ public class Ingreso implements Comparable<Ingreso>{
     List<ItemIngreso> items;
 
     //Manda el ingreso a procesar, lo cual lo envía a la app de Android
-    //TODO: ENVIAR EL INGRESO A LA APLICACIÓN CUANDO SE PASE A ESTE ESTADO.
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
@@ -126,6 +128,18 @@ public class Ingreso implements Comparable<Ingreso>{
 
     public boolean hideProcesar() {
         return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO;
+    }
+
+    @Action
+    @ActionLayout(
+            hidden=Where.EVERYWHERE
+    )
+    public void completar() {
+        for (int i = 0; i < getItems().size(); i++) {
+            int cantidad = this.getItems().get(i).getCantidad();
+            getItems().get(i).getArticulo().sumarStock(cantidad);
+        }
+        this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
     }
 
     private final static Comparator<Ingreso> comparator =

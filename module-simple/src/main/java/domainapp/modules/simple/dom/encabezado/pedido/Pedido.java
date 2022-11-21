@@ -123,6 +123,18 @@ public class Pedido implements Comparable<Pedido> {
         return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO;
     }
 
+    @Action
+    @ActionLayout(
+            hidden=Where.EVERYWHERE
+    )
+    public void completar() {
+        for (int i = 0; i < getItems().size(); i++) {
+            int cantidad = this.getItems().get(i).getCantidad();
+            getItems().get(i).getArticulo().restarStock(cantidad);
+        }
+        this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
+    }
+
     private final static Comparator<Pedido> comparator =
             Comparator.comparing(Pedido::getCodigo);
     @Override
