@@ -11,14 +11,17 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
+import static org.apache.isis.applib.annotation.SemanticsOf.IDEMPOTENT;
+
 @DomainService(
         nature = NatureOfService.VIEW,
         logicalTypeName = "simple.Usuarios"
 )
 public class Usuarios {
+
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Usuarios Registrados")
-    public List<Usuario> listarUsuario() {
+    public List<Usuario> listarAll() {
         return repositoryService.allInstances(Usuario.class);
     }
 
@@ -45,7 +48,15 @@ public class Usuarios {
                 .orElse(null);
     }
 
-    @Action(semantics = SemanticsOf.SAFE)
+    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL,named = "Agregar Usuario")
+    public Usuario addUsuario(String userName, String nombre, String apellido, String telefono,
+                              String email, String password
+    ) {
+        return repositoryService.persist(new Usuario(userName,nombre,apellido,email,telefono,password));
+    }
+
+    //@Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Validar Usuario")
     public Usuario userValidation(final String username, final String password) throws Exception {
         return repositoryService.uniqueMatch(

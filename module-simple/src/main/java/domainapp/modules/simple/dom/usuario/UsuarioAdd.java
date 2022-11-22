@@ -11,13 +11,13 @@ public class UsuarioAdd {
     RepositoryService repositoryService;
     JdoSupportService jdoSupportService;
 
-    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL,named = "Agregar Usuario")
-    public Usuario AddUsuario(String userName, String nombre, String apellido, String telefono,
-                              String email, String password
-    ) {
-        return repositoryService.persist(new Usuario(userName,nombre,apellido,email,telefono,password));
-    }
+//    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
+//    @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL,named = "Agregar Usuario")
+//    public Usuario addUsuario(String userName, String nombre, String apellido, String telefono,
+//                              String email, String password
+//    ) {
+//        return repositoryService.persist(new Usuario(userName,nombre,apellido,email,telefono,password));
+//    }
 
 
 }

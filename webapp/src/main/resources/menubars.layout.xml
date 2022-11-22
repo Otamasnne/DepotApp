@@ -4,6 +4,25 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
     <mb3:primary>
 
 
+
+        <mb3:menu unreferencedActions="true">
+            <mb3:named>Usuarios</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction id="create" objectType="depotapp.Usuarios">
+                    <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
+                    <cpt:named>Crear Usuario</cpt:named>
+                </mb3:serviceAction>
+<!--                <mb3:serviceAction id="listAll" objectType="depotapp.Usuarios">-->
+<!--                    <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>-->
+<!--                    <cpt:named>Listar Todos los Artículos</cpt:named>-->
+<!--                </mb3:serviceAction>-->
+<!--                <mb3:serviceAction id="addUsuario" objectType="depotapp.Usuarios">-->
+<!--                    <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>-->
+<!--                    <cpt:named>Agregar Usuario</cpt:named>-->
+<!--                </mb3:serviceAction>-->
+            </mb3:section>
+        </mb3:menu>
+
         <mb3:menu unreferencedActions="true">
             <mb3:named>Articulos</mb3:named>
             <mb3:section>
