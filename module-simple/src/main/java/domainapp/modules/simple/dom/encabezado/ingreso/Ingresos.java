@@ -1,13 +1,20 @@
 package domainapp.modules.simple.dom.encabezado.ingreso;
 
+import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
+import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.value.Blob;
+import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @DomainService(
@@ -18,7 +25,8 @@ import java.util.List;
 @lombok.RequiredArgsConstructor(onConstructor_ = {@Inject} )
 public class Ingresos {
 
-    @Inject RepositoryService repositoryService;
+    final RepositoryService repositoryService;
+    final JdoSupportService jdoSupportService;
 
     //TODO: REEMPLAZAR CODIGO POR CODIGO INCREMENTAL BD
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
@@ -68,4 +76,11 @@ public class Ingresos {
                 .orElse(null);
     }
 
+    @Programmatic
+    public Blob generarReporteIngreso() throws JRException, IOException {
+        List<Ingreso> ingresos = new ArrayList<Ingreso>();
+        reportePadre ReportePadre = new reportePadre();
+        ingresos = repositoryService.allInstances(Ingreso.class);
+        return ReportePadre.ListadoIngresosPDF(ingresos);
+    }
 }
