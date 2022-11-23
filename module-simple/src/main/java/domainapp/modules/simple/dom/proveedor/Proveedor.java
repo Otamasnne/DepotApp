@@ -1,6 +1,8 @@
 package domainapp.modules.simple.dom.proveedor;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.ubicacion.Ubicacion;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
@@ -15,6 +17,7 @@ import javax.inject.Inject;
 import javax.jdo.annotations.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -69,6 +72,8 @@ public class Proveedor implements Comparable<Proveedor>{
     TitleService titleService;
     @Inject
     MessageService messageService;
+    @Inject
+    RepositoryService repositoryService;
 
    public static Proveedor withName(String razonSocial){
        val proveedor = new Proveedor();
@@ -132,7 +137,6 @@ public class Proveedor implements Comparable<Proveedor>{
     @Getter @Setter @ToString.Include
     private String localidad;
 
-    //@EmailAddress no funciona
     @Getter @Setter @ToString.Include
     private String email;
 
@@ -141,11 +145,33 @@ public class Proveedor implements Comparable<Proveedor>{
     @ToString.Include
     private EstadoHabDes estado;
 
-    /**
-     * PENDIENTE: agregar metodos para actualizar campos
-     * Agregar Querys?
-     * Definir nombre de la clase repo
-     */
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Proveedor modificarProveedor(final String direccion, final String razonSocial, final String telefono, final String localidad, final String email ) {
+        this.setDireccion(direccion);
+        this.setRazonSocial(razonSocial);
+        this.setTelefono(telefono);
+        this.setLocalidad(localidad);
+        this.setEmail(email);
+        return this;
+    }
+
+    public String default0ModificarProveedor() {
+        return this.getDireccion();
+    }
+    public String default1ModificarProveedor() {
+        return this.getRazonSocial();
+    }
+    public String default2ModificarProveedor() {
+        return this.getTelefono();
+    }
+    public String default3ModificarProveedor() {
+        return this.getLocalidad();
+    }
+    public String default4ModificarProveedor() {
+        return this.getEmail();
+    }
+
 
     public static final Comparator<Proveedor> comparator = Comparator.comparing(Proveedor::getCodigo);
 

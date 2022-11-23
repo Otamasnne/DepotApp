@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.cliente;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.cliente.CodigoCliente;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
@@ -143,21 +144,20 @@ public class Cliente implements Comparable<Cliente>{
     @PropertyLayout(fieldSetId = "cliente", sequence = "4")
     private EstadoHabDes estado;
 
-
-/* LAS ENTIDADES NO DEBERÍAN PODER SER BORRADAS, SOLO DESHABILITADAS Y HABILITADAS.
-
-    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
-    @ActionLayout(
-            position = ActionLayout.Position.PANEL,
-            describedAs = "Borra el cliente.")
-    public String borrar() {
-        String nombre = this.getCodigo();
-        final String title = titleService.titleOf(this);
-        messageService.informUser(String.format("'%s' borrado", title));
-        repositoryService.removeAndFlush(this);
-        return "Se borró el artículo " + nombre;
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Cliente modificarCliente(final @Dni int dni, final String razonSocial) {
+        this.setDni(dni);
+        this.setRazonSocial(razonSocial);
+        return this;
     }
-*/
+
+    public int default0ModificarCliente() {
+        return this.getDni();
+    }
+    public String default1ModificarCliente() {
+        return this.getRazonSocial();
+    }
 
     private final static Comparator<Cliente> comparator =
             Comparator.comparing(Cliente::getCodigo);
