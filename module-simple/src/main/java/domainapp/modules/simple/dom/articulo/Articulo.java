@@ -16,6 +16,7 @@ import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.datanucleus.store.rdbms.query.PersistentClassROF;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
@@ -27,6 +28,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 import java.util.List;
 
+import static org.apache.isis.applib.annotation.SemanticsOf.IDEMPOTENT;
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
 @javax.jdo.annotations.PersistenceCapable(
@@ -153,7 +155,7 @@ public  class Articulo implements Comparable<Articulo> {
     @Descripcion
     @Getter
     @Setter
-    @ToString.Include
+    @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "articulo", sequence = "2")
     private String descripcion;
 
@@ -174,7 +176,7 @@ public  class Articulo implements Comparable<Articulo> {
     @Getter
     @Setter
     @ToString.Include
-    @Column(allowsNull = "false")
+    @Column(allowsNull = "false") 
     @PropertyLayout(fieldSetId = "articulo", sequence = "5")
     private Proveedor proveedor;
 
@@ -185,29 +187,33 @@ public  class Articulo implements Comparable<Articulo> {
     @PropertyLayout(fieldSetId = "articulo", sequence = "6")
     private Ubicacion ubicacion;
 
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Articulo modificarArticulo(final String descripcion, final Proveedor proveedor, final Ubicacion ubicacion) {
-        this.setDescripcion(descripcion);
+    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
+    @ActionLayout(associateWith = "proveedor", promptStyle = PromptStyle.INLINE)
+    public Articulo modificarProveedor(final Proveedor proveedor){
         this.setProveedor(proveedor);
-        this.setUbicacion(ubicacion);
         return this;
-    }
+    };
 
-    public String default0ModificarArticulo() {
-        return this.getDescripcion();
-    }
-    public Proveedor default1ModificarArticulo() {
+    public Proveedor default0ModificarProveedor(){
         return this.getProveedor();
     }
-    public Ubicacion default2ModificarArticulo() {
-        return getUbicacion();
-    }
 
-    public List<Proveedor> choices1ModificarArticulo() {
+    public List<Proveedor> choices0ModificarProveedor() {
         return repositoryService.allMatches(Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_HABILITADO));
     }
-    public List<Ubicacion> choices2ModificarArticulo() {
+
+    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
+    @ActionLayout(associateWith = "ubicacion", promptStyle = PromptStyle.INLINE)
+    public Articulo modificarUbicacion(final Ubicacion ubicacion){
+        this.setUbicacion(ubicacion);
+        return this;
+    };
+
+    public Ubicacion default0ModificarUbicacion(){
+        return this.getUbicacion();
+    }
+
+    public List<Ubicacion> choices0ModificarUbicacion() {
         return repositoryService.allMatches(Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_HABILITADOS));
     }
 

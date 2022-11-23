@@ -124,7 +124,7 @@ public  class Ubicacion implements Comparable<Ubicacion> {
     @Descripcion
     @Getter
     @Setter
-    @ToString.Include
+    @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "ubicacion", sequence = "2")
     private String descripcion;
 
@@ -133,17 +133,6 @@ public  class Ubicacion implements Comparable<Ubicacion> {
     @ToString.Include
     @PropertyLayout(fieldSetId = "ubicacion", sequence = "3")
     private EstadoHabDes estado;
-
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Ubicacion modificarUbicacion(final String descripcion) {
-        this.setDescripcion(descripcion);
-        return this;
-    }
-
-    public String default0ModificarUbicacion() {
-        return this.getDescripcion();
-    }
 
     private final static Comparator<Ubicacion> comparator =
             Comparator.comparing(Ubicacion::getCodigo);

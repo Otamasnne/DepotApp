@@ -78,6 +78,10 @@ public class Proveedor implements Comparable<Proveedor>{
    public static Proveedor withName(String razonSocial, String direccion, String localidad, String telefono, String email){
        val proveedor = new Proveedor();
        proveedor.setRazonSocial(razonSocial);
+       proveedor.setDireccion(direccion);
+       proveedor.setLocalidad(localidad);
+       proveedor.setTelefono(telefono);
+       proveedor.setEmail(email);
        proveedor.setEstado(EstadoHabDes.HABILITADO);
        return proveedor;
    }
@@ -124,23 +128,23 @@ public class Proveedor implements Comparable<Proveedor>{
     @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
     private String codigo;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
     private String razonSocial;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
     private String localidad;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "3")
     private String direccion;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "4")
     private String telefono;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "5")
     private String email;
 
@@ -148,34 +152,6 @@ public class Proveedor implements Comparable<Proveedor>{
     @Setter
     @ToString.Include
     private EstadoHabDes estado;
-
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Proveedor modificarProveedor(final String direccion, final String razonSocial, final String telefono, final String localidad, final String email ) {
-        this.setDireccion(direccion);
-        this.setRazonSocial(razonSocial);
-        this.setTelefono(telefono);
-        this.setLocalidad(localidad);
-        this.setEmail(email);
-        return this;
-    }
-
-    public String default0ModificarProveedor() {
-        return this.getDireccion();
-    }
-    public String default1ModificarProveedor() {
-        return this.getRazonSocial();
-    }
-    public String default2ModificarProveedor() {
-        return this.getTelefono();
-    }
-    public String default3ModificarProveedor() {
-        return this.getLocalidad();
-    }
-    public String default4ModificarProveedor() {
-        return this.getEmail();
-    }
-
 
     public static final Comparator<Proveedor> comparator = Comparator.comparing(Proveedor::getCodigo);
 

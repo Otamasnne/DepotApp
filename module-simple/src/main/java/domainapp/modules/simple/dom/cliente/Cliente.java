@@ -136,24 +136,25 @@ public class Cliente implements Comparable<Cliente>{
     @RazonSocial
     @Setter
     @Getter
+    @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "3")
     private String razonSocial;
 
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "4")
     private String localidad;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "5")
     private String direccion;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "6")
     private String telefono;
 
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "7")
     private String email;
 
@@ -161,37 +162,6 @@ public class Cliente implements Comparable<Cliente>{
     @Getter
     @PropertyLayout(fieldSetId = "cliente", sequence = "8")
     private EstadoHabDes estado;
-
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Cliente modificarCliente(final @Dni int dni, final String razonSocial, final String localidad, final String direccion, final String telefono, final String email) {
-        this.setDni(dni);
-        this.setRazonSocial(razonSocial);
-        this.setLocalidad(localidad);
-        this.setDireccion(direccion);
-        this.setTelefono(telefono);
-        this.setEmail(email);
-        return this;
-    }
-
-    public int default0ModificarCliente() {
-        return this.getDni();
-    }
-    public String default1ModificarCliente() {
-        return this.getRazonSocial();
-    }
-    public String default2ModificarCliente() {
-        return this.getLocalidad();
-    }
-    public String default3ModificarCliente() {
-        return this.getDireccion();
-    }
-    public String default4ModificarCliente() {
-        return this.getTelefono();
-    }
-    public String default5ModificarCliente() {
-        return this.getEmail();
-    }
 
     private final static Comparator<Cliente> comparator =
             Comparator.comparing(Cliente::getCodigo);
