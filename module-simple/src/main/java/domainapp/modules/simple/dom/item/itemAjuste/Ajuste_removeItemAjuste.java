@@ -33,7 +33,7 @@ public class Ajuste_removeItemAjuste {
     }
 
     public boolean hideAct() {
-        return itemAjusteRepository.buscarItemPorAjuste(ajuste).isEmpty() || ajuste.getEstadoOperativo() == EstadoOperativo.COMPLETADO;
+        return itemAjusteRepository.buscarItemPorAjuste(ajuste).isEmpty() || ajuste.getEstadoOperativo() == EstadoOperativo.COMPLETADO || ajuste.getEstadoOperativo()==EstadoOperativo.ANULADO;
     }
 
     public List<Articulo> choices0Act() {

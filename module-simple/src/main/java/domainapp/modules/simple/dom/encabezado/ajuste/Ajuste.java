@@ -68,7 +68,7 @@ public class Ajuste implements Comparable<Ajuste>{
     JdoSupportService jdoSupportService;
 
     public String title() {
-        return getTipoAjuste() == TipoAjuste.AJP ? "Ajuste Positivo " + getCodigoCo() : "Ajuste Negativo " + getCodigoCo();
+        return this.getTipoAjuste() == TipoAjuste.AJP ? "Ajuste Positivo " + this.getCodigoCo() : "Ajuste Negativo " + this.getCodigoCo();
     }
 
     public static Ajuste creacion(TipoAjuste tipoAjuste, String descripcion) {
@@ -108,10 +108,18 @@ public class Ajuste implements Comparable<Ajuste>{
         return this;
     }
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
+        return this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0 || this.getEstadoOperativo()==EstadoOperativo.ANULADO;
     }
 
-
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Anula el ajuste.")
+    public Ajuste anular(){
+        this.setEstadoOperativo(EstadoOperativo.ANULADO);
+        messageService.informUser(String.format("Se anuló el '%s'", title()));
+        return this;
+    }
 
     @Getter
     @Setter

@@ -51,7 +51,7 @@ public class Ajuste_addItemAjuste {
 
     }
 
-    public boolean hideAct() { return ajuste.getEstadoOperativo() == EstadoOperativo.COMPLETADO; }
+    public boolean hideAct() { return ajuste.getEstadoOperativo() == EstadoOperativo.COMPLETADO || ajuste.getEstadoOperativo() == EstadoOperativo.ANULADO; }
 
     @Inject
     MessageService messageService;
