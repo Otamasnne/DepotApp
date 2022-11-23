@@ -30,19 +30,22 @@ public class Ubicaciones {
         return repositoryService.persist(Ubicacion.creacion(descripcion));
     }
 
+    /*
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Ubicacion> buscarPorCodigoLike(
-            @CodigoArticulo final String codigo
+            final int codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_POR_CODIGO_LIKE)
                         .withParameter("codigo", codigo));
     }
+*/
+
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Ubicacion buscarPorCodigoExacto(final String codigo) {
+    public Ubicacion buscarPorCodigoExacto(final int codigo) {
         Ubicacion ubicacion = repositoryService.firstMatch(
                         Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_POR_CODIGO_EXACTO)
                                 .withParameter("codigo", codigo)

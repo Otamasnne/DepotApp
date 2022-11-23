@@ -10,7 +10,7 @@ import lombok.Setter;
 
 public class RepoArticulo {
     @Getter   @Setter
-    private String codigo;
+    private int codigo;
     @Getter   @Setter
     private String descripcion;
     @Getter   @Setter
@@ -19,7 +19,7 @@ public class RepoArticulo {
     private EstadoHabDes estado;
 
 
-    public RepoArticulo(String codigo, String descripcion, Integer stock, EstadoHabDes estado) {
+    public RepoArticulo(int codigo, String descripcion, Integer stock, EstadoHabDes estado) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.stock = stock;

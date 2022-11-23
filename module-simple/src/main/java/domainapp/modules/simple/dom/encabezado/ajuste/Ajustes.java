@@ -45,22 +45,25 @@ public class Ajustes {
         return repositoryService.allInstances(Ajuste.class);
     }
 
+/*
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Ajuste> findByCodigo(
-            @CodigoCo final String codigo
+            final int codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
                         .withParameter("codigo", codigo));
     }
+*/
 
-
-    @Programmatic
-    public Ajuste findByCodigoExact(final String codigo) {
+    //findByCodigoExact
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Ajuste findByCodigo(final int codigo) {
         return repositoryService.firstMatch(
                         Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
-                                .withParameter("codigo", codigo))
+                                .withParameter("codigoCo", codigo))
                 .orElse(null);
     }
 

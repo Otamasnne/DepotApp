@@ -43,20 +43,23 @@ public class Clientes {
         return repositoryService.persist(Cliente.creacion(dni, razonSocial, localidad, direccion, telefono, email));
     }
 
+    /*
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Cliente> findByCodigo(
-            final String codigo
+            final int codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_CODIGO_LIKE )
                         .withParameter("codigo", codigo));
     }
 
+*/
 
-
-    @Programmatic
-    public Cliente findByCodigoExact(final String codigo) {
+    //
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Cliente findByCodigo(final int codigo) {
         return repositoryService.firstMatch(
                         Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))

@@ -91,7 +91,6 @@ public class Proveedor implements Comparable<Proveedor>{
             position = ActionLayout.Position.PANEL,
             describedAs = "Habilita el proveedor")
     public Proveedor habilitar() {
-        String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
         this.setEstado(EstadoHabDes.HABILITADO);
@@ -103,7 +102,6 @@ public class Proveedor implements Comparable<Proveedor>{
             position = ActionLayout.Position.PANEL,
             describedAs = "Deshabilita el proveedor.")
     public Proveedor deshabilitar() {
-        String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
         this.setEstado(EstadoHabDes.DESHABILITADO);
@@ -126,7 +124,7 @@ public class Proveedor implements Comparable<Proveedor>{
     @CodigoCo
     @Getter @Setter @ToString.Include
     @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
-    private String codigo;
+    private int codigo;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "2")

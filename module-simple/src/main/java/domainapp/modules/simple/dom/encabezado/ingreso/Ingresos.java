@@ -23,7 +23,7 @@ public class Ingresos {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Ingreso persistir(
-            @Descripcion final String descripcion
+            final String descripcion
     )
     {
         return repositoryService.persist(Ingreso.crear(descripcion));
@@ -35,15 +35,18 @@ public class Ingresos {
         return repositoryService.allInstances(Ingreso.class);
     }
 
+    /*
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Ingreso> porCodigo(
-            @CodigoArticulo final String codigo
+            final int codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
                         .withParameter("codigo", codigo));
     }
+    */
+
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
@@ -59,8 +62,10 @@ public class Ingresos {
         return repositoryService.allInstances(Proveedor.class);
     }
 
-    @Programmatic
-    public Ingreso porCodigoExacto(final String codigo) {
+    //porCodigoExacto
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Ingreso porCodigo(final int codigo) {
         return repositoryService.firstMatch(
                         Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))

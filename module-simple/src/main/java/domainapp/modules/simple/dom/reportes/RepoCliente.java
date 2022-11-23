@@ -7,7 +7,7 @@ public class RepoCliente {
 
     @Getter
     @Setter
-    private String codigo;
+    private int codigo;
 
     @Getter
     @Setter
@@ -18,7 +18,7 @@ public class RepoCliente {
     private String razonSocial;
 
 
-    public RepoCliente(String codigo, Integer dni, String razonSocial) {
+    public RepoCliente(int codigo, Integer dni, String razonSocial) {
         this.codigo = codigo;
         this.dni = dni;
         this.razonSocial = razonSocial;

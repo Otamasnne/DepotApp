@@ -71,7 +71,7 @@ public class Pedido implements Comparable<Pedido> {
     @CodigoCo
     @Getter@Setter @ToString.Include
     @PropertyLayout(fieldSetId = "pedido", sequence = "1")
-    private String codigo;
+    private int codigo;
 
     @Getter@Setter @ToString.Include
     @PropertyLayout(fieldSetId = "pedido", sequence = "2")
@@ -114,7 +114,6 @@ public class Pedido implements Comparable<Pedido> {
             position = ActionLayout.Position.PANEL,
             describedAs = "Envía el pedido a ser procesado.")
     public Pedido procesar() {
-        String nombre = this.getCodigo();
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' siendo procesado.", title));
         this.setEstadoOperativo(EstadoOperativo.PROCESANDO);

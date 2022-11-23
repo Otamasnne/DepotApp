@@ -119,7 +119,7 @@ public  class Ubicacion implements Comparable<Ubicacion> {
     @Setter
     @ToString.Include
     @PropertyLayout(fieldSetId = "ubicacion", sequence = "1")
-    private String codigo;
+    private int codigo;
 
     @Descripcion
     @Getter

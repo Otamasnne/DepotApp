@@ -3,24 +3,12 @@
 http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isis.apache.org/applib/layout/component http://isis.apache.org/applib/layout/component/component.xsd http://isis.apache.org/applib/layout/links http://isis.apache.org/applib/layout/links/links.xsd" xmlns:cpt="http://isis.apache.org/applib/layout/component" xmlns:lnk="http://isis.apache.org/applib/layout/links" xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <mb3:primary>
 
-
-
-
-
         <mb3:menu unreferencedActions="true">
             <mb3:named>Articulos</mb3:named>
             <mb3:section>
                 <mb3:serviceAction id="create" objectType="depotapp.Articulos">
                     <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Crear Artículo</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction id="ajustePositivo" objectType="depotapp.Articulos">
-                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
-                    <cpt:named>Ajuste Positivo</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction id="ajusteNegativo" objectType="depotapp.Articulos">
-                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
-                    <cpt:named>Ajuste Negativo</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction id="findByCodigo" objectType="depotapp.Articulos">
                     <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
@@ -40,6 +28,7 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
+
 
         <mb3:menu>
             <mb3:named>Usuarios</mb3:named>
@@ -88,44 +77,16 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
         </mb3:menu>
 
         <mb3:menu>
-            <mb3:named>KitArticulos</mb3:named>
-            <mb3:section>
-                <mb3:serviceAction id="create" objectType="depotapp.KitArticulos">
-                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
-                    <cpt:named>Create</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction id="findByCodigo" objectType="depotapp.KitArticulos">
-                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
-                    <cpt:named>Find By Codigo</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction id="listAll" objectType="depotapp.KitArticulos">
-                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
-                    <cpt:named>List All</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction id="buscarPorDescripcion" objectType="depotapp.KitArticulos">
-                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
-                    <cpt:named>Buscar Por Descripcion</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction id="buscarItemsPorKit" objectType="depotapp.KitArticulos">
-                    <cpt:logicalTypeName>depotapp.KitArticulos</cpt:logicalTypeName>
-                    <cpt:named>Buscar Items por Kit</cpt:named>
-                </mb3:serviceAction>
-            </mb3:section>
-
-
-        </mb3:menu>
-        <mb3:menu>
             <mb3:named>Ubicaciones</mb3:named>
-
             <mb3:section>
                 <mb3:serviceAction id="buscarPorCodigoExacto" objectType="depotapp.Ubicaciones">
                     <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
                     <cpt:named>Buscar Por Codigo Exacto</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction id="buscarPorCodigoLike" objectType="depotapp.Ubicaciones">
+                <!-- <mb3:serviceAction id="buscarPorCodigoLike" objectType="depotapp.Ubicaciones">
                     <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
                     <cpt:named>Buscar Por Codigo Like</cpt:named>
-                </mb3:serviceAction>
+                </mb3:serviceAction>-->
                 <mb3:serviceAction id="create" objectType="depotapp.Ubicaciones">
                     <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
                     <cpt:named>Create</cpt:named>
@@ -145,11 +106,6 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
             </mb3:section>
 
         </mb3:menu>
-
-
-
-
-
 
         <mb3:menu>
             <mb3:named>Ajustes</mb3:named>

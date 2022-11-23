@@ -80,7 +80,7 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
 public  class Articulo implements Comparable<Articulo> {
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Articulo.findByCodigoLike";
-    public static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigoExact";
+    public static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Articulo.findByCodigo";
     public static final String NAMED_QUERY__FIND_BY_HABILITADO = "Articulo.findByHabilitado";
     static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Articulo.findByDeshabilitado";
     static final String NAMED_QUERY__FIND_BY_KIT = "Articulo.findByKit";
@@ -103,24 +103,22 @@ public  class Articulo implements Comparable<Articulo> {
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Habilita el artículo")
-    public String habilitar() {
-        String nombre = this.getCodigo();
+    public Articulo habilitar() {
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
         this.setEstado(EstadoHabDes.HABILITADO);
-        return "Se habilitó el artículo " + nombre;
+        return this;
     }
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Deshabilita el artículo.")
-    public String deshabilitar() {
-        String nombre = this.getCodigo();
+    public Articulo deshabilitar() {
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
         this.setEstado(EstadoHabDes.DESHABILITADO);
-        return "Se deshabilitó el artículo " + nombre;
+        return this;
     }
 
     public boolean hideHabilitar() {
@@ -150,7 +148,7 @@ public  class Articulo implements Comparable<Articulo> {
     @Setter
     @ToString.Include
     @PropertyLayout(fieldSetId = "articulo", sequence = "1")
-    private String codigo;
+    private int codigo;
 
     @Descripcion
     @Getter

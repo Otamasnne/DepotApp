@@ -25,27 +25,29 @@ public class Proveedores {
     final RepositoryService repositoryService;
     final JdoSupportService jdoSupportService;
 
-    //USAMOS "CODIGO" PARA LA MAYORIA O DEBERIAMOS HACER UN IDENTIFICADOR APARTE PARA PROVEEDOR??
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Proveedor create(@RazonSocial final String razonSocial, final String direccion, final String localidad, final String telefono, final String email){
         return repositoryService.persist(Proveedor.withName(razonSocial, direccion, localidad, telefono, email));
     }
 
+    /*
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Proveedor> findByCodigo(
-            @CodigoArticulo final String codigo
+            final int codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
                         .withParameter("codigo", codigo));
     }
 
+*/
 
-
-    @Programmatic
-    public Proveedor findByCodigoExact(final String codigo) {
+    //findByCodigoExact
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Proveedor findByCodigo(final int codigo) {
         return repositoryService.firstMatch(
                         Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))

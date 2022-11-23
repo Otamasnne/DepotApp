@@ -91,24 +91,22 @@ public class Cliente implements Comparable<Cliente>{
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Habilita el cliente")
-    public String habilitar() {
-        String nombre = this.getCodigo();
+    public Cliente habilitar() {
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
         this.setEstado(EstadoHabDes.HABILITADO);
-        return "Se habilitó el cliente " + nombre;
+        return this;
     }
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
             position = ActionLayout.Position.PANEL,
             describedAs = "Deshabilita el cliente.")
-    public String deshabilitar() {
-        String nombre = this.getCodigo();
+    public Cliente deshabilitar() {
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
         this.setEstado(EstadoHabDes.DESHABILITADO);
-        return "Se deshabilitó el cliente " + nombre;
+        return this;
     }
 
     public boolean hideHabilitar() {
@@ -124,7 +122,7 @@ public class Cliente implements Comparable<Cliente>{
     @Getter
     @Setter
     @PropertyLayout(fieldSetId = "cliente", sequence = "1")
-    private String codigo;
+    private int codigo;
 
     @Dni
     @Setter

@@ -57,19 +57,22 @@ public class Articulos {
         return ReportePadre.ListadoArticulosPDF(articulos);
     }
 
-
+/*
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Articulo> findByCodigo(
-            @CodigoArticulo final String codigo
+            final int codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
                         .withParameter("codigo", codigo));
     }
+    */
 
-    @Programmatic
-    public Articulo findByCodigoExact(final String codigo) {
+    //antes findByCodigoExact
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Articulo findByCodigo(final int codigo) {
         return repositoryService.firstMatch(
                         Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))

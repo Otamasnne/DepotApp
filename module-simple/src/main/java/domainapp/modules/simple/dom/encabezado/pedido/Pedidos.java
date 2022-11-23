@@ -47,7 +47,7 @@ public class Pedidos {
         return repositoryService.allInstances(Pedido.class);
     }
 
-    public Pedido findByCodigoExact (final String codigo) {
+    public Pedido findByCodigoExact (final int codigo) {
         return repositoryService.firstMatch(
                 Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT)
                         .withParameter("codigo", codigo))

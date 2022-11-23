@@ -18,7 +18,7 @@ import org.datanucleus.store.rdbms.query.PersistentClassROF;
 public class ArticuloBuilder extends BuilderScriptWithResult<Articulo> {
 
     @Getter @Setter
-    private String codigo;
+    private int codigo;
 
     @Getter @Setter
     private String descripcion;
