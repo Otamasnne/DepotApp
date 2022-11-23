@@ -1,6 +1,9 @@
 package domainapp.modules.simple.dom.reportes;
 import com.sun.tools.ws.wsdl.document.Input;
 import domainapp.modules.simple.dom.cliente.Cliente;
+import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
+import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
+import domainapp.modules.simple.dom.ubicacion.Ubicacion;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.apache.isis.applib.value.Blob;
@@ -53,6 +56,51 @@ public class reportePadre {
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoClientes);
         return GenerarArchivoPDF("repoClientes.jrxml", "ListadoClientes.pdf", ds);
     }
+    public Blob ListadoIngresosPDF(List<Ingreso> ingresos) throws JRException, IOException {
+
+        List<RepoIngreso> repoIngresos = new ArrayList<RepoIngreso>();
+        repoIngresos.add(new RepoIngreso());
+
+        for (Ingreso ingreso : ingresos) {
+            RepoIngreso repoIngreso = new RepoIngreso(ingreso.getCodigo(), ingreso.getDescripcion(), ingreso.getEstadoOperativo(), ingreso.getProveedor());
+            repoIngresos.add(repoIngreso);
+        }
+
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoIngresos);
+        return GenerarArchivoPDF("repoIngresos.jrxml", "ListadoIngresos.pdf", ds);
+    }
+
+
+    public Blob ListadoPedidosPDF(List<Pedido> pedidos) throws JRException, IOException {
+
+        List<RepoPedido> repoPedidos = new ArrayList<RepoPedido>();
+        repoPedidos.add(new RepoPedido());
+
+        for (Pedido pedido : pedidos) {
+            RepoPedido repoPedido = new RepoPedido(pedido.getCodigo(), pedido.getDescripcion());
+            repoPedidos.add(repoPedido);
+        }
+
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoPedidos);
+        return GenerarArchivoPDF("repoPedidos.jrxml", "ListadoPedidos.pdf", ds);
+    }
+
+    public Blob ListadoUbicacionesPDF(List<Ubicacion> ubicaciones) throws JRException, IOException {
+
+        List<RepoUbicacion> repoUbicaciones = new ArrayList<RepoUbicacion>();
+        repoUbicaciones.add(new RepoUbicacion());
+
+        for (Ubicacion ubicacion : ubicaciones) {
+            RepoUbicacion repoUbicacion = new RepoUbicacion();
+            repoUbicaciones.add(repoUbicacion);
+        }
+
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(repoUbicaciones);
+        return GenerarArchivoPDF("repoUbicaciones.jrxml", "ListadoUbicaciones.pdf", ds);
+    }
+
+
+
 
     private Blob GenerarArchivoPDF(String archivoDesign, String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException {
 
@@ -73,4 +121,6 @@ public class reportePadre {
         return new Blob(nombreSalida, "application/pdf", contentBytes);
 
     }
+
+
 }
