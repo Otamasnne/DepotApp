@@ -4,7 +4,7 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="codigo" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.Integer"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<title>
 		<band height="175" splitType="Stretch">
