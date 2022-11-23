@@ -130,11 +130,11 @@ public class Usuario {
     private final static Comparator<Usuario> comparator =
             Comparator.comparing(Usuario::getNombre).thenComparing(Usuario:: getNombre);
 
-    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL, named = "Listar Usuarios")
-    public List<Usuario> ListarTodosLosUsuario() {
-        return repositoryService.allInstances(Usuario.class);
-    }
+//    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
+//    @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL, named = "Listar Usuarios")
+//    public List<Usuario> ListarTodosLosUsuario() {
+//        return repositoryService.allInstances(Usuario.class);
+//    }
 
     @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
     @ActionLayout( promptStyle =PromptStyle.DIALOG_MODAL ,associateWith = "name", sequence = "1", named = "Editar Usuario")
