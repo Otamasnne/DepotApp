@@ -1,17 +1,14 @@
 package domainapp.modules.simple.dom.cliente;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
-import domainapp.modules.simple.dom.proveedor.Proveedor;
-import domainapp.modules.simple.types.cliente.CodigoCliente;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
+import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
-import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
-import org.apache.isis.persistence.jdo.applib.types.PhoneNumber;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -78,13 +75,15 @@ public class Cliente implements Comparable<Cliente>{
         return getCodigo() + " - " + getRazonSocial();
     }
 
-    public static Cliente creacion(String codigo, int dni, String razonSocial) {
+    public static Cliente creacion(int dni, String razonSocial, String localidad, String direccion, String telefono, String email) {
         val cliente = new Cliente();
-        codigo = ("000000" + codigo).substring(codigo.length());
-        cliente.setCodigo(codigo);
         cliente.setDni(dni);
         cliente.setRazonSocial(razonSocial);
         cliente.setEstado(EstadoHabDes.HABILITADO);
+        cliente.setLocalidad(localidad);
+        cliente.setDireccion(direccion);
+        cliente.setTelefono(telefono);
+        cliente.setEmail(email);
         return cliente;
     }
 
@@ -121,7 +120,7 @@ public class Cliente implements Comparable<Cliente>{
     }
 
 
-    @CodigoCliente
+    @CodigoCo
     @Getter
     @Setter
     @PropertyLayout(fieldSetId = "cliente", sequence = "1")

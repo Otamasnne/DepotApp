@@ -1,8 +1,8 @@
 package domainapp.modules.simple.dom.cliente;
 
+
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.reportes.reportePadre;
-import domainapp.modules.simple.types.cliente.CodigoCliente;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
 import net.sf.jasperreports.engine.JRException;
@@ -33,16 +33,20 @@ public class Clientes {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Cliente create(
-            @CodigoCliente final String codigo,
             @Dni final int dni,
-            @RazonSocial final String razonSocial) {
-        return repositoryService.persist(Cliente.creacion(codigo, dni, razonSocial));
+            @RazonSocial final String razonSocial,
+            final String localidad,
+            final String direccion,
+            final String telefono,
+            final String email
+            ) {
+        return repositoryService.persist(Cliente.creacion(dni, razonSocial, localidad, direccion, telefono, email));
     }
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public List<Cliente> findByCodigo(
-            @CodigoCliente final String codigo
+            final String codigo
     ) {
         return repositoryService.allMatches(
                 Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_CODIGO_LIKE )
