@@ -2,14 +2,20 @@ package domainapp.modules.simple.dom.ubicacion;
 
 
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
+import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.value.Blob;
 
 import javax.inject.Inject;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @DomainService(
@@ -82,5 +88,16 @@ public class Ubicaciones {
                 Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_DESHABILITADOS)
         );
     }
+
+
+
+    @Programmatic
+    public Blob generarReporteUbicacion() throws JRException, IOException {
+        List<Ubicacion> ubicaciones = new ArrayList<Ubicacion>();
+        reportePadre ReportePadre = new reportePadre();
+        ubicaciones = repositoryService.allInstances(Ubicacion.class);
+        return ReportePadre.ListadoUbicacionesPDF(ubicaciones);
+    }
+
 
 }
