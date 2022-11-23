@@ -1,14 +1,9 @@
 package domainapp.modules.simple.dom.articulo;
 
-<<<<<<< HEAD
 
-import domainapp.modules.simple.dom.comprobante.ajuste.AjusteNegativo;
-import domainapp.modules.simple.dom.comprobante.ajuste.AjustePositivo;
+
 import domainapp.modules.simple.dom.reportes.reportePadre;
-=======
->>>>>>> aa250a5 (Issue #4: Retoques referidos a borrado de ajustes)
 import domainapp.modules.simple.dom.proveedor.Proveedor;
-import domainapp.modules.simple.dom.proveedor.Proveedores;
 import domainapp.modules.simple.dom.ubicacion.Ubicacion;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
