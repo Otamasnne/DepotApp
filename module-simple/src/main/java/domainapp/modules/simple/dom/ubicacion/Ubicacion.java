@@ -2,12 +2,15 @@ package domainapp.modules.simple.dom.ubicacion;
 
 
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.articulo.Descripcion;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
+import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
 
@@ -17,6 +20,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -129,6 +133,17 @@ public  class Ubicacion implements Comparable<Ubicacion> {
     @ToString.Include
     @PropertyLayout(fieldSetId = "ubicacion", sequence = "3")
     private EstadoHabDes estado;
+
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Ubicacion modificarUbicacion(final String descripcion) {
+        this.setDescripcion(descripcion);
+        return this;
+    }
+
+    public String default0ModificarUbicacion() {
+        return this.getDescripcion();
+    }
 
     private final static Comparator<Ubicacion> comparator =
             Comparator.comparing(Ubicacion::getCodigo);

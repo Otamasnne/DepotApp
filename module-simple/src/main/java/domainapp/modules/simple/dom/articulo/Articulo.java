@@ -12,6 +12,7 @@ import domainapp.modules.simple.types.articulo.Stock;
 import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
+import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
@@ -24,6 +25,7 @@ import javax.jdo.annotations.VersionStrategy;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
@@ -82,6 +84,7 @@ public  class Articulo implements Comparable<Articulo> {
     static final String NAMED_QUERY__FIND_BY_KIT = "Articulo.findByKit";
     @Inject TitleService titleService;
     @Inject MessageService messageService;
+    @Inject RepositoryService repositoryService;
 
     public static Articulo withName(String descripcion, Proveedor proveedor, Ubicacion ubicacion) {
         val articulo = new Articulo();
@@ -181,6 +184,32 @@ public  class Articulo implements Comparable<Articulo> {
     @Column(allowsNull = "false")
     @PropertyLayout(fieldSetId = "articulo", sequence = "6")
     private Ubicacion ubicacion;
+
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Articulo modificarArticulo(final String descripcion, final Proveedor proveedor, final Ubicacion ubicacion) {
+        this.setDescripcion(descripcion);
+        this.setProveedor(proveedor);
+        this.setUbicacion(ubicacion);
+        return this;
+    }
+
+    public String default0ModificarArticulo() {
+        return this.getDescripcion();
+    }
+    public Proveedor default1ModificarArticulo() {
+        return this.getProveedor();
+    }
+    public Ubicacion default2ModificarArticulo() {
+        return getUbicacion();
+    }
+
+    public List<Proveedor> choices1ModificarArticulo() {
+        return repositoryService.allMatches(Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_HABILITADO));
+    }
+    public List<Ubicacion> choices2ModificarArticulo() {
+        return repositoryService.allMatches(Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_HABILITADOS));
+    }
 
     private final static Comparator<Articulo> comparator =
             Comparator.comparing(Articulo::getCodigo);

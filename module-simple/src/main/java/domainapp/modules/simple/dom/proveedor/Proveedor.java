@@ -101,12 +101,12 @@ public class Proveedor implements Comparable<Proveedor>{
         return this;
     }
 
-    public String disableHabilitar() {
-        return this.getEstado()== EstadoHabDes.HABILITADO ? "Ya se encuentra habilitado" : null;
+    public boolean hideHabilitar() {
+        return this.getEstado()== EstadoHabDes.HABILITADO;
     }
 
-    public String disableDeshabilitar() {
-        return this.getEstado()== EstadoHabDes.DESHABILITADO ? "Ya se encuentra deshabilitado" : null;
+    public boolean hideDeshabilitar() {
+        return this.getEstado()== EstadoHabDes.DESHABILITADO;
     }
 
     public String title() {
