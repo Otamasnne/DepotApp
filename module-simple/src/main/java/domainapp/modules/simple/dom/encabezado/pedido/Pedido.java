@@ -13,6 +13,7 @@ import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.*;
+import javax.mail.FetchProfile;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -105,6 +106,7 @@ public class Pedido implements Comparable<Pedido> {
         this.items.add(item);
         jdoSupportService.refresh(this);
     }
+
 
 
     @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)

@@ -74,6 +74,7 @@ public class ItemPedido implements Comparable<ItemPedido> {
     @PropertyLayout(fieldSetId = "itemPedido", sequence = "3")
     private Pedido pedido;
 
+
     private final static Comparator<ItemPedido> comparator =
             Comparator.comparing(ItemPedido::getPedido).thenComparing(ItemPedido::getArticulo);
 
