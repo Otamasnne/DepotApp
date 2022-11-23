@@ -1,12 +1,18 @@
 package domainapp.modules.simple.dom.encabezado.pedido;
 
+import domainapp.modules.simple.dom.cliente.Cliente;
+import domainapp.modules.simple.dom.reportes.reportePadre;
 import lombok.RequiredArgsConstructor;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.value.Blob;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @DomainService(
@@ -39,5 +45,14 @@ public class Pedidos {
                         .withParameter("codigo", codigo))
                 .orElse(null);
     }
+
+    @Programmatic
+    public Blob generarReportePedido() throws JRException, IOException {
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        reportePadre ReportePadre = new reportePadre();
+        pedidos = repositoryService.allInstances(Pedido.class);
+        return ReportePadre.ListadoPedidosPDF(pedidos);
+    }
+
 
 }
