@@ -11,6 +11,7 @@ import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.apache.isis.persistence.jdo.applib.types.PhoneNumber;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -139,16 +140,38 @@ public class Cliente implements Comparable<Cliente>{
     @PropertyLayout(fieldSetId = "cliente", sequence = "3")
     private String razonSocial;
 
+
+    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "cliente", sequence = "4")
+    private String localidad;
+
+    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "cliente", sequence = "5")
+    private String direccion;
+
+    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "cliente", sequence = "6")
+    private String telefono;
+
+
+    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "cliente", sequence = "7")
+    private String email;
+
     @Setter
     @Getter
-    @PropertyLayout(fieldSetId = "cliente", sequence = "4")
+    @PropertyLayout(fieldSetId = "cliente", sequence = "8")
     private EstadoHabDes estado;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Cliente modificarCliente(final @Dni int dni, final String razonSocial) {
+    public Cliente modificarCliente(final @Dni int dni, final String razonSocial, final String localidad, final String direccion, final String telefono, final String email) {
         this.setDni(dni);
         this.setRazonSocial(razonSocial);
+        this.setLocalidad(localidad);
+        this.setDireccion(direccion);
+        this.setTelefono(telefono);
+        this.setEmail(email);
         return this;
     }
 
@@ -157,6 +180,18 @@ public class Cliente implements Comparable<Cliente>{
     }
     public String default1ModificarCliente() {
         return this.getRazonSocial();
+    }
+    public String default2ModificarCliente() {
+        return this.getLocalidad();
+    }
+    public String default3ModificarCliente() {
+        return this.getDireccion();
+    }
+    public String default4ModificarCliente() {
+        return this.getTelefono();
+    }
+    public String default5ModificarCliente() {
+        return this.getEmail();
     }
 
     private final static Comparator<Cliente> comparator =

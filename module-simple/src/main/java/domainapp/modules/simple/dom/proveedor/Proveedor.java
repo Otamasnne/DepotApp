@@ -75,7 +75,7 @@ public class Proveedor implements Comparable<Proveedor>{
     @Inject
     RepositoryService repositoryService;
 
-   public static Proveedor withName(String razonSocial){
+   public static Proveedor withName(String razonSocial, String direccion, String localidad, String telefono, String email){
        val proveedor = new Proveedor();
        proveedor.setRazonSocial(razonSocial);
        proveedor.setEstado(EstadoHabDes.HABILITADO);
@@ -125,19 +125,23 @@ public class Proveedor implements Comparable<Proveedor>{
     private String codigo;
 
     @Getter @Setter @ToString.Include
-    private String direccion;
-
-    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
     private String razonSocial;
 
     @Getter @Setter @ToString.Include
-    @PhoneNumber //Investigar
-    private String telefono;
-
-    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
     private String localidad;
 
     @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "proveedor", sequence = "3")
+    private String direccion;
+
+    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "proveedor", sequence = "4")
+    private String telefono;
+
+    @Getter @Setter @ToString.Include
+    @PropertyLayout(fieldSetId = "proveedor", sequence = "5")
     private String email;
 
     @Getter

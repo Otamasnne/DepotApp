@@ -28,8 +28,8 @@ public class Proveedores {
     //USAMOS "CODIGO" PARA LA MAYORIA O DEBERIAMOS HACER UN IDENTIFICADOR APARTE PARA PROVEEDOR??
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Proveedor create(@RazonSocial final String razonSocial){
-        return repositoryService.persist(Proveedor.withName(razonSocial));
+    public Proveedor create(@RazonSocial final String razonSocial, final String direccion, final String localidad, final String telefono, final String email){
+        return repositoryService.persist(Proveedor.withName(razonSocial, direccion, localidad, telefono, email));
     }
 
     @Action(semantics = SemanticsOf.SAFE)
