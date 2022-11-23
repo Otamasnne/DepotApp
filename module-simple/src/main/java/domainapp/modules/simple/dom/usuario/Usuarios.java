@@ -15,7 +15,7 @@ import static org.apache.isis.applib.annotation.SemanticsOf.IDEMPOTENT;
 
 @DomainService(
         nature = NatureOfService.VIEW,
-        logicalTypeName = "simple.Usuarios"
+        logicalTypeName = "depotapp.Usuarios"
 )
 public class Usuarios {
 
