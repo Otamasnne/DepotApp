@@ -8,7 +8,7 @@ import lombok.Setter;
 public class RepoIngreso {
 
     @Getter @Setter
-    private String codigo;
+    private Integer codigo;
 
 
     @Getter @Setter
@@ -17,14 +17,13 @@ public class RepoIngreso {
     @Getter @Setter
     private EstadoOperativo estadoOperativo;
 
-    @Getter @Setter
-    private Proveedor proveedor;
 
-    public RepoIngreso(String codigo, String descripcion, EstadoOperativo estadoOperativo, Proveedor proveedor){
+
+    public RepoIngreso(Integer codigo, String descripcion, EstadoOperativo estadoOperativo){
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.estadoOperativo = estadoOperativo;
-        this.proveedor = proveedor;
+
     }
 
 

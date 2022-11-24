@@ -9,7 +9,7 @@
 	<title>
 		<band height="175" splitType="Stretch">
 			<staticText>
-				<reportElement x="180" y="0" width="260" height="50" uuid="db9e738e-19b2-405e-8bc4-6dd90bda7d30"/>
+				<reportElement mode="Opaque" x="180" y="0" width="260" height="50" forecolor="#FFFFFF" backcolor="#030101" uuid="db9e738e-19b2-405e-8bc4-6dd90bda7d30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Cantarell Extra Bold" size="30"/>
 				</textElement>
@@ -41,20 +41,26 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="278" height="30" uuid="aa9915f6-2d93-445e-bade-6db646e473f5">
+				<reportElement mode="Opaque" x="0" y="0" width="278" height="30" backcolor="#1961B9" uuid="aa9915f6-2d93-445e-bade-6db646e473f5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d1ff02e4-028c-4eb0-8760-34798c0143b2"/>
 				</reportElement>
+				<box>
+					<pen lineWidth="3.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="25"/>
 				</textElement>
 				<text><![CDATA[CODIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="278" y="0" width="277" height="30" uuid="422518ea-9db2-4ece-9d4e-390cf05ac89f">
+				<reportElement mode="Opaque" x="278" y="0" width="277" height="30" backcolor="#1961B9" uuid="422518ea-9db2-4ece-9d4e-390cf05ac89f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98f4f5fa-1b2f-4999-b2d6-15d015b6e24d"/>
 				</reportElement>
+				<box>
+					<pen lineWidth="3.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="25"/>
 				</textElement>
@@ -63,17 +69,19 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="278" height="30" uuid="bf0eeef9-49b6-44ed-a21c-30de2116428c">
+		<band height="32" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="0" width="278" height="30" backcolor="#B3B5B5" uuid="bf0eeef9-49b6-44ed-a21c-30de2116428c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d1ff02e4-028c-4eb0-8760-34798c0143b2"/>
 				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="278" y="0" width="277" height="30" uuid="2dfb8ab8-337a-4977-856d-24679c229343">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="278" y="0" width="277" height="30" backcolor="#B3B5B5" uuid="2dfb8ab8-337a-4977-856d-24679c229343">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98f4f5fa-1b2f-4999-b2d6-15d015b6e24d"/>
 				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 		</band>

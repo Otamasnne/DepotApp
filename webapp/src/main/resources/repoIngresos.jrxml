@@ -6,11 +6,10 @@
 	</queryString>
 	<field name="codigo" class="java.lang.Integer"/>
 	<field name="descripcion" class="java.lang.String"/>
-
 	<title>
 		<band height="165" splitType="Stretch">
 			<staticText>
-				<reportElement x="180" y="0" width="260" height="50" uuid="fdc60920-748a-4dbf-8b41-4025e1e25d4d"/>
+				<reportElement mode="Opaque" x="180" y="0" width="260" height="50" forecolor="#FFFCFC" backcolor="#030000" uuid="fdc60920-748a-4dbf-8b41-4025e1e25d4d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Cantarell Extra Bold" size="30"/>
 				</textElement>
@@ -42,40 +41,45 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
-
+		<band height="62" splitType="Stretch">
 			<staticText>
-				<reportElement x="120" y="9" width="160" height="40" uuid="fae7882c-2d5c-473a-8ee0-5f7628b70503"/>
+				<reportElement mode="Opaque" x="279" y="10" width="271" height="51" backcolor="#1961B9" uuid="fae7882c-2d5c-473a-8ee0-5f7628b70503"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="3.25" lineStyle="Solid"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22"/>
+					<font size="32"/>
 				</textElement>
 				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="10" width="100" height="40" uuid="39b86697-1b54-4605-a56f-8acac2eee919"/>
+				<reportElement mode="Opaque" x="0" y="10" width="279" height="51" backcolor="#1961B9" uuid="39b86697-1b54-4605-a56f-8acac2eee919"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="3.25" lineStyle="Solid"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22"/>
+					<font size="32"/>
 				</textElement>
 				<text><![CDATA[CODIGO]]></text>
 			</staticText>
-
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="60" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="100" height="30" uuid="1aabc0a7-0eba-41cd-a68e-951998ff4136">
+		<band height="32" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="0" width="280" height="32" backcolor="#B3B5B5" uuid="1aabc0a7-0eba-41cd-a68e-951998ff4136">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="959b1e28-fb88-4344-99d4-75990441175f"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{codigo} ]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="120" y="0" width="159" height="30" uuid="3c36d333-f94c-4470-a69e-4623f7fe44be">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="280" y="1" width="270" height="31" backcolor="#B3B5B5" uuid="3c36d333-f94c-4470-a69e-4623f7fe44be">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="319a7ba9-d60c-441a-bb8d-4fbca5aae3df"/>
 				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
-
 		</band>
 	</detail>
 </jasperReport>

@@ -6,13 +6,13 @@ import lombok.Setter;
 public class RepoPedido {
 
     @Getter @Setter
-    private String codigo;
+    private Integer codigo;
 
     @Getter @Setter
     private String descripcion;
 
 
-    public RepoPedido (String codigo, String descripcion){
+    public RepoPedido (Integer codigo, String descripcion){
         this.codigo = codigo;
         this.descripcion = descripcion;
 

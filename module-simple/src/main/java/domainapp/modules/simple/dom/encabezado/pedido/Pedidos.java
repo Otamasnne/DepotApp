@@ -4,6 +4,7 @@ package domainapp.modules.simple.dom.encabezado.pedido;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
+import domainapp.modules.simple.dom.reportes.reportePadre;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;

@@ -6,12 +6,12 @@ import lombok.Setter;
 public class RepoUbicacion {
 
     @Getter @Setter
-    private String codigo;
+    private int codigo;
 
     @Getter @Setter
     private String descripcion;
 
-    public RepoUbicacion(String codigo, String descripcion){
+    public RepoUbicacion(int codigo, String descripcion){
         this.codigo = codigo;
         this.descripcion = descripcion;
 
