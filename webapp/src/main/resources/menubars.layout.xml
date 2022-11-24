@@ -204,6 +204,9 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
         <mb3:section>
             <mb3:serviceAction id="generarReporteArticulo" objectType="depotapp.Reportes"/>
             <mb3:serviceAction id="generarReporteClientes" objectType="depotapp.Reportes"/>
+            <mb3:serviceAction id="generarReporteIngresos" objectType="depotapp.Reportes"/>
+            <mb3:serviceAction id="generarReportePedidos" objectType="depotapp.Reportes"/>
+            <mb3:serviceAction id="generarReporteUbicaciones" objectType="depotapp.Reportes"/>
         </mb3:section>
         </mb3:menu>
         <mb3:menu>
