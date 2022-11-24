@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repoPedidos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="28f95ee3-99a0-4174-89f7-25c9c799eb44">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<title>
+		<band height="175" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="260" height="50" uuid="db9e738e-19b2-405e-8bc4-6dd90bda7d30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Cantarell Extra Bold" size="30"/>
+				</textElement>
+				<text><![CDATA[DEPOTAPP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="70" width="190" height="40" uuid="a231b409-c690-416a-92c9-b480d5a74f81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[PEDIDOS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="160" height="160" uuid="c3079b2f-fa61-4823-b023-926228ef0de7"/>
+				<imageExpression><![CDATA["/home/ignaciootarola/Descargas/icon.png"]]></imageExpression>
+			</image>
+			<textField evaluationTime="Report">
+				<reportElement x="470" y="0" width="100" height="30" uuid="e4d86c40-470e-4628-9746-6acb18c6a131"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="470" y="110" width="100" height="30" uuid="2abe1d10-3908-4562-89d4-97bf9d3c16f4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="470" y="70" width="100" height="30" uuid="23168bd5-d43e-4cfd-ba71-81c499a5d672"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="278" height="30" uuid="aa9915f6-2d93-445e-bade-6db646e473f5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d1ff02e4-028c-4eb0-8760-34798c0143b2"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="0" width="277" height="30" uuid="422518ea-9db2-4ece-9d4e-390cf05ac89f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98f4f5fa-1b2f-4999-b2d6-15d015b6e24d"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="278" height="30" uuid="bf0eeef9-49b6-44ed-a21c-30de2116428c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d1ff02e4-028c-4eb0-8760-34798c0143b2"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="0" width="277" height="30" uuid="2dfb8ab8-337a-4977-856d-24679c229343">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98f4f5fa-1b2f-4999-b2d6-15d015b6e24d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
