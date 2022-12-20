@@ -8,6 +8,7 @@ import lombok.*;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntityAdapter;
 import org.apache.isis.applib.services.message.MessageService;
+import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.title.TitleService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
@@ -41,14 +42,20 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
         @javax.jdo.annotations.Query(
                 name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_LIKE,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido" +
+                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido " +
                         "WHERE codigo.indexOf(:codigo) >= 0"
         ),
         @javax.jdo.annotations.Query(
                 name = Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT,
                 value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido" +
+                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido " +
                         "WHERE codigo == :codigo"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Pedido.NAMED_QUERY_FIND_BY_PROCESANDO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido " +
+                        "WHERE estadoOperativo == 'PROCESANDO'"
         )
 })
 public class Pedido implements Comparable<Pedido> {
@@ -64,9 +71,14 @@ public class Pedido implements Comparable<Pedido> {
     static final String NAMED_QUERY_FIND_BY_CODIGO_EXACT = "pedido.findByCodigoExact";
     static final String NAMED_QUERY_FIND_BY_CODIGO_LIKE = "pedido.findByCodigoLike";
 
+    static final String NAMED_QUERY_FIND_BY_PROCESANDO = "pedido.findByProcesando";
+
+
+
     public String title() {
         return "Pedido " + getCodigo();
     }
+
 
     @CodigoCo
     @Getter@Setter @ToString.Include
@@ -92,6 +104,12 @@ public class Pedido implements Comparable<Pedido> {
     @PropertyLayout(fieldSetId = "pedido", sequence = "4")
     @Column(allowsNull = "false")
     private Cliente cliente;
+
+    //0 no - 1 si
+//    @Getter@Setter
+//    @ToString.Include
+//
+//    private int procesando = 0;
 
     public static Pedido withName(String descripcion, Cliente cliente) {
         val pedido = new Pedido();
@@ -124,9 +142,11 @@ public class Pedido implements Comparable<Pedido> {
         return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getItems().size() == 0;
     }
 
-    @Action
+
+        //@Action
     @ActionLayout(
-            hidden=Where.EVERYWHERE
+            //hidden=Where.EVERYWHERE
+            named = "Completar pedido"
     )
     public void completar() {
         for (int i = 0; i < getItems().size(); i++) {
@@ -135,6 +155,7 @@ public class Pedido implements Comparable<Pedido> {
         }
         this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
     }
+
 
     private final static Comparator<Pedido> comparator =
             Comparator.comparing(Pedido::getCodigo);

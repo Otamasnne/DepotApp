@@ -131,7 +131,7 @@ public class Ingreso implements Comparable<Ingreso>{
 
     @Action
     @ActionLayout(
-            hidden=Where.EVERYWHERE
+
     )
     public void completar() {
         for (int i = 0; i < getItems().size(); i++) {

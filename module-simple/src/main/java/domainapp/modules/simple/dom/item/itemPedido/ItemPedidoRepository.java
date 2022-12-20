@@ -20,6 +20,7 @@ public class ItemPedidoRepository {
     private final RepositoryService repositoryService;
 
 
+    @Action(semantics = SemanticsOf.SAFE)
     public List<ItemPedido> buscarItemPorPedido(Pedido pedido) {
         return pedido.getItems();
     }

@@ -1,10 +1,12 @@
 package domainapp.modules.simple.dom.encabezado.pedido;
 
 
+import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.cliente.Cliente;
 import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
 import domainapp.modules.simple.dom.reportes.reportePadre;
+import domainapp.modules.simple.dom.usuario.Usuario;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
@@ -38,9 +40,12 @@ public class Pedidos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(named = "Listado de Items")
-    public List<ItemPedido> listItems() {
-        return repositoryService.allInstances(ItemPedido.class);
+    public List<ItemPedido> listItems(int codigo) {
+
+        Pedido pedido = findByCodigoExact(codigo);
+
+        return pedido.getItems();
+         //repositoryService.allInstances(ItemPedido.class);
     }
 
     public List<Cliente> choices1Create () {
@@ -59,6 +64,17 @@ public class Pedidos {
                         .withParameter("codigo", codigo))
                 .orElse(null);
     }
+
+
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Pedido> listProcesando() {
+        return repositoryService.allMatches(
+                Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_PROCESANDO)
+        );
+    }
+
 
     @Programmatic
     public Blob generarReportePedido() throws JRException, IOException {

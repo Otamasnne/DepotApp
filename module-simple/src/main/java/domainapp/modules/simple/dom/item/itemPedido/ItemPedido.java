@@ -5,16 +5,14 @@ import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
 import domainapp.modules.simple.types.comprobante.CantidadMueve;
 import lombok.*;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Publishing;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.jaxb.PersistentEntitiesAdapter;
 
 import javax.jdo.annotations.*;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
+import java.util.List;
 
 @PersistenceCapable(
         schema = "depotapp",
@@ -29,7 +27,7 @@ import java.util.Comparator;
                         name = ItemPedido.NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO,
                         value = "SELECT " +
                                 "FROM domainapp.modules.simple.dom.item.itemPedido.ItemPedido " +
-                                "WHERE pedido == :pedido "
+                                "WHERE pedido_id_oid == :pedido "
                 ),
                 @Query(
                         name = ItemPedido.NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO_Y_ARTICULO,
@@ -59,6 +57,8 @@ public class ItemPedido implements Comparable<ItemPedido> {
         this.cantidad = cantidad;
     }
 
+
+
     @Getter@Setter@ToString.Include
     @Column(allowsNull = "false")
     @PropertyLayout(fieldSetId = "itemPedido", sequence = "1")
@@ -72,9 +72,21 @@ public class ItemPedido implements Comparable<ItemPedido> {
     @Getter@Setter@ToString.Include
     @Column(allowsNull = "false")
     @PropertyLayout(fieldSetId = "itemPedido", sequence = "3")
+    //@PropertyLayout(hidden = Where.EVERYWHERE)
     private Pedido pedido;
 
 
+//    public List<ItemPedido> buscarxPedido(){
+//        return
+//    }
+
+//    @Action(semantics = SemanticsOf.SAFE)
+//    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+//    public List<Pedido> listProcesando() {
+//        return repositoryService.allMatches(
+//                org.apache.isis.applib.query.Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_PROCESANDO)
+//        );
+//    }
     private final static Comparator<ItemPedido> comparator =
             Comparator.comparing(ItemPedido::getPedido).thenComparing(ItemPedido::getArticulo);
 

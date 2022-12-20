@@ -140,7 +140,7 @@ public  class Articulo implements Comparable<Articulo> {
     }
 
     public String title() {
-        return "Artículo " + getCodigo();
+        return getCodigo() + " - " + getDescripcion() ;
     }
 
     @CodigoArticulo
