@@ -1,6 +1,9 @@
 package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.cliente.Cliente;
+import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
+import domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso;
+import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
@@ -41,6 +44,30 @@ public class Ingresos {
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<Ingreso> listarTodos(){
         return repositoryService.allInstances(Ingreso.class);
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Ingreso> listProcesando() {
+        return repositoryService.allMatches(
+                Query.named(Ingreso.class, Ingreso.NAMED_QUERY_FIND_BY_PROCESANDO)
+        );
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    public List<ItemIngreso> listItems(int codigo) {
+
+        Ingreso ingreso = findByCodigoExact(codigo);
+
+        return ingreso.getItems();
+        //repositoryService.allInstances(ItemPedido.class);
+    }
+
+    public Ingreso findByCodigoExact (final int codigo) {
+        return repositoryService.firstMatch(
+                        Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
+                                .withParameter("codigo", codigo))
+                .orElse(null);
     }
 
     /*

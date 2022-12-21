@@ -91,6 +91,7 @@ public class Proveedor implements Comparable<Proveedor>{
             position = ActionLayout.Position.PANEL,
             describedAs = "Habilita el proveedor")
     public Proveedor habilitar() {
+
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' habilitado", title));
         this.setEstado(EstadoHabDes.HABILITADO);
@@ -102,6 +103,7 @@ public class Proveedor implements Comparable<Proveedor>{
             position = ActionLayout.Position.PANEL,
             describedAs = "Deshabilita el proveedor.")
     public Proveedor deshabilitar() {
+
         final String title = titleService.titleOf(this);
         messageService.informUser(String.format("'%s' deshabilitado", title));
         this.setEstado(EstadoHabDes.DESHABILITADO);
@@ -120,13 +122,22 @@ public class Proveedor implements Comparable<Proveedor>{
         return getCodigo() + " - " + getRazonSocial();
     }
 
-    // Por que no usar anotacion column?
-    @CodigoCo
-    @Getter @Setter @ToString.Include
-    @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
-    private int codigo;
 
-    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
+
+
+    @CodigoCo
+    @Getter
+    @Setter
+    @ToString.Include
+    @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
+    private String codigo;
+//    @CodigoCo
+//    @Getter @Setter @ToString.Include
+//    @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
+//    private int codigo;
+
+    @Getter @Setter @ToString.Include
+    @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
     private String razonSocial;
 
@@ -142,7 +153,8 @@ public class Proveedor implements Comparable<Proveedor>{
     @PropertyLayout(fieldSetId = "proveedor", sequence = "4")
     private String telefono;
 
-    @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
+    @Getter @Setter @ToString.Include
+    @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "5")
     private String email;
 

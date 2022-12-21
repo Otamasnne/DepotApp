@@ -85,16 +85,16 @@ public class Pedido implements Comparable<Pedido> {
     @PropertyLayout(fieldSetId = "pedido", sequence = "1")
     private int codigo;
 
-    @Getter@Setter @ToString.Include
+    @Getter@Setter
     @PropertyLayout(fieldSetId = "pedido", sequence = "2")
     private EstadoOperativo estadoOperativo;
 
     @Getter
-    @Setter @ToString.Include
+    @Setter
     @PropertyLayout(fieldSetId = "pedido", sequence = "3")
     private String descripcion;
 
-    @Getter @Setter @ToString.Include
+    @Getter @Setter 
     @Persistent(mappedBy="pedido")
     @PropertyLayout(hidden = Where.EVERYWHERE)
     List<ItemPedido> items;

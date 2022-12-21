@@ -59,6 +59,12 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
                         "WHERE proveedor == :proveedor"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ingreso.NAMED_QUERY_FIND_BY_PROCESANDO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
+                        "WHERE estadoOperativo == 'PROCESANDO'"
         )
 })
 public class Ingreso implements Comparable<Ingreso>{
@@ -74,6 +80,8 @@ public class Ingreso implements Comparable<Ingreso>{
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Ingreso.findByCodigoExact";
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Ingreso.findByCodigoLike";
     static final String NAMED_QUERY__BUSCAR_POR_PROVEEDOR = "Ingreso.buscarPorProveedor";
+
+    static final String NAMED_QUERY_FIND_BY_PROCESANDO = "Ingreso.findByProcesando";
 
     public static Ingreso crear(String descripcion) {
         val ingreso = new Ingreso();
@@ -140,6 +148,8 @@ public class Ingreso implements Comparable<Ingreso>{
         }
         this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
     }
+
+
 
     private final static Comparator<Ingreso> comparator =
             Comparator.comparing(Ingreso::getCodigo);

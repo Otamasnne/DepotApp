@@ -27,7 +27,7 @@ import java.util.List;
                         name = ItemPedido.NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO,
                         value = "SELECT " +
                                 "FROM domainapp.modules.simple.dom.item.itemPedido.ItemPedido " +
-                                "WHERE pedido_id_oid == :pedido "
+                                "WHERE pedido == :pedido "
                 ),
                 @Query(
                         name = ItemPedido.NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO_Y_ARTICULO,
@@ -69,24 +69,13 @@ public class ItemPedido implements Comparable<ItemPedido> {
     @PropertyLayout(fieldSetId = "itemPedido", sequence = "2")
     private int cantidad;
 
-    @Getter@Setter@ToString.Include
+    @Getter
+    @Setter
+    @ToString.Include
     @Column(allowsNull = "false")
     @PropertyLayout(fieldSetId = "itemPedido", sequence = "3")
-    //@PropertyLayout(hidden = Where.EVERYWHERE)
     private Pedido pedido;
 
-
-//    public List<ItemPedido> buscarxPedido(){
-//        return
-//    }
-
-//    @Action(semantics = SemanticsOf.SAFE)
-//    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
-//    public List<Pedido> listProcesando() {
-//        return repositoryService.allMatches(
-//                org.apache.isis.applib.query.Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_PROCESANDO)
-//        );
-//    }
     private final static Comparator<ItemPedido> comparator =
             Comparator.comparing(ItemPedido::getPedido).thenComparing(ItemPedido::getArticulo);
 

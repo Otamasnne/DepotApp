@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.articulo;
 
 
 
+import domainapp.modules.simple.dom.proveedor.Proveedores;
 import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.dom.proveedor.Proveedor;
 import domainapp.modules.simple.dom.ubicacion.Ubicacion;
@@ -30,6 +31,9 @@ public class Articulos {
 
     @Inject RepositoryService repositoryService;
     @Inject JdoSupportService jdoSupportService;
+
+//    @Inject
+//    Proveedores proveedores;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)

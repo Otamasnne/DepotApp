@@ -31,18 +31,18 @@ public class Proveedores {
         return repositoryService.persist(Proveedor.withName(razonSocial, direccion, localidad, telefono, email));
     }
 
-    /*
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public List<Proveedor> findByCodigo(
-            final int codigo
-    ) {
-        return repositoryService.allMatches(
-                Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
-                        .withParameter("codigo", codigo));
-    }
+//
+//    @Action(semantics = SemanticsOf.SAFE)
+//    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+//    public List<Proveedor> findByCodigo(
+//            final int codigo
+//    ) {
+//        return repositoryService.allMatches(
+//                Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
+//                        .withParameter("codigo", codigo));
+//    }
 
-*/
+
 
     //findByCodigoExact
     @Action(semantics = SemanticsOf.SAFE)
