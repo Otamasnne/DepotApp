@@ -143,6 +143,11 @@ public class Pedido implements Comparable<Pedido> {
     }
 
 
+
+    /*
+    * @Santi
+    * Este metodo es llamado cuando se presiona el boton de completar un pedido en la app movil 
+    * */
         //@Action
     @ActionLayout(
             //hidden=Where.EVERYWHERE

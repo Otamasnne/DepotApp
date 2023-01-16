@@ -39,6 +39,11 @@ public class Pedidos {
         return repositoryService.persist(Pedido.withName(descripcion, cliente));
     }
 
+    /*
+    * @Santi
+    * es metodo es llamado por la app movil y recibe un codigo de pedido para recuperar los articulos correspondientes
+    * a este.
+    * */
     @Action(semantics = SemanticsOf.SAFE)
     public List<ItemPedido> listItems(int codigo) {
 
@@ -66,7 +71,11 @@ public class Pedidos {
     }
 
 
-
+    /*
+    * @Santi
+    * Este metodo es llamado por la app movil para recuperar los pedidos en estado procesando y mostrarlos en un
+    * recycler view
+    * */
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<Pedido> listProcesando() {

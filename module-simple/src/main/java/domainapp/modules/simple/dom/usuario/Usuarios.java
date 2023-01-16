@@ -56,6 +56,10 @@ public class Usuarios {
         return repositoryService.persist(new Usuario(userName,nombre,apellido,email,telefono,password));
     }
 
+    /*
+    * @Santi
+    * Este metodo es usado en la aplicacion movil para verificar si el usuario y contrasenia
+    * es correcto y si lo es, ingresar a la app*/
     //@Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Validar Usuario")
     public Usuario userValidation(final String username, final String password) throws Exception {

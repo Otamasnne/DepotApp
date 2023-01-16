@@ -46,6 +46,10 @@ public class Ingresos {
         return repositoryService.allInstances(Ingreso.class);
     }
 
+    /*
+     * @Santi
+     * Este metodo es llamado por la app movil para recuperar los ingresos en estado procesando
+     * */
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<Ingreso> listProcesando() {
@@ -54,6 +58,11 @@ public class Ingresos {
         );
     }
 
+    /*
+     * @Santi
+     * es metodo es llamado por la app movil y recibe un codigo de ingreso para recuperar los articulos correspondientes
+     * a este.
+     * */
     @Action(semantics = SemanticsOf.SAFE)
     public List<ItemIngreso> listItems(int codigo) {
 

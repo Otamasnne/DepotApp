@@ -137,6 +137,10 @@ public class Ingreso implements Comparable<Ingreso>{
         return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getItems().size() == 0;
     }
 
+    /*
+     * @Santi
+     * Este metodo es llamado cuando se presiona el boton de completar un ingreso en la app movil
+     * */
     @Action
     @ActionLayout(
 
