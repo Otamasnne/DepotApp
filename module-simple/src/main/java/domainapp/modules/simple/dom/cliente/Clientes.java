@@ -3,6 +3,8 @@ package domainapp.modules.simple.dom.cliente;
 
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.reportes.reportePadre;
+import domainapp.modules.simple.types.Email;
+import domainapp.modules.simple.types.Telefono;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
 import net.sf.jasperreports.engine.JRException;
@@ -17,6 +19,8 @@ import javax.jdo.JDOQLTypedQuery;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 @DomainService(
         nature = NatureOfService.VIEW,
@@ -37,24 +41,11 @@ public class Clientes {
             @RazonSocial final String razonSocial,
             final String localidad,
             final String direccion,
-            final String telefono,
-            final String email
+            @Telefono final String telefono,
+            @Email final String email
             ) {
         return repositoryService.persist(Cliente.creacion(dni, razonSocial, localidad, direccion, telefono, email));
     }
-
-    /*
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public List<Cliente> findByCodigo(
-            final int codigo
-    ) {
-        return repositoryService.allMatches(
-                Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_CODIGO_LIKE )
-                        .withParameter("codigo", codigo));
-    }
-
-*/
 
     //
     @Action(semantics = SemanticsOf.SAFE)
