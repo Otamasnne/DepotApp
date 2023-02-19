@@ -1,6 +1,8 @@
 package domainapp.modules.simple.dom.cliente;
 
 import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.types.Email;
+import domainapp.modules.simple.types.Telefono;
 import domainapp.modules.simple.types.cliente.Dni;
 import domainapp.modules.simple.types.cliente.RazonSocial;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
@@ -11,6 +13,7 @@ import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
 
 import javax.inject.Inject;
+import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.VersionStrategy;
@@ -141,19 +144,23 @@ public class Cliente implements Comparable<Cliente>{
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "4")
+    @Column(allowsNull = "false")
     private String localidad;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "5")
+    @Column(allowsNull = "false")
     private String direccion;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "6")
+    @Telefono
     private String telefono;
 
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "cliente", sequence = "7")
+    @Email
     private String email;
 
     @Setter
