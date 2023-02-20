@@ -37,7 +37,7 @@ public class Clientes {
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
     public Cliente create(
-            @Dni final int dni,
+            @Dni final Integer dni,
             @RazonSocial final String razonSocial,
             final String localidad,
             final String direccion,

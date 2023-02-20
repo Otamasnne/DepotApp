@@ -3,6 +3,8 @@ package domainapp.modules.simple.dom.proveedor;
 import domainapp.modules.simple.dom.EstadoHabDes;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.ubicacion.Ubicacion;
+import domainapp.modules.simple.types.Email;
+import domainapp.modules.simple.types.Telefono;
 import domainapp.modules.simple.types.articulo.CodigoArticulo;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
@@ -131,10 +133,6 @@ public class Proveedor implements Comparable<Proveedor>{
     @ToString.Include
     @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
     private String codigo;
-//    @CodigoCo
-//    @Getter @Setter @ToString.Include
-//    @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
-//    private int codigo;
 
     @Getter @Setter @ToString.Include
     @Property(editing = Editing.ENABLED)
@@ -143,19 +141,23 @@ public class Proveedor implements Comparable<Proveedor>{
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
+    @Column(allowsNull = "false")
     private String localidad;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "3")
+    @Column(allowsNull = "false")
     private String direccion;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "4")
+    @Telefono
     private String telefono;
 
     @Getter @Setter @ToString.Include
     @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "proveedor", sequence = "5")
+    @Email
     private String email;
 
     @Getter

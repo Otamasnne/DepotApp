@@ -25,6 +25,7 @@ public class Usuarios {
         return repositoryService.allInstances(Usuario.class);
     }
 
+    /*
     @ActionLayout(named = "Usuarios por Nombre")
     public List<Usuario> listarUsuarioPorNombre() {
         return repositoryService.allMatches(Query.named(Usuario.class,Usuario.NAMED_QUERY__FIND_BY_NAME_LIKE_USUARIO));
@@ -48,6 +49,8 @@ public class Usuarios {
                 .orElse(null);
     }
 
+
+     */
     @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL,named = "Agregar Usuario")
     public Usuario addUsuario(String userName, String nombre, String apellido, String telefono,
@@ -62,6 +65,7 @@ public class Usuarios {
     * es correcto y si lo es, ingresar a la app*/
     //@Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Validar Usuario")
+    @Property(hidden = Where.EVERYWHERE)
     public Usuario userValidation(final String username, final String password) throws Exception {
         return repositoryService.uniqueMatch(
                         Query.named(Usuario.class, Usuario.NAMED_QUERY__FIND_BY_USER_NAME_PASSWORD)
@@ -69,8 +73,6 @@ public class Usuarios {
                                 .withParameter("password", password))
                 .orElseThrow(() ->
                         new Exception("Usuario - " + username + " no encontrado"));
-
-
     }
 
 
