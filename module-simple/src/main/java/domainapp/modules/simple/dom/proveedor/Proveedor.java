@@ -131,37 +131,39 @@ public class Proveedor implements Comparable<Proveedor>{
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "proveedor", sequence = "1")
-    private String codigo;
+    @PropertyLayout(fieldSetId = "datos", sequence = "1")
+    private int codigo;
 
     @Getter @Setter @ToString.Include
     @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
+    @PropertyLayout(fieldSetId = "datos", sequence = "2")
+    @Column(allowsNull = "false")
     private String razonSocial;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "proveedor", sequence = "2")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "1")
     @Column(allowsNull = "false")
     private String localidad;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "proveedor", sequence = "3")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "2")
     @Column(allowsNull = "false")
     private String direccion;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "proveedor", sequence = "4")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "3")
     @Telefono
     private String telefono;
 
     @Getter @Setter @ToString.Include
     @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "proveedor", sequence = "5")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "4")
     @Email
     private String email;
 
     @Getter
     @Setter
+    @PropertyLayout(fieldSetId = "datos", sequence = "3")
     @ToString.Include
     private EstadoHabDes estado;
 

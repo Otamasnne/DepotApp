@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
+import domainapp.modules.simple.dom.encabezado.ajuste.Ajuste;
 import domainapp.modules.simple.dom.encabezado.ajuste.TipoAjuste;
 import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
 import domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso;
@@ -17,10 +18,7 @@ import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 
 import javax.inject.Inject;
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.VersionStrategy;
+import javax.jdo.annotations.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Comparator;
 import java.util.List;
@@ -55,16 +53,22 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                         "WHERE codigo == :codigo"
         ),
         @javax.jdo.annotations.Query(
-                name = Ingreso.NAMED_QUERY__BUSCAR_POR_PROVEEDOR,
-                value = "SELECT " +
-                        "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
-                        "WHERE proveedor == :proveedor"
-        ),
-        @javax.jdo.annotations.Query(
                 name = Ingreso.NAMED_QUERY_FIND_BY_PROCESANDO,
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
                         "WHERE estadoOperativo == 'PROCESANDO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ingreso.NAMED_QUERY__FIND_BY_MODIFICABLE,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
+                        "WHERE estadoOperativo == 'MODIFICABLE'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ingreso.NAMED_QUERY__FIND_BY_COMPLETADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ingreso.Ingreso " +
+                        "WHERE estadoOperativo == 'COMPLETADO'"
         )
 })
 public class Ingreso implements Comparable<Ingreso>{
@@ -82,6 +86,8 @@ public class Ingreso implements Comparable<Ingreso>{
     static final String NAMED_QUERY__BUSCAR_POR_PROVEEDOR = "Ingreso.buscarPorProveedor";
 
     static final String NAMED_QUERY_FIND_BY_PROCESANDO = "Ingreso.findByProcesando";
+    static final String NAMED_QUERY__FIND_BY_MODIFICABLE = "Ingreso.findByModificable";
+    static final String NAMED_QUERY__FIND_BY_COMPLETADO = "Ingreso.findByCompletado";
 
     public static Ingreso crear(String descripcion) {
         val ingreso = new Ingreso();
@@ -109,6 +115,8 @@ public class Ingreso implements Comparable<Ingreso>{
 
     @Descripcion
     @Getter @Setter @ToString.Include
+    @Property(editing = Editing.ENABLED)
+    @Column(allowsNull = "false")
     @PropertyLayout(fieldSetId = "ingreso", sequence = "2")
     private String descripcion;
 
@@ -145,6 +153,7 @@ public class Ingreso implements Comparable<Ingreso>{
     @ActionLayout(
 
     )
+    @Property(hidden = Where.EVERYWHERE) // Todo: verificar si esto saca de REST
     public void completar() {
         for (int i = 0; i < getItems().size(); i++) {
             int cantidad = this.getItems().get(i).getCantidad();

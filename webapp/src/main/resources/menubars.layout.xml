@@ -18,13 +18,13 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Listar Todos los Artículos</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction id="articulosDeshabilitados" objectType="depotapp.Articulos">
-                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
-                    <cpt:named>Articulos Deshabilitados</cpt:named>
-                </mb3:serviceAction>
                 <mb3:serviceAction id="articulosHabilitados" objectType="depotapp.Articulos">
                     <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
                     <cpt:named>Articulos Habilitados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="articulosDeshabilitados" objectType="depotapp.Articulos">
+                    <cpt:logicalTypeName>depotapp.Articulos</cpt:logicalTypeName>
+                    <cpt:named>Articulos Deshabilitados</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
@@ -33,13 +33,21 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
         <mb3:menu>
             <mb3:named>Usuarios</mb3:named>
             <mb3:section>
+                <mb3:serviceAction id="addUsuario" objectType="depotapp.Usuarios">
+                    <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
+                    <cpt:named>Crear Usuario</cpt:named>
+                </mb3:serviceAction>
                 <mb3:serviceAction id="listarAll" objectType="depotapp.Usuarios">
                     <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
                     <cpt:named>Listar Todos los Usuarios</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction id="addUsuario" objectType="depotapp.Usuarios">
+                <mb3:serviceAction id="usuariosHabilitados" objectType="depotapp.Usuarios">
                     <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
-                    <cpt:named>Agregar Usuario</cpt:named>
+                    <cpt:named>Usuarios Habilitados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="usuariosDeshabilitados" objectType="depotapp.Usuarios">
+                    <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
+                    <cpt:named>Usuarios Deshabilitados</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
@@ -48,14 +56,6 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
         <mb3:menu>
             <mb3:named>Clientes</mb3:named>
             <mb3:section>
-                <mb3:serviceAction id="clientesDeshabilitados" objectType="depotapp.Clientes">
-                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
-                    <cpt:named>Clientes Deshabilitados</cpt:named>
-                </mb3:serviceAction>
-                <mb3:serviceAction id="clientesHabilitados" objectType="depotapp.Clientes">
-                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
-                    <cpt:named>Clientes Habilitados</cpt:named>
-                </mb3:serviceAction>
                 <mb3:serviceAction id="create" objectType="depotapp.Clientes">
                     <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
                     <cpt:named>Crear Cliente</cpt:named>
@@ -68,6 +68,14 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
                     <cpt:named>Lista de Clientes</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction id="clientesHabilitados" objectType="depotapp.Clientes">
+                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
+                    <cpt:named>Clientes Habilitados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="clientesDeshabilitados" objectType="depotapp.Clientes">
+                    <cpt:logicalTypeName>depotapp.Clientes</cpt:logicalTypeName>
+                    <cpt:named>Clientes Deshabilitados</cpt:named>
+                </mb3:serviceAction>
             </mb3:section>
 
         </mb3:menu>
@@ -79,10 +87,6 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
                     <cpt:named>Buscar Por Codigo Exacto</cpt:named>
                 </mb3:serviceAction>
-                <!-- <mb3:serviceAction id="buscarPorCodigoLike" objectType="depotapp.Ubicaciones">
-                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
-                    <cpt:named>Buscar Por Codigo Like</cpt:named>
-                </mb3:serviceAction>-->
                 <mb3:serviceAction id="create" objectType="depotapp.Ubicaciones">
                     <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
                     <cpt:named>Crear Ubicacion</cpt:named>
@@ -91,13 +95,13 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
                     <cpt:named>Listar Ubicacion</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction id="ubicacionesDeshabilitadas" objectType="depotapp.Ubicaciones">
-                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
-                    <cpt:named>Ubicaciones Deshabilitadas</cpt:named>
-                </mb3:serviceAction>
                 <mb3:serviceAction id="ubicacionesHabilitadas" objectType="depotapp.Ubicaciones">
                     <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
                     <cpt:named>Ubicaciones Habilitadas</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="ubicacionesDeshabilitadas" objectType="depotapp.Ubicaciones">
+                    <cpt:logicalTypeName>depotapp.Ubicaciones</cpt:logicalTypeName>
+                    <cpt:named>Ubicaciones Deshabilitadas</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
 
@@ -122,6 +126,14 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.Ajustes</cpt:logicalTypeName>
                     <cpt:named>Lista de Ajustes</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction id="ajustesModificables" objectType="depotapp.Ajustes">
+                    <cpt:logicalTypeName>depotapp.Ajustes</cpt:logicalTypeName>
+                    <cpt:named>Lista de Ajustes Pendientes</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="ajustesCompletados" objectType="depotapp.Ajustes">
+                    <cpt:logicalTypeName>depotapp.Ajustes</cpt:logicalTypeName>
+                    <cpt:named>Lista de Ajustes Procesados</cpt:named>
+                </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
 
@@ -131,19 +143,27 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
             <mb3:section>
                 <mb3:serviceAction id="listarTodos" objectType="depotapp.Ingresos">
                     <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
-                    <cpt:named>Listar ingresos</cpt:named>
+                    <cpt:named>Listar Ingresos</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction id="persistir" objectType="depotapp.Ingresos">
                     <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
-                    <cpt:named>Persistir</cpt:named>
+                    <cpt:named>Crear Ingreso</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction id="porCodigo" objectType="depotapp.Ingresos">
                     <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
                     <cpt:named>Buscar por Codigo</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction id="porProveedor" objectType="depotapp.Ingresos">
+                <mb3:serviceAction id="ingresosModificables" objectType="depotapp.Ingresos">
                     <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
-                    <cpt:named>Buscar por Proveedor</cpt:named>
+                    <cpt:named>Lista de Ingresos Siendo Generados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listProcesando" objectType="depotapp.Ingresos">
+                    <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
+                    <cpt:named>Lista de Ingresos en Procesamiento</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="ingresosCompletados" objectType="depotapp.Ingresos">
+                    <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
+                    <cpt:named>Lista de Ingresos Completados</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
@@ -154,15 +174,27 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
             <mb3:section>
                 <mb3:serviceAction id="create" objectType="depotapp.Pedidos">
                     <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
-                    <cpt:named>Crear pedido</cpt:named>
+                    <cpt:named>Crear Pedido</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction id="listAll" objectType="depotapp.Pedidos">
                     <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
-                    <cpt:named>Listar pedido</cpt:named>
+                    <cpt:named>Listar Pedidos</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction id="findByCodigoExact" objectType="depotapp.Pedidos">
                     <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
-                    <cpt:named>Buscar por Codigo Exacto</cpt:named>
+                    <cpt:named>Buscar por Codigo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="pedidosModificables" objectType="depotapp.Pedidos">
+                    <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
+                    <cpt:named>Lista de Pedidos Siendo Generados</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listProcesando" objectType="depotapp.Pedidos">
+                    <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
+                    <cpt:named>Lista de Pedidos en Procesamiento</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="pedidosCompletados" objectType="depotapp.Pedidos">
+                    <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
+                    <cpt:named>Lista de Pedidos Completados</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
 
@@ -172,7 +204,7 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
            <mb3:section>
                <mb3:serviceAction id="create" objectType="depotapp.Proveedores">
                    <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
-                   <cpt:named>Crear proveedor</cpt:named>
+                   <cpt:named>Crear Proveedor</cpt:named>
                </mb3:serviceAction>
                <mb3:serviceAction id="findByCodigo" objectType="depotapp.Proveedores">
                    <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
@@ -180,15 +212,15 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                </mb3:serviceAction>
                <mb3:serviceAction id="listAll" objectType="depotapp.Proveedores">
                    <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
-                   <cpt:named>Listar proveedores</cpt:named>
-               </mb3:serviceAction>
-               <mb3:serviceAction id="proveedoresDeshabilitados" objectType="depotapp.Proveedores">
-                   <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
-                   <cpt:named>Proveedores Deshabilitados</cpt:named>
+                   <cpt:named>Listar Proveedores</cpt:named>
                </mb3:serviceAction>
                <mb3:serviceAction id="proveedoresHabilitados" objectType="depotapp.Proveedores">
                    <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
-                   <cpt:named>Proveedores Habilitados</cpt:named>
+                   <cpt:named>Listar Proveedores Habilitados</cpt:named>
+               </mb3:serviceAction>
+               <mb3:serviceAction id="proveedoresDeshabilitados" objectType="depotapp.Proveedores">
+                   <cpt:logicalTypeName>depotapp.Proveedores</cpt:logicalTypeName>
+                   <cpt:named>Listar Proveedores Deshabilitados</cpt:named>
                </mb3:serviceAction>
            </mb3:section>
 

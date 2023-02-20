@@ -10,10 +10,10 @@
             <bs3:row>
                 <bs3:col span="12">
                     <bs3:tabGroup>
-                        <bs3:tab name="General">
+                        <bs3:tab name="Ubicación">
                             <bs3:row>
                                 <bs3:col span="12">
-                                    <cpt:fieldSet name="Ubicacion" id="ubicacion"/>
+                                    <cpt:fieldSet name="Datos Generales" id="ubicacion"/>
                                 </bs3:col>
                             </bs3:row>
                         </bs3:tab>

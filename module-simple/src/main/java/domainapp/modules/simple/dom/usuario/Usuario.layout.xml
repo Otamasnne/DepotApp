@@ -10,10 +10,13 @@
             <bs3:row>
                 <bs3:col span="12">
                     <bs3:tabGroup>
-                        <bs3:tab name="General">
+                        <bs3:tab name="Usuario">
                             <bs3:row>
                                 <bs3:col span="12">
-                                    <cpt:fieldSet name="Usuario" id="usuario"/>
+                                    <cpt:fieldSet name="Credenciales del usuario" id="credenciales"/>
+                                </bs3:col>
+                                <bs3:col span="12">
+                                    <cpt:fieldSet name="Datos del usuario" id="datos"/>
                                 </bs3:col>
                             </bs3:row>
                         </bs3:tab>

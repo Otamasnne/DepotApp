@@ -1,5 +1,8 @@
 package domainapp.modules.simple.dom.usuario;
 
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.types.Email;
+import domainapp.modules.simple.types.Telefono;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
 import org.apache.isis.applib.services.message.MessageService;
@@ -53,8 +56,8 @@ public class Usuarios {
      */
     @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
     @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL,named = "Agregar Usuario")
-    public Usuario addUsuario(String userName, String nombre, String apellido, String telefono,
-                              String email, String password
+    public Usuario addUsuario(String userName, String nombre, String apellido, @Telefono String telefono,
+                              @Email String email, String password
     ) {
         return repositoryService.persist(new Usuario(userName,nombre,apellido,email,telefono,password));
     }
@@ -65,7 +68,7 @@ public class Usuarios {
     * es correcto y si lo es, ingresar a la app*/
     //@Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Validar Usuario")
-    @Property(hidden = Where.EVERYWHERE)
+    @Property(hidden = Where.EVERYWHERE) // Todo: verificar si esto saca de REST
     public Usuario userValidation(final String username, final String password) throws Exception {
         return repositoryService.uniqueMatch(
                         Query.named(Usuario.class, Usuario.NAMED_QUERY__FIND_BY_USER_NAME_PASSWORD)
@@ -76,6 +79,21 @@ public class Usuarios {
     }
 
 
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Usuario> usuariosHabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Usuario.class, Usuario.NAMED_QUERY__FIND_BY_HABILITADO)
+        );
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Usuario> usuariosDeshabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Usuario.class, Usuario.NAMED_QUERY__FIND_BY_DESHABILITADO)
+        );
+    }
 
     @Inject
     RepositoryService repositoryService;

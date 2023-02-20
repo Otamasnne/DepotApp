@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dom.encabezado.ingreso;
 
 import domainapp.modules.simple.dom.cliente.Cliente;
+import domainapp.modules.simple.dom.encabezado.ajuste.Ajuste;
 import domainapp.modules.simple.dom.encabezado.pedido.Pedido;
 import domainapp.modules.simple.dom.item.itemIngreso.ItemIngreso;
 import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
@@ -58,11 +59,28 @@ public class Ingresos {
         );
     }
 
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Ingreso> ingresosModificables() {
+        return repositoryService.allMatches(
+                Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_MODIFICABLE)
+        );
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Ingreso> ingresosCompletados() {
+        return repositoryService.allMatches(
+                Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_COMPLETADO)
+        );
+    }
+
     /*
      * @Santi
      * es metodo es llamado por la app movil y recibe un codigo de ingreso para recuperar los articulos correspondientes
      * a este.
      * */
+    @Property(hidden = Where.EVERYWHERE) // Todo: verificar si esto saca de REST
     @Action(semantics = SemanticsOf.SAFE)
     public List<ItemIngreso> listItems(int codigo) {
 
@@ -72,44 +90,19 @@ public class Ingresos {
         //repositoryService.allInstances(ItemPedido.class);
     }
 
-    public Ingreso findByCodigoExact (final int codigo) {
+    // Todo: Preguntar a santi por esta accion
+    public Ingreso findByCodigoExact (final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))
                 .orElse(null);
     }
 
-    /*
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public List<Ingreso> porCodigo(
-            final int codigo
-    ) {
-        return repositoryService.allMatches(
-                Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_LIKE)
-                        .withParameter("codigo", codigo));
-    }
-    */
-
-
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
-    public List<Ingreso> porProveedor(
-            final Proveedor proveedor
-            ) {
-        return repositoryService.allMatches(
-                Query.named(Ingreso.class, Ingreso.NAMED_QUERY__BUSCAR_POR_PROVEEDOR)
-                        .withParameter("proveedor", proveedor));
-    }
-
-    public List<Proveedor> choices0PorProveedor(){
-        return repositoryService.allInstances(Proveedor.class);
-    }
 
     //porCodigoExacto
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Ingreso porCodigo(final int codigo) {
+    public Ingreso porCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))

@@ -15,10 +15,10 @@ http://isis.apache.org/applib/layout/grid/bootstrap3/bootstrap3.xsd"
     <bs3:row>
         <bs3:col span="6">
             <bs3:tabGroup>
-                <bs3:tab name="General">
+                <bs3:tab name="Pedido">
                     <bs3:row>
                         <bs3:col span="12">
-                            <c:fieldSet id="Pedido" name="pedido"/>
+                            <c:fieldSet name="Datos Generales" id="pedido"/>
                         </bs3:col>
                     </bs3:row>
                 </bs3:tab>

@@ -4,6 +4,7 @@ package domainapp.modules.simple.dom.encabezado.pedido;
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.cliente.Cliente;
+import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
 import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
 import domainapp.modules.simple.dom.reportes.reportePadre;
 import domainapp.modules.simple.dom.usuario.Usuario;
@@ -44,6 +45,7 @@ public class Pedidos {
     * es metodo es llamado por la app movil y recibe un codigo de pedido para recuperar los articulos correspondientes
     * a este.
     * */
+    @PropertyLayout(hidden = Where.EVERYWHERE)
     @Action(semantics = SemanticsOf.SAFE)
     public List<ItemPedido> listItems(int codigo) {
 
@@ -63,7 +65,9 @@ public class Pedidos {
         return repositoryService.allInstances(Pedido.class);
     }
 
-    public Pedido findByCodigoExact (final int codigo) {
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    public Pedido findByCodigoExact (final Integer codigo) {
         return repositoryService.firstMatch(
                 Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT)
                         .withParameter("codigo", codigo))
@@ -84,6 +88,21 @@ public class Pedidos {
         );
     }
 
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Pedido> pedidosModificables() {
+        return repositoryService.allMatches(
+                Query.named(Pedido.class, Pedido.NAMED_QUERY__FIND_BY_MODIFICABLE)
+        );
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Pedido> pedidosCompletados() {
+        return repositoryService.allMatches(
+                Query.named(Pedido.class, Pedido.NAMED_QUERY__FIND_BY_COMPLETADO)
+        );
+    }
 
     @Programmatic
     public Blob generarReportePedido() throws JRException, IOException {

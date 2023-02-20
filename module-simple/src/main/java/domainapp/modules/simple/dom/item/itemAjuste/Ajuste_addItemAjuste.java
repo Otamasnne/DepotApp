@@ -29,7 +29,7 @@ public class Ajuste_addItemAjuste {
 
     public Ajuste act(
             final Articulo articulo,
-            final int cantidad
+            final Integer cantidad
     ) {
         if (articulo.getStock() < cantidad & this.ajuste.getTipoAjuste() == TipoAjuste.AJN) {
             messageService.warnUser("El ajuste negativo por " + cantidad + " dejaria al artículo " + articulo.getCodigo() + " con stock negativo, esto podría generar problemas de stock a largo plazo.");

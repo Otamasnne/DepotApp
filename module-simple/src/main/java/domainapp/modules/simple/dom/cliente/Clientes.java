@@ -50,7 +50,7 @@ public class Clientes {
     //
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Cliente findByCodigo(final int codigo) {
+    public Cliente findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))
@@ -80,17 +80,6 @@ public class Clientes {
                 Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_DESHABILITADO)
         );
     }
-
-
-    @Programmatic
-    public void ping() {
-        JDOQLTypedQuery<Cliente> q = jdoSupportService.newTypesafeQuery(Cliente.class);
-        final QCliente candidate = QCliente.candidate();
-        q.range(0,2);
-        q.orderBy(candidate.codigo.asc());
-        q.executeList();
-    }
-
 
     @Programmatic
     public Blob generarReporteCliente() throws JRException, IOException {

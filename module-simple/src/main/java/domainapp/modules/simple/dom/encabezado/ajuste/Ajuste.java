@@ -4,6 +4,7 @@ import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.dom.item.itemAjuste.ItemAjuste;
 import domainapp.modules.simple.dom.item.itemAjuste.ItemAjusteRepository;
+import domainapp.modules.simple.dom.usuario.Usuario;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import domainapp.modules.simple.types.comprobante.FechaAlta;
 import lombok.*;
@@ -14,10 +15,7 @@ import org.apache.isis.applib.services.title.TitleService;
 import org.apache.isis.persistence.jdo.applib.services.JdoSupportService;
 
 import javax.inject.Inject;
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.VersionStrategy;
+import javax.jdo.annotations.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -43,6 +41,18 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.encabezado.ajuste.Ajuste " +
                         "WHERE codigoCo == :codigoCo"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ajuste.NAMED_QUERY__FIND_BY_MODIFICABLE,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ajuste.Ajuste " +
+                        "WHERE estadoOperativo == 'MODIFICABLE'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Ajuste.NAMED_QUERY__FIND_BY_COMPLETADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.ajuste.Ajuste " +
+                        "WHERE estadoOperativo == 'COMPLETADO'"
         )
 })
 @javax.jdo.annotations.DatastoreIdentity(strategy= IdGeneratorStrategy.IDENTITY, column="id")
@@ -56,6 +66,8 @@ public class Ajuste implements Comparable<Ajuste>{
 
     static final String NAMED_QUERY__FIND_BY_CODIGO_LIKE = "Ajuste.findByCodigoLike";
     static final String NAMED_QUERY__FIND_BY_CODIGO_EXACT = "Ajuste.findByCodigoExact";
+    static final String NAMED_QUERY__FIND_BY_MODIFICABLE = "Ajuste.findByModificable";
+    static final String NAMED_QUERY__FIND_BY_COMPLETADO = "Ajuste.findByCompletado";
 
     @Inject
     TitleService titleService;
@@ -124,33 +136,35 @@ public class Ajuste implements Comparable<Ajuste>{
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "encabezado", sequence = "1")
+    @PropertyLayout(fieldSetId = "ajuste", sequence = "1", named = "Tipo de Ajuste")
     private TipoAjuste tipoAjuste;
 
     @CodigoCo
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "encabezado", sequence = "2")
+    @PropertyLayout(fieldSetId = "ajuste", sequence = "2", named = "Codigo")
     private int codigoCo;
 
     @FechaAlta
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "encabezado", sequence = "3")
+    @PropertyLayout(fieldSetId = "ajuste", sequence = "3", named = "Fecha de Alta")
     private LocalDateTime fechaAlta;
 
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "encabezado", sequence = "5")
+    @PropertyLayout(fieldSetId = "ajuste", sequence = "4")
     private EstadoOperativo estadoOperativo;
 
     @Getter
     @Setter
     @ToString.Include
-    @PropertyLayout(fieldSetId = "encabezado", sequence = "6")
+    @PropertyLayout(fieldSetId = "ajuste", sequence = "5")
+    @Property(editing = Editing.ENABLED)
+    @Column(allowsNull = "false")
     private String descripcion;
 
     @Getter @Setter
