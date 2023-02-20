@@ -91,30 +91,30 @@ public class Usuario {
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "1")
+    @PropertyLayout(fieldSetId = "Usuario", sequence = "3")
     private String nombre;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "1")
+    @PropertyLayout(fieldSetId = "Usuario", sequence = "4")
     @Column(allowsNull = "false")
     private String apellido;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "1" )
+    @PropertyLayout(fieldSetId = "Usuario", sequence = "5" )
     @Column(allowsNull = "false")
     private String telefono;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "1")
+    @PropertyLayout(fieldSetId = "Usuario", sequence = "6")
     @Column(allowsNull = "true")
     private String email;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "5", labelPosition=LabelPosition.LEFT, typicalLength=80,cssClass="x-key")
+    @PropertyLayout(fieldSetId = "Usuario", sequence = "2", labelPosition=LabelPosition.LEFT, typicalLength=80,cssClass="x-key")
     @Column(allowsNull = "true")
     private String password;
 
