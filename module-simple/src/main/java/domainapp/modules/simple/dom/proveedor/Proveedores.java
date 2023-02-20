@@ -40,13 +40,20 @@ public class Proveedores {
     //findByCodigoExact
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Proveedor findByCodigo(final int codigo) {
+    public Proveedor findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))
                 .orElse(null);
     }
 
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Proveedor> proveedoresHabilitados() {
+        return repositoryService.allMatches(
+                Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_HABILITADO)
+        );
+    }
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<Proveedor> proveedoresDeshabilitados() {
@@ -60,13 +67,6 @@ public class Proveedores {
     public List<Proveedor> listAll(){
         return repositoryService.allInstances(Proveedor.class);
     }
-    @Programmatic
-    public void ping() {
-        JDOQLTypedQuery<Proveedor> q = jdoSupportService.newTypesafeQuery(Proveedor.class);
-        final QProveedor candidate = QProveedor.candidate();
-        q.range(0,2);
-        q.orderBy(candidate.codigo.asc());
-        q.executeList();
-    }
+
 
 }

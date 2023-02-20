@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dom.encabezado.ajuste;
 
+import domainapp.modules.simple.dom.articulo.Articulo;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.Query;
@@ -60,13 +61,27 @@ public class Ajustes {
     //findByCodigoExact
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Ajuste findByCodigo(final int codigo) {
+    public Ajuste findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigoCo", codigo))
                 .orElse(null);
     }
 
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Ajuste> ajustesModificables() {
+        return repositoryService.allMatches(
+                Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_MODIFICABLE)
+        );
+    }
 
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    public List<Ajuste> ajustesCompletados() {
+        return repositoryService.allMatches(
+                Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_COMPLETADO)
+        );
+    }
 
 }

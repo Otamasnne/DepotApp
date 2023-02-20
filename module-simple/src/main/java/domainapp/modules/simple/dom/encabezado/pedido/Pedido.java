@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.encabezado.pedido;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.cliente.Cliente;
+import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
 import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
 import lombok.*;
@@ -56,6 +57,18 @@ import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_Y
                 value = "SELECT " +
                         "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido " +
                         "WHERE estadoOperativo == 'PROCESANDO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Pedido.NAMED_QUERY__FIND_BY_MODIFICABLE,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido " +
+                        "WHERE estadoOperativo == 'MODIFICABLE'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Pedido.NAMED_QUERY__FIND_BY_COMPLETADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.encabezado.pedido.Pedido " +
+                        "WHERE estadoOperativo == 'COMPLETADO'"
         )
 })
 public class Pedido implements Comparable<Pedido> {
@@ -68,10 +81,12 @@ public class Pedido implements Comparable<Pedido> {
     @Inject
     JdoSupportService jdoSupportService;
 
-    static final String NAMED_QUERY_FIND_BY_CODIGO_EXACT = "pedido.findByCodigoExact";
-    static final String NAMED_QUERY_FIND_BY_CODIGO_LIKE = "pedido.findByCodigoLike";
+    static final String NAMED_QUERY_FIND_BY_CODIGO_EXACT = "Pedido.findByCodigoExact";
+    static final String NAMED_QUERY_FIND_BY_CODIGO_LIKE = "Pedido.findByCodigoLike";
 
-    static final String NAMED_QUERY_FIND_BY_PROCESANDO = "pedido.findByProcesando";
+    static final String NAMED_QUERY_FIND_BY_PROCESANDO = "Pedido.findByProcesando";
+    static final String NAMED_QUERY__FIND_BY_MODIFICABLE = "Pedido.findByModificable";
+    static final String NAMED_QUERY__FIND_BY_COMPLETADO = "Pedido.findByCompletado";
 
 
 
@@ -86,22 +101,24 @@ public class Pedido implements Comparable<Pedido> {
     private int codigo;
 
     @Getter@Setter
-    @PropertyLayout(fieldSetId = "pedido", sequence = "2")
+    @PropertyLayout(fieldSetId = "pedido", sequence = "4")
     private EstadoOperativo estadoOperativo;
 
     @Getter
     @Setter
-    @PropertyLayout(fieldSetId = "pedido", sequence = "3")
+    @Property(editing = Editing.ENABLED)
+    @Column(allowsNull = "false")
+    @PropertyLayout(fieldSetId = "pedido", sequence = "2")
     private String descripcion;
 
     @Getter @Setter 
     @Persistent(mappedBy="pedido")
-    @PropertyLayout(hidden = Where.EVERYWHERE)
+    @PropertyLayout(hidden = Where.EVERYWHERE) //Todo: afecta rest?
     List<ItemPedido> items;
 
 
     @Getter @Setter
-    @PropertyLayout(fieldSetId = "pedido", sequence = "4")
+    @PropertyLayout(fieldSetId = "pedido", sequence = "3")
     @Column(allowsNull = "false")
     private Cliente cliente;
 
@@ -153,6 +170,7 @@ public class Pedido implements Comparable<Pedido> {
             //hidden=Where.EVERYWHERE
             named = "Completar pedido"
     )
+    @Property(hidden = Where.EVERYWHERE) //Todo: verificar si esto saca de REST
     public void completar() {
         for (int i = 0; i < getItems().size(); i++) {
             int cantidad = this.getItems().get(i).getCantidad();

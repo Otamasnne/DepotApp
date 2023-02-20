@@ -111,7 +111,7 @@ public  class Ubicacion implements Comparable<Ubicacion> {
     }
 
     public String title() {
-        return this.descripcion;
+        return "Ubicación " + this.descripcion;
     }
 
     @CodigoCo

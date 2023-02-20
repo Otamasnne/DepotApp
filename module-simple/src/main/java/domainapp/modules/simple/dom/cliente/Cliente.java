@@ -124,48 +124,48 @@ public class Cliente implements Comparable<Cliente>{
     @CodigoCo
     @Getter
     @Setter
-    @PropertyLayout(fieldSetId = "cliente", sequence = "1")
+    @PropertyLayout(fieldSetId = "datos", sequence = "1")
     private int codigo;
 
     @Dni
     @Setter
     @Getter
     @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "cliente", sequence = "2")
+    @PropertyLayout(fieldSetId = "datos", sequence = "2")
     private int dni;
 
     @RazonSocial
     @Setter
     @Getter
     @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "cliente", sequence = "3")
+    @PropertyLayout(fieldSetId = "datos", sequence = "3")
     private String razonSocial;
 
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "cliente", sequence = "4")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "1")
     @Column(allowsNull = "false")
     private String localidad;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "cliente", sequence = "5")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "2")
     @Column(allowsNull = "false")
     private String direccion;
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "cliente", sequence = "6")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "3")
     @Telefono
     private String telefono;
 
 
     @Getter @Setter @ToString.Include @Property(editing = Editing.ENABLED)
-    @PropertyLayout(fieldSetId = "cliente", sequence = "7")
+    @PropertyLayout(fieldSetId = "contacto", sequence = "4")
     @Email
     private String email;
 
     @Setter
     @Getter
-    @PropertyLayout(fieldSetId = "cliente", sequence = "8")
+    @PropertyLayout(fieldSetId = "datos", sequence = "4")
     private EstadoHabDes estado;
 
     private final static Comparator<Cliente> comparator =

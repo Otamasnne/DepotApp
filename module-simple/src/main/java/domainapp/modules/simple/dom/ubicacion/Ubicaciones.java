@@ -51,7 +51,7 @@ public class Ubicaciones {
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Ubicacion buscarPorCodigoExacto(final int codigo) {
+    public Ubicacion buscarPorCodigoExacto(final Integer codigo) {
         Ubicacion ubicacion = repositoryService.firstMatch(
                         Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_POR_CODIGO_EXACTO)
                                 .withParameter("codigo", codigo)

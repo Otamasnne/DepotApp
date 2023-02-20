@@ -28,7 +28,7 @@ public class Pedido_addItemPedido {
 
     public Pedido act(
             final Articulo articulo,
-            final int cantidad
+            final Integer cantidad
             ) {
         if (articulo.getStock() < cantidad) {
             messageService.warnUser("El " + articulo.title() + " se encuentra sin el stock necesario, el pedido podría tener una espera elevada.");

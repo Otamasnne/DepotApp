@@ -76,7 +76,7 @@ public class Articulos {
     //antes findByCodigoExact
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
-    public Articulo findByCodigo(final int codigo) {
+    public Articulo findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
                                 .withParameter("codigo", codigo))

@@ -155,6 +155,7 @@ public  class Articulo implements Comparable<Articulo> {
     @Setter
     @ToString.Include @Property(editing = Editing.ENABLED)
     @PropertyLayout(fieldSetId = "articulo", sequence = "2")
+    @Column(allowsNull = "false")
     private String descripcion;
 
     @Stock

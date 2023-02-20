@@ -1,6 +1,10 @@
 package domainapp.modules.simple.dom.usuario;
 
 
+import domainapp.modules.simple.dom.EstadoHabDes;
+import domainapp.modules.simple.dom.articulo.Articulo;
+import domainapp.modules.simple.types.Email;
+import domainapp.modules.simple.types.Telefono;
 import lombok.*;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.repository.RepositoryService;
@@ -19,6 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static org.apache.isis.applib.annotation.SemanticsOf.IDEMPOTENT;
+import static org.apache.isis.applib.annotation.SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE;
 
 @PersistenceCapable(schema = "depotapp",identityType= IdentityType.DATASTORE)
 
@@ -48,6 +53,18 @@ import static org.apache.isis.applib.annotation.SemanticsOf.IDEMPOTENT;
                         + "FROM domainapp.modules.simple.dom.usuario.Usuario"
                         + "WHERE UsuarioId == :UsuarioId"
                         + "ORDER BY username ASC"),
+        @javax.jdo.annotations.Query(
+                name = Usuario.NAMED_QUERY__FIND_BY_DESHABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.usuario.Usuario " +
+                        "WHERE estado == 'DESHABILITADO'"
+        ),
+        @javax.jdo.annotations.Query(
+                name = Usuario.NAMED_QUERY__FIND_BY_HABILITADO,
+                value = "SELECT " +
+                        "FROM domainapp.modules.simple.dom.usuario.Usuario " +
+                        "WHERE estado == 'HABILITADO'"
+        )
 
 })
 
@@ -68,6 +85,9 @@ public class Usuario {
     public static final String NAMED_QUERY__FIND_BY_USER_NAME_PASSWORD ="Usuario.findByUsernamePassword";
     public static final String NAMED_QUERY__FIND_BY_USER_BY_ID ="Usuario.findById";
 
+    public static final String NAMED_QUERY__FIND_BY_HABILITADO = "Usuario.findByHabilitado";
+    static final String NAMED_QUERY__FIND_BY_DESHABILITADO = "Usuario.findByDeshabilitado";
+
     public Usuario(String userName, String nombre, String apellido, String telefono,
                    String email, String password) {
         this.username=userName;
@@ -76,52 +96,55 @@ public class Usuario {
         this.email=email;
         this.telefono=telefono;
         this.password=password;
+        setEstado(EstadoHabDes.HABILITADO);
 
     }
 
-
-
-
+    public String title() {
+        return this.username + " - " + this.nombre + " " + this.apellido;
+    }
 
     @Getter
     @Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "1")
+    @PropertyLayout(fieldSetId = "credenciales", sequence = "1")
     private String username;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "3")
+    @PropertyLayout(fieldSetId = "datos", sequence = "1")
     private String nombre;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "4")
+    @PropertyLayout(fieldSetId = "datos", sequence = "2")
     @Column(allowsNull = "false")
     private String apellido;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "5" )
+    @PropertyLayout(fieldSetId = "datos", sequence = "3" )
     @Column(allowsNull = "false")
     private String telefono;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "6")
+    @PropertyLayout(fieldSetId = "datos", sequence = "4")
     @Column(allowsNull = "true")
     private String email;
 
     @Getter@Setter
     @Property(commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-    @PropertyLayout(fieldSetId = "Usuario", sequence = "2", labelPosition=LabelPosition.LEFT, typicalLength=80,cssClass="x-key")
+    @PropertyLayout(fieldSetId = "credenciales", sequence = "2", labelPosition=LabelPosition.LEFT, typicalLength=80,cssClass="x-key")
     @Column(allowsNull = "true")
     private String password;
 
-
-    public String title() {
-        return getNombre() ;
-    }
+    @Getter
+    @Setter
+    @ToString.Include
+    @Column(allowsNull = "false")
+    @PropertyLayout(fieldSetId = "datos", sequence = "5")
+    private EstadoHabDes estado;
 
     public int compareTo(@NotNull Usuario o) {
         return 0;
@@ -130,16 +153,10 @@ public class Usuario {
     private final static Comparator<Usuario> comparator =
             Comparator.comparing(Usuario::getNombre).thenComparing(Usuario:: getNombre);
 
-//    @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-//    @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL, named = "Listar Usuarios")
-//    public List<Usuario> ListarTodosLosUsuario() {
-//        return repositoryService.allInstances(Usuario.class);
-//    }
-
     @Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
     @ActionLayout( promptStyle =PromptStyle.DIALOG_MODAL ,associateWith = "name", sequence = "1", named = "Editar Usuario")
-    public Object UpdateUsuario(String userName, String nombre, String apellido, String telefono,
-                                String email, String password
+    public Object UpdateUsuario(String userName, String nombre, String apellido, @Telefono String telefono,
+                                @Email String email, String password
     ) {
         setUsername(userName);
         setNombre(nombre);
@@ -156,6 +173,37 @@ public class Usuario {
     public @NonNull String default3UpdateUsuario() { return getEmail();  }
     public @NonNull String default4UpdateUsuario() { return getTelefono(); }
     public String default5UpdateUsuario() { return getPassword(); }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Habilita el usuario")
+    public Usuario habilitar() {
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' habilitado", title));
+        this.setEstado(EstadoHabDes.HABILITADO);
+        return this;
+    }
+
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Deshabilita el usuario.")
+    public Usuario deshabilitar() {
+        final String title = titleService.titleOf(this);
+        messageService.informUser(String.format("'%s' deshabilitado", title));
+        this.setEstado(EstadoHabDes.DESHABILITADO);
+        return this;
+    }
+
+    public boolean hideHabilitar() {
+        return this.getEstado()== EstadoHabDes.HABILITADO;
+    }
+
+    public boolean hideDeshabilitar() {
+        return this.getEstado()== EstadoHabDes.DESHABILITADO;
+    }
+
 
     @Inject
     RepositoryService repositoryService;
