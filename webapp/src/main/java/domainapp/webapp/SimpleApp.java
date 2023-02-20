@@ -19,7 +19,8 @@ public class SimpleApp extends SpringBootServletInitializer {
      * entry point by searching for classes having a {@code main(...)}
      */
     public static void main(String[] args) {
-        IsisPresets.prototyping();
+        //IsisPresets.prototyping();
+        System.setProperty("PRODUCTION", "true");
         SpringApplication.run(new Class[] { SimpleApp.class }, args);
     }
 

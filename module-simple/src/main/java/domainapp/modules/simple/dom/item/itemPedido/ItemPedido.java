@@ -51,13 +51,16 @@ public class ItemPedido implements Comparable<ItemPedido> {
     static final String NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO = "ItemPedido.buscarItemPorPedido";
     static final String NAMED_QUERY__BUSCAR_ITEM_POR_PEDIDO_Y_ARTICULO = "ItemPedido.buscarItemPorPedidoYArticulo";
 
+
     ItemPedido(Pedido pedido, Articulo articulo, int cantidad){
         this.pedido = pedido;
         this.articulo = articulo;
         this.cantidad = cantidad;
     }
 
-
+    public String title() {
+        return getArticulo().getDescripcion() + " - " + getCantidad() ;
+    }
 
     @Getter@Setter@ToString.Include
     @Column(allowsNull = "false")
@@ -73,7 +76,7 @@ public class ItemPedido implements Comparable<ItemPedido> {
     @Setter
     @ToString.Include
     @Column(allowsNull = "false")
-    @PropertyLayout(fieldSetId = "itemPedido", sequence = "3")
+    @PropertyLayout(fieldSetId = "itemPedido", sequence = "3", hidden = Where.EVERYWHERE)
     private Pedido pedido;
 
     private final static Comparator<ItemPedido> comparator =

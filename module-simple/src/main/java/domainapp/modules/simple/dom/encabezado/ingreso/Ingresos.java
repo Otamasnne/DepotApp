@@ -80,24 +80,14 @@ public class Ingresos {
      * es metodo es llamado por la app movil y recibe un codigo de ingreso para recuperar los articulos correspondientes
      * a este.
      * */
-    @Property(hidden = Where.EVERYWHERE) // Todo: verificar si esto saca de REST
     @Action(semantics = SemanticsOf.SAFE)
-    public List<ItemIngreso> listItems(int codigo) {
+    public List<ItemIngreso> listItems(Integer codigo) {
 
-        Ingreso ingreso = findByCodigoExact(codigo);
+        Ingreso ingreso = porCodigo(codigo);
 
         return ingreso.getItems();
         //repositoryService.allInstances(ItemPedido.class);
     }
-
-    // Todo: Preguntar a santi por esta accion
-    public Ingreso findByCodigoExact (final Integer codigo) {
-        return repositoryService.firstMatch(
-                        Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
-                                .withParameter("codigo", codigo))
-                .orElse(null);
-    }
-
 
     //porCodigoExacto
     @Action(semantics = SemanticsOf.SAFE)

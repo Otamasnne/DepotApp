@@ -142,7 +142,7 @@ public class Ingreso implements Comparable<Ingreso>{
     }
 
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getItems().size() == 0;
+        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
     }
 
     /*
@@ -153,7 +153,6 @@ public class Ingreso implements Comparable<Ingreso>{
     @ActionLayout(
 
     )
-    @Property(hidden = Where.EVERYWHERE) // Todo: verificar si esto saca de REST
     public void completar() {
         for (int i = 0; i < getItems().size(); i++) {
             int cantidad = this.getItems().get(i).getCantidad();
@@ -162,7 +161,14 @@ public class Ingreso implements Comparable<Ingreso>{
         this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
     }
 
+    public String disableCompletar() {
+        return this.estadoOperativo == EstadoOperativo.COMPLETADO ? "Este Ingreso ya se encuentra completado" :
+                                                                    "Los Ingresos solo pueden ser completados desde la aplicación movil";
+    }
 
+    public boolean hideCompletar() {
+        return this.estadoOperativo == EstadoOperativo.COMPLETADO;
+    }
 
     private final static Comparator<Ingreso> comparator =
             Comparator.comparing(Ingreso::getCodigo);

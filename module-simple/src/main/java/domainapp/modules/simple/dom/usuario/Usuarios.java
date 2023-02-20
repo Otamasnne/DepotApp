@@ -68,7 +68,6 @@ public class Usuarios {
     * es correcto y si lo es, ingresar a la app*/
     //@Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(named = "Validar Usuario")
-    @Property(hidden = Where.EVERYWHERE) // Todo: verificar si esto saca de REST
     public Usuario userValidation(final String username, final String password) throws Exception {
         return repositoryService.uniqueMatch(
                         Query.named(Usuario.class, Usuario.NAMED_QUERY__FIND_BY_USER_NAME_PASSWORD)

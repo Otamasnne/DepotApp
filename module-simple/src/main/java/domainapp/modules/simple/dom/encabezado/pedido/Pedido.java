@@ -113,7 +113,7 @@ public class Pedido implements Comparable<Pedido> {
 
     @Getter @Setter 
     @Persistent(mappedBy="pedido")
-    @PropertyLayout(hidden = Where.EVERYWHERE) //Todo: afecta rest?
+    @PropertyLayout(hidden = Where.EVERYWHERE)
     List<ItemPedido> items;
 
 
@@ -121,12 +121,6 @@ public class Pedido implements Comparable<Pedido> {
     @PropertyLayout(fieldSetId = "pedido", sequence = "3")
     @Column(allowsNull = "false")
     private Cliente cliente;
-
-    //0 no - 1 si
-//    @Getter@Setter
-//    @ToString.Include
-//
-//    private int procesando = 0;
 
     public static Pedido withName(String descripcion, Cliente cliente) {
         val pedido = new Pedido();
@@ -156,7 +150,7 @@ public class Pedido implements Comparable<Pedido> {
     }
 
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getItems().size() == 0;
+        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
     }
 
 
@@ -170,13 +164,21 @@ public class Pedido implements Comparable<Pedido> {
             //hidden=Where.EVERYWHERE
             named = "Completar pedido"
     )
-    @Property(hidden = Where.EVERYWHERE) //Todo: verificar si esto saca de REST
     public void completar() {
         for (int i = 0; i < getItems().size(); i++) {
             int cantidad = this.getItems().get(i).getCantidad();
             getItems().get(i).getArticulo().restarStock(cantidad);
         }
         this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
+    }
+
+    public String disableCompletar() {
+        return this.estadoOperativo == EstadoOperativo.COMPLETADO ? "Este Pedido ya se encuentra completado" :
+                "Los Pedidos solo pueden ser completados desde la aplicación movil";
+    }
+
+    public boolean hideCompletar() {
+        return this.estadoOperativo == EstadoOperativo.COMPLETADO;
     }
 
 

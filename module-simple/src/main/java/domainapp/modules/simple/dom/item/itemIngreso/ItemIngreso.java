@@ -55,6 +55,9 @@ public class ItemIngreso implements Comparable<ItemIngreso> {
         this.cantidad = cantidad;
     }
 
+    public String title() {
+        return getArticulo().getDescripcion() + " - " + getCantidad() ;
+    }
     @Getter @Setter @ToString.Include
     @Column(allowsNull = "false")
     @PropertyLayout(fieldSetId = "itemIngreso", sequence = "1")
