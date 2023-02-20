@@ -45,9 +45,8 @@ public class Pedidos {
     * es metodo es llamado por la app movil y recibe un codigo de pedido para recuperar los articulos correspondientes
     * a este.
     * */
-    @PropertyLayout(hidden = Where.EVERYWHERE)
     @Action(semantics = SemanticsOf.SAFE)
-    public List<ItemPedido> listItems(int codigo) {
+    public List<ItemPedido> listItems(Integer codigo) {
 
         Pedido pedido = findByCodigoExact(codigo);
 

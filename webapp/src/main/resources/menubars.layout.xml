@@ -41,6 +41,10 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
                     <cpt:named>Listar Todos los Usuarios</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction id="userValidation" objectType="depotapp.Usuarios">
+                    <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
+                    <cpt:named>Verificar Credenciales de Usuario</cpt:named>
+                </mb3:serviceAction>
                 <mb3:serviceAction id="usuariosHabilitados" objectType="depotapp.Usuarios">
                     <cpt:logicalTypeName>depotapp.Usuarios</cpt:logicalTypeName>
                     <cpt:named>Usuarios Habilitados</cpt:named>
@@ -153,6 +157,10 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                     <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
                     <cpt:named>Buscar por Codigo</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction id="listItems" objectType="depotapp.Ingresos">
+                    <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
+                    <cpt:named>Items por Ingreso</cpt:named>
+                </mb3:serviceAction>
                 <mb3:serviceAction id="ingresosModificables" objectType="depotapp.Ingresos">
                     <cpt:logicalTypeName>depotapp.Ingresos</cpt:logicalTypeName>
                     <cpt:named>Lista de Ingresos Siendo Generados</cpt:named>
@@ -183,6 +191,10 @@ http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isi
                 <mb3:serviceAction id="findByCodigoExact" objectType="depotapp.Pedidos">
                     <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
                     <cpt:named>Buscar por Codigo</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction id="listItems" objectType="depotapp.Pedidos">
+                    <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
+                    <cpt:named>Items por Pedido</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction id="pedidosModificables" objectType="depotapp.Pedidos">
                     <cpt:logicalTypeName>depotapp.Pedidos</cpt:logicalTypeName>
