@@ -142,18 +142,19 @@ public class Ingreso implements Comparable<Ingreso>{
     }
 
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
+        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getEstadoOperativo()==EstadoOperativo.ANULADO || this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
     }
 
     /*
      * @Santi
      * Este metodo es llamado cuando se presiona el boton de completar un ingreso en la app movil
      * */
-    @Action
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
-
+        named = "Completar Ingreso",
+            describedAs = "NO RECOMENDADO. Se completará el ingreso de manera manual, realizando los cambios apropiados en el stock. Se recomienda realizar el procesamiento entero del ingreso desde la aplicación movil."
     )
-    public void completar() {
+    public void completar() { // TODO: Pasar de tipo void a Ingreso?
         for (int i = 0; i < getItems().size(); i++) {
             int cantidad = this.getItems().get(i).getCantidad();
             getItems().get(i).getArticulo().sumarStock(cantidad);
@@ -161,13 +162,22 @@ public class Ingreso implements Comparable<Ingreso>{
         this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
     }
 
-    public String disableCompletar() {
-        return this.estadoOperativo == EstadoOperativo.COMPLETADO ? "Este Ingreso ya se encuentra completado" :
-                                                                    "Los Ingresos solo pueden ser completados desde la aplicación movil";
+    public boolean hideCompletar() {
+        return  this.estadoOperativo == EstadoOperativo.COMPLETADO || this.estadoOperativo == EstadoOperativo.ANULADO || this.estadoOperativo == EstadoOperativo.MODIFICABLE ;
     }
 
-    public boolean hideCompletar() {
-        return this.estadoOperativo == EstadoOperativo.COMPLETADO;
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Anula el ingreso.")
+    public Ingreso anular(){
+        this.setEstadoOperativo(EstadoOperativo.ANULADO);
+        messageService.informUser(String.format("Se anuló el '%s'", title()));
+        return this;
+    }
+
+    public boolean hideAnular() {
+        return this.estadoOperativo == EstadoOperativo.ANULADO || this.estadoOperativo == EstadoOperativo.COMPLETADO;
     }
 
     private final static Comparator<Ingreso> comparator =

@@ -34,7 +34,7 @@ public class Pedido_removeItemPedido {
     }
 
     public boolean hideAct() {
-        return itemPedidoRepository.buscarItemPorPedido(pedido).isEmpty() || pedido.getEstadoOperativo() == EstadoOperativo.PROCESANDO;
+        return itemPedidoRepository.buscarItemPorPedido(pedido).isEmpty() || pedido.getEstadoOperativo() == EstadoOperativo.PROCESANDO || pedido.getEstadoOperativo() == EstadoOperativo.ANULADO || pedido.getEstadoOperativo() == EstadoOperativo.COMPLETADO;
     }
 
     public List<Articulo> choices0Act(){
