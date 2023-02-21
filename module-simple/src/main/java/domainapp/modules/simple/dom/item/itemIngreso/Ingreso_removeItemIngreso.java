@@ -32,7 +32,7 @@ public class Ingreso_removeItemIngreso {
     }
 
     public boolean hideAct() {
-        return itemIngresoRepository.buscarItemPorIngreso(ingreso).isEmpty() || ingreso.getEstadoOperativo() == EstadoOperativo.PROCESANDO;
+        return itemIngresoRepository.buscarItemPorIngreso(ingreso).isEmpty() || ingreso.getEstadoOperativo() == EstadoOperativo.PROCESANDO || ingreso.getEstadoOperativo() == EstadoOperativo.ANULADO || ingreso.getEstadoOperativo() == EstadoOperativo.COMPLETADO;
     }
 
     public List<Articulo> choices0Act() {

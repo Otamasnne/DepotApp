@@ -133,6 +133,10 @@ public class Ajuste implements Comparable<Ajuste>{
         return this;
     }
 
+    public boolean hideAnular() {
+        return this.estadoOperativo == EstadoOperativo.COMPLETADO;
+    }
+
     @Getter
     @Setter
     @ToString.Include

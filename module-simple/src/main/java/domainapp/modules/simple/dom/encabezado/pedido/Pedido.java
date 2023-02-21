@@ -2,6 +2,7 @@ package domainapp.modules.simple.dom.encabezado.pedido;
 
 import domainapp.modules.simple.dom.EstadoOperativo;
 import domainapp.modules.simple.dom.cliente.Cliente;
+import domainapp.modules.simple.dom.encabezado.ajuste.Ajuste;
 import domainapp.modules.simple.dom.encabezado.ingreso.Ingreso;
 import domainapp.modules.simple.dom.item.itemPedido.ItemPedido;
 import domainapp.modules.simple.types.comprobante.CodigoCo;
@@ -150,7 +151,7 @@ public class Pedido implements Comparable<Pedido> {
     }
 
     public boolean hideProcesar() {
-        return this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
+        return this.getEstadoOperativo()==EstadoOperativo.ANULADO ||this.getEstadoOperativo()==EstadoOperativo.PROCESANDO || this.getEstadoOperativo()==EstadoOperativo.COMPLETADO || this.getItems().size() == 0;
     }
 
 
@@ -158,13 +159,13 @@ public class Pedido implements Comparable<Pedido> {
     /*
     * @Santi
     * Este metodo es llamado cuando se presiona el boton de completar un pedido en la app movil 
-    * */
-        //@Action
+    */
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
     @ActionLayout(
-            //hidden=Where.EVERYWHERE
-            named = "Completar pedido"
+            named = "Completar Pedido",
+            describedAs = "NO RECOMENDADO. Se completará el pedido de manera manual, realizando los cambios apropiados en el stock. Se recomienda realizar el procesamiento entero del pedido desde la aplicación movil."
     )
-    public void completar() {
+    public void completar() { // TODO: Pasar de tipo void a Pedido?
         for (int i = 0; i < getItems().size(); i++) {
             int cantidad = this.getItems().get(i).getCantidad();
             getItems().get(i).getArticulo().restarStock(cantidad);
@@ -172,15 +173,23 @@ public class Pedido implements Comparable<Pedido> {
         this.setEstadoOperativo(EstadoOperativo.COMPLETADO);
     }
 
-    public String disableCompletar() {
-        return this.estadoOperativo == EstadoOperativo.COMPLETADO ? "Este Pedido ya se encuentra completado" :
-                "Los Pedidos solo pueden ser completados desde la aplicación movil";
-    }
-
     public boolean hideCompletar() {
-        return this.estadoOperativo == EstadoOperativo.COMPLETADO;
+        return this.estadoOperativo == EstadoOperativo.COMPLETADO || this.estadoOperativo == EstadoOperativo.ANULADO || this.estadoOperativo == EstadoOperativo.MODIFICABLE;
     }
 
+    @Action(semantics = NON_IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(
+            position = ActionLayout.Position.PANEL,
+            describedAs = "Anula el pedido.")
+    public Pedido anular(){
+        this.setEstadoOperativo(EstadoOperativo.ANULADO);
+        messageService.informUser(String.format("Se anuló el '%s'", title()));
+        return this;
+    }
+
+    public boolean hideAnular() {
+        return this.estadoOperativo == EstadoOperativo.ANULADO || this.estadoOperativo == EstadoOperativo.COMPLETADO;
+    }
 
     private final static Comparator<Pedido> comparator =
             Comparator.comparing(Pedido::getCodigo);

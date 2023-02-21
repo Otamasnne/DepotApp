@@ -50,7 +50,7 @@ public class Pedido_addItemPedido {
 
     //Esconde la acción para agregar items si está en estado PREPARADO
     public boolean hideAct() {
-        return pedido.getEstadoOperativo() == EstadoOperativo.PROCESANDO;
+        return pedido.getEstadoOperativo() == EstadoOperativo.PROCESANDO || pedido.getEstadoOperativo() == EstadoOperativo.ANULADO || pedido.getEstadoOperativo() == EstadoOperativo.COMPLETADO;
     }
 
     @Inject

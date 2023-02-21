@@ -49,7 +49,7 @@ public class Ingreso_addItemIngreso {
 
     //Esta acción se esconde si el Ingreso tiene estado PROCESANDO, para que no se puedan agregar mas items en un ingreso que se encuentre siendo procesado.
     public boolean hideAct(){
-        return ingreso.getEstadoOperativo() == EstadoOperativo.PROCESANDO;
+        return ingreso.getEstadoOperativo() == EstadoOperativo.PROCESANDO || ingreso.getEstadoOperativo() == EstadoOperativo.ANULADO || ingreso.getEstadoOperativo() == EstadoOperativo.COMPLETADO;
     }
 
     @Inject
