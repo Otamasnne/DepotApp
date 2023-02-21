@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repoClientes" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="144e28da-11d5-47ec-8e40-c5582696ba73">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -79,21 +78,21 @@
 	<detail>
 		<band height="31" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="0" y="0" width="170" height="30" backcolor="#B3B5B5" uuid="17848545-18a3-4ba3-9343-e3a430b95b96">
+				<reportElement mode="Opaque" x="0" y="0" width="170" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="17848545-18a3-4ba3-9343-e3a430b95b96">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24139720-2335-4a04-b1c5-2d192579cd78"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="170" y="0" width="160" height="30" backcolor="#B3B5B5" uuid="598bf08c-b72d-4fd5-948e-93ff43bfb264">
+				<reportElement mode="Opaque" x="170" y="0" width="160" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="598bf08c-b72d-4fd5-948e-93ff43bfb264">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37d0d80f-05ca-4401-a4cc-603a67759e66"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="330" y="0" width="220" height="30" backcolor="#B3B5B5" uuid="db84fda5-f576-4597-83fc-ac85305a5d1b">
+				<reportElement mode="Opaque" x="330" y="0" width="220" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="db84fda5-f576-4597-83fc-ac85305a5d1b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="75917ffd-a955-482e-ae3a-2f93facf266e"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>

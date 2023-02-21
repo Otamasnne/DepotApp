@@ -71,14 +71,14 @@
 	<detail>
 		<band height="34" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="0" y="0" width="278" height="30" backcolor="#B3B5B5" uuid="1acffdcd-16be-46bd-9a8d-c6ae1be5703e">
+				<reportElement mode="Opaque" x="0" y="0" width="278" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="1acffdcd-16be-46bd-9a8d-c6ae1be5703e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76f9feb7-42a6-489e-a417-afe171fd90ea"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="278" y="0" width="277" height="30" backcolor="#B3B5B5" uuid="c80f382e-8516-4bfd-951e-af521f7c2a79">
+				<reportElement mode="Opaque" x="278" y="0" width="277" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="c80f382e-8516-4bfd-951e-af521f7c2a79">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f6d2de62-2d68-42d7-a514-eda0c77a257a"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>

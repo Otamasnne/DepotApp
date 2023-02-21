@@ -7,18 +7,18 @@ public class RepoCliente {
 
     @Getter
     @Setter
-    private int codigo;
+    private Integer codigo;
 
     @Getter
     @Setter
-    private int dni;
+    private Integer dni;
 
     @Getter
     @Setter
     private String razonSocial;
 
 
-    public RepoCliente(int codigo, Integer dni, String razonSocial) {
+    public RepoCliente(Integer codigo, Integer dni, String razonSocial) {
         this.codigo = codigo;
         this.dni = dni;
         this.razonSocial = razonSocial;

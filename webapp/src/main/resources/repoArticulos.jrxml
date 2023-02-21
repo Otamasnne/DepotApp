@@ -5,13 +5,6 @@
 	<subDataset name="TablaArticulos" uuid="a16ab2b9-dd73-45f6-b161-53ee04242d49">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<queryString>
-			<![CDATA[]]>
-		</queryString>
-		<field name="codigo" class="java.lang.Integer"/>
-		<field name="descripcion" class="java.lang.String"/>
-		<field name="stock" class="java.lang.Integer"/>
-		<field name="estado" class="java.lang.String"/>
 	</subDataset>
 	<queryString>
 		<![CDATA[]]>
@@ -55,7 +48,7 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="50">
+		<band height="65">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="160" height="50" backcolor="#1961B9" uuid="5822f951-bb2e-49c2-9b6f-a2608c5401db">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f364cbb5-33f6-4eb9-8d58-cfad884c6197"/>
@@ -85,10 +78,10 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="360060dc-df96-4674-acd8-ef3c0b066768"/>
 				</reportElement>
 				<box>
-					<pen lineWidth="2.25"/>
+					<pen lineWidth="3.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="36"/>
+					<font size="32"/>
 				</textElement>
 				<text><![CDATA[STOCK]]></text>
 			</staticText>
@@ -97,21 +90,21 @@
 	<detail>
 		<band height="33" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="0" y="0" width="160" height="33" backcolor="#B3B5B5" uuid="17c1a79c-5850-4b4a-97dc-6c241ad90548">
+				<reportElement positionType="Float" mode="Opaque" x="30" y="0" width="100" height="33" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="17c1a79c-5850-4b4a-97dc-6c241ad90548">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f364cbb5-33f6-4eb9-8d58-cfad884c6197"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="160" y="0" width="230" height="33" backcolor="#B3B5B5" uuid="3bd3e069-3647-43ef-b02b-e72ff776a12e">
+				<reportElement positionType="Float" mode="Opaque" x="160" y="0" width="230" height="33" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="3bd3e069-3647-43ef-b02b-e72ff776a12e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac34233c-7579-459c-936e-d0ebeae38f66"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="390" y="1" width="167" height="32" backcolor="#B3B5B5" uuid="1b8b856b-168c-4011-8e3b-b608e346f623">
+				<reportElement positionType="Float" mode="Opaque" x="420" y="0" width="110" height="33" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="1b8b856b-168c-4011-8e3b-b608e346f623">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="360060dc-df96-4674-acd8-ef3c0b066768"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
