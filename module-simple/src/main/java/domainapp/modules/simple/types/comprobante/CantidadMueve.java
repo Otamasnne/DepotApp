@@ -12,5 +12,6 @@ import java.lang.annotation.Target;
 @ParameterLayout(named = "CantidadMueve")
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
+@Column(allowsNull = "false")
 public @interface CantidadMueve {
 }
