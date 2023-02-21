@@ -7,11 +7,11 @@ public class RepoCliente {
 
     @Getter
     @Setter
-    private int codigo;
+    private Integer codigo;
 
     @Getter
     @Setter
-    private int dni;
+    private Integer dni;
 
     @Getter
     @Setter

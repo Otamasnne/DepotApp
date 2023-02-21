@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repoClientes" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="144e28da-11d5-47ec-8e40-c5582696ba73">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -11,7 +10,7 @@
 	<title>
 		<band height="163" splitType="Stretch">
 			<staticText>
-				<reportElement x="180" y="0" width="260" height="50" uuid="5aa0f50c-1579-4f01-ab65-01d515dae13c"/>
+				<reportElement mode="Opaque" x="180" y="0" width="260" height="50" forecolor="#FFFFFF" backcolor="#030101" uuid="5aa0f50c-1579-4f01-ab65-01d515dae13c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Cantarell Extra Bold" size="30"/>
 				</textElement>
@@ -45,21 +44,30 @@
 	<columnHeader>
 		<band height="51" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="10" width="170" height="40" uuid="8c379a8a-0d4e-4407-8875-4526c5cf1938"/>
+				<reportElement mode="Opaque" x="0" y="10" width="170" height="40" backcolor="#1961B9" uuid="8c379a8a-0d4e-4407-8875-4526c5cf1938"/>
+				<box>
+					<pen lineWidth="3.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="30"/>
+					<font size="26"/>
 				</textElement>
 				<text><![CDATA[CODIGO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="170" y="10" width="160" height="40" uuid="cf3db199-1a57-4b4b-805a-cac3ec0ca2b1"/>
+				<reportElement mode="Opaque" x="170" y="10" width="160" height="40" backcolor="#1961B9" uuid="cf3db199-1a57-4b4b-805a-cac3ec0ca2b1"/>
+				<box>
+					<pen lineWidth="3.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="30"/>
+					<font size="26"/>
 				</textElement>
 				<text><![CDATA[DNI]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="330" y="10" width="220" height="41" uuid="15db76b5-5c02-479f-98fe-7e94ccc719e1"/>
+				<reportElement mode="Opaque" x="330" y="10" width="220" height="41" backcolor="#1961B9" uuid="15db76b5-5c02-479f-98fe-7e94ccc719e1"/>
+				<box>
+					<pen lineWidth="3.25"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="26"/>
 				</textElement>
@@ -69,22 +77,22 @@
 	</columnHeader>
 	<detail>
 		<band height="31" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="170" height="30" uuid="17848545-18a3-4ba3-9343-e3a430b95b96">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="0" width="170" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="17848545-18a3-4ba3-9343-e3a430b95b96">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24139720-2335-4a04-b1c5-2d192579cd78"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="170" y="0" width="160" height="30" uuid="598bf08c-b72d-4fd5-948e-93ff43bfb264">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="170" y="0" width="160" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="598bf08c-b72d-4fd5-948e-93ff43bfb264">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="37d0d80f-05ca-4401-a4cc-603a67759e66"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="330" y="0" width="220" height="30" uuid="db84fda5-f576-4597-83fc-ac85305a5d1b">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="330" y="0" width="220" height="30" isRemoveLineWhenBlank="true" backcolor="#B3B5B5" uuid="db84fda5-f576-4597-83fc-ac85305a5d1b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="75917ffd-a955-482e-ae3a-2f93facf266e"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>

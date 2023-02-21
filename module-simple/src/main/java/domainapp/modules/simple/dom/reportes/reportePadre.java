@@ -62,7 +62,7 @@ public class reportePadre {
         repoIngresos.add(new RepoIngreso());
 
         for (Ingreso ingreso : ingresos) {
-            RepoIngreso repoIngreso = new RepoIngreso(ingreso.getCodigo(), ingreso.getDescripcion(), ingreso.getEstadoOperativo(), ingreso.getProveedor());
+            RepoIngreso repoIngreso = new RepoIngreso(ingreso.getCodigo(), ingreso.getDescripcion(), ingreso.getEstadoOperativo());
             repoIngresos.add(repoIngreso);
         }
 
