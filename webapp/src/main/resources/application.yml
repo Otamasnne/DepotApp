@@ -41,13 +41,13 @@ isis:
   viewer:
     wicket:
       application:
-        about: Simple App
+        about: DepotApp
         brand-logo-header: images/apache-isis/logo-48x48.png
         css: css/application.css
         favicon-url: images/favicon.png
         js: scripts/application.js
         menubars-layout-xml: menubars.layout.xml
-        name: Simple App
+        name: DepotApp
         # https://stackoverflow.com/a/38983935/56880
         version: @project.version@
 

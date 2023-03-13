@@ -72,7 +72,7 @@ public class Articulos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listar todos los Artículos")
     public List<Articulo> listAll() {
         return repositoryService.allInstances(Articulo.class);
     }

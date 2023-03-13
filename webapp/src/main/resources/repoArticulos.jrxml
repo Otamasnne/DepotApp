@@ -43,7 +43,7 @@
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="160" height="160" uuid="052ce79a-0c8d-4b5d-802c-d0c10de3b03e"/>
-				<imageExpression><![CDATA["/home/ignaciootarola/Descargas/icon.png"]]></imageExpression>
+				<imageExpression><![CDATA["img.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

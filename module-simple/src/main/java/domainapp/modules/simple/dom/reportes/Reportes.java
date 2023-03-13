@@ -17,32 +17,32 @@ import java.io.IOException;
 @DomainService(nature = NatureOfService.VIEW, logicalTypeName = "depotapp.Reportes")
 class Reportes {
 
-    @Action(semantics = SemanticsOf.SAFE, restrictTo = RestrictTo.PROTOTYPING)
+    @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Exportar Articulos PDF", sequence = "1")
     public Blob generarReporteArticulo() throws JRException, IOException{
         return articulos.generarReporteArticulo();
     }
 
-    @Action(semantics = SemanticsOf.SAFE, restrictTo = RestrictTo.PROTOTYPING)
+    @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Exportar Clientes PDF", sequence = "1")
     public Blob generarReporteClientes() throws JRException, IOException{
         return clientes.generarReporteCliente();
     }
 
-    @Action(semantics = SemanticsOf.SAFE, restrictTo = RestrictTo.PROTOTYPING)
+    @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Exportar Ingresos PDF", sequence = "1")
     public Blob generarReporteIngresos() throws JRException, IOException{
         return ingresos.generarReporteIngreso();
     }
 
 
-    @Action(semantics = SemanticsOf.SAFE, restrictTo = RestrictTo.PROTOTYPING)
+    @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Exportar Pedidos PDF", sequence = "1")
     public Blob generarReportePedidos() throws JRException, IOException{
         return pedidos.generarReportePedido();
     }
 
-    @Action(semantics = SemanticsOf.SAFE, restrictTo = RestrictTo.PROTOTYPING)
+    @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Exportar Ubicaciones PDF", sequence = "1")
     public Blob generarReporteUbicaciones() throws JRException, IOException{
         return ubicaciones.generarReporteUbicacion();

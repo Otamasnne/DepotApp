@@ -24,7 +24,7 @@
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="160" height="160" uuid="eb29b729-e639-423d-bd05-0a51844da74e"/>
-				<imageExpression><![CDATA["/home/ignaciootarola/Descargas/icon.png"]]></imageExpression>
+				<imageExpression><![CDATA["img.png"]]></imageExpression>
 			</image>
 			<textField evaluationTime="Report">
 				<reportElement x="470" y="0" width="100" height="30" uuid="dd7c96b8-1d95-4446-9f97-59781da6153f"/>
