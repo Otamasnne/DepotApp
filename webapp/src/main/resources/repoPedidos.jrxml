@@ -11,7 +11,7 @@
 			<staticText>
 				<reportElement mode="Opaque" x="180" y="0" width="260" height="50" forecolor="#FFFFFF" backcolor="#030101" uuid="db9e738e-19b2-405e-8bc4-6dd90bda7d30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="Cantarell Extra Bold" size="30"/>
+					<font  size="30"/>
 				</textElement>
 				<text><![CDATA[DEPOTAPP]]></text>
 			</staticText>
