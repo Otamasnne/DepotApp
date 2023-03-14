@@ -28,7 +28,7 @@ public class Proveedores {
     final JdoSupportService jdoSupportService;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Crear Proveedor", sequence = "1")
     public Proveedor create(@RazonSocial final String razonSocial,
                             final String direccion,
                             final String localidad,
@@ -39,7 +39,7 @@ public class Proveedores {
 
     //findByCodigoExact
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Buscar por Código", sequence = "2")
     public Proveedor findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
@@ -48,14 +48,14 @@ public class Proveedores {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "4")
     public List<Proveedor> proveedoresHabilitados() {
         return repositoryService.allMatches(
                 Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_HABILITADO)
         );
     }
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "5")
     public List<Proveedor> proveedoresDeshabilitados() {
         return repositoryService.allMatches(
                 Query.named(Proveedor.class, Proveedor.NAMED_QUERY__FIND_BY_DESHABILITADO)
@@ -63,7 +63,7 @@ public class Proveedores {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Proveedores", sequence = "3")
     public List<Proveedor> listAll(){
         return repositoryService.allInstances(Proveedor.class);
     }
