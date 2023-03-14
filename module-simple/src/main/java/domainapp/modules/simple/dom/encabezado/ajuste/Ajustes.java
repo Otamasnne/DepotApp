@@ -22,7 +22,7 @@ public class Ajustes {
     final JdoSupportService jdoSupportService;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, sequence = "2")
     public Ajuste ajustePositivo(
             final String descripcion
     )
@@ -31,7 +31,7 @@ public class Ajustes {
     }
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, sequence = "1")
     public Ajuste ajusteNegativo(
             final String descripcion
     )
@@ -41,7 +41,7 @@ public class Ajustes {
 
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Ajustes", sequence = "4")
     public List<Ajuste> listAll(){
         return repositoryService.allInstances(Ajuste.class);
     }
@@ -60,7 +60,7 @@ public class Ajustes {
 
     //findByCodigoExact
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Buscar por Código", sequence = "3")
     public Ajuste findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
@@ -69,7 +69,7 @@ public class Ajustes {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Ajustes Pendientes", sequence = "5")
     public List<Ajuste> ajustesModificables() {
         return repositoryService.allMatches(
                 Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_MODIFICABLE)
@@ -77,7 +77,7 @@ public class Ajustes {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Ajustes Procesados", sequence = "6")
     public List<Ajuste> ajustesCompletados() {
         return repositoryService.allMatches(
                 Query.named(Ajuste.class, Ajuste.NAMED_QUERY__FIND_BY_COMPLETADO)
