@@ -33,7 +33,7 @@ public class Pedidos {
     final JdoSupportService jdoSupportService;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Crear Pedido", sequence = "1")
     public Pedido create(
             final String descripcion,
             final Cliente cliente) {
@@ -46,6 +46,7 @@ public class Pedidos {
     * a este.
     * */
     @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Items por Pedido", sequence = "4")
     public List<ItemPedido> listItems(Integer codigo) {
 
         Pedido pedido = findByCodigoExact(codigo);
@@ -59,13 +60,13 @@ public class Pedidos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listar Pedidos", sequence = "2")
     public List<Pedido> listAll() {
         return repositoryService.allInstances(Pedido.class);
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Buscar por Código", sequence = "3")
     public Pedido findByCodigoExact (final Integer codigo) {
         return repositoryService.firstMatch(
                 Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_CODIGO_EXACT)
@@ -80,7 +81,7 @@ public class Pedidos {
     * recycler view
     * */
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Pedidos en Procesamiento", sequence = "6")
     public List<Pedido> listProcesando() {
         return repositoryService.allMatches(
                 Query.named(Pedido.class, Pedido.NAMED_QUERY_FIND_BY_PROCESANDO)
@@ -88,7 +89,7 @@ public class Pedidos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Pedidos Siendo Generados", sequence = "5")
     public List<Pedido> pedidosModificables() {
         return repositoryService.allMatches(
                 Query.named(Pedido.class, Pedido.NAMED_QUERY__FIND_BY_MODIFICABLE)
@@ -96,7 +97,7 @@ public class Pedidos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Pedidos Completados", sequence = "7")
     public List<Pedido> pedidosCompletados() {
         return repositoryService.allMatches(
                 Query.named(Pedido.class, Pedido.NAMED_QUERY__FIND_BY_COMPLETADO)
