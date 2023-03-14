@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 
 @DomainService(nature = NatureOfService.VIEW, logicalTypeName = "depotapp.Reportes")
+@DomainServiceLayout(menuBar = DomainServiceLayout.MenuBar.SECONDARY)
 class Reportes {
 
     @Action(semantics = SemanticsOf.SAFE)
