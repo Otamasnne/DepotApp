@@ -33,7 +33,7 @@ public class Ingresos {
     final JdoSupportService jdoSupportService;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Crear Ingreso", sequence = "1")
     public Ingreso persistir(
             final String descripcion
     )
@@ -42,7 +42,7 @@ public class Ingresos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listar Todos los Ingresos", sequence = "2")
     public List<Ingreso> listarTodos(){
         return repositoryService.allInstances(Ingreso.class);
     }
@@ -52,7 +52,7 @@ public class Ingresos {
      * Este metodo es llamado por la app movil para recuperar los ingresos en estado procesando
      * */
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Ingresos en Procesamiento", sequence = "5")
     public List<Ingreso> listProcesando() {
         return repositoryService.allMatches(
                 Query.named(Ingreso.class, Ingreso.NAMED_QUERY_FIND_BY_PROCESANDO)
@@ -60,7 +60,7 @@ public class Ingresos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Ingresos Siendo Generados", sequence = "4")
     public List<Ingreso> ingresosModificables() {
         return repositoryService.allMatches(
                 Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_MODIFICABLE)
@@ -68,7 +68,7 @@ public class Ingresos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Ingresos Completados", sequence = "6")
     public List<Ingreso> ingresosCompletados() {
         return repositoryService.allMatches(
                 Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_COMPLETADO)
@@ -81,6 +81,7 @@ public class Ingresos {
      * a este.
      * */
     @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Items por Ingreso", sequence = "7")
     public List<ItemIngreso> listItems(Integer codigo) {
 
         Ingreso ingreso = porCodigo(codigo);
@@ -91,7 +92,7 @@ public class Ingresos {
 
     //porCodigoExacto
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Buscar por Código", sequence = "3")
     public Ingreso porCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Ingreso.class, Ingreso.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
