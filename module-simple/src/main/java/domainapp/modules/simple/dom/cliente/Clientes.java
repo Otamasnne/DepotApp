@@ -35,7 +35,7 @@ public class Clientes {
 
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Crear Cliente", sequence = "1")
     public Cliente create(
             @Dni final Integer dni,
             @RazonSocial final String razonSocial,
@@ -49,7 +49,7 @@ public class Clientes {
 
     //
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Buscar por Código", sequence = "2")
     public Cliente findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
@@ -59,14 +59,14 @@ public class Clientes {
 
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Clientes", sequence = "3")
     public List<Cliente> listAll() {
         return repositoryService.allInstances(Cliente.class);
     }
 
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "4")
     public List<Cliente> clientesHabilitados() {
         return repositoryService.allMatches(
                 Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_HABILITADO)
@@ -74,7 +74,7 @@ public class Clientes {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "5")
     public List<Cliente> clientesDeshabilitados() {
         return repositoryService.allMatches(
                 Query.named(Cliente.class, Cliente.NAMED_QUERY__FIND_BY_DESHABILITADO)
