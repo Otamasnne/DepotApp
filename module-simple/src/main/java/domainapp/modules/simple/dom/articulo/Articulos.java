@@ -36,7 +36,7 @@ public class Articulos {
 //    Proveedores proveedores;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Crear Artículo", sequence = "1")
     public Articulo create(
             @Descripcion final String descripcion,
             final Proveedor proveedor,
@@ -63,7 +63,7 @@ public class Articulos {
 
     //antes findByCodigoExact
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Buscar por Código", sequence = "3")
     public Articulo findByCodigo(final Integer codigo) {
         return repositoryService.firstMatch(
                         Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_CODIGO_EXACT)
@@ -72,13 +72,13 @@ public class Articulos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listar todos los Artículos")
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listar todos los Artículos", sequence = "2")
     public List<Articulo> listAll() {
         return repositoryService.allInstances(Articulo.class);
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "4")
     public List<Articulo> articulosHabilitados() {
         return repositoryService.allMatches(
                 Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_HABILITADO)
@@ -86,7 +86,7 @@ public class Articulos {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "5")
     public List<Articulo> articulosDeshabilitados() {
         return repositoryService.allMatches(
                 Query.named(Articulo.class, Articulo.NAMED_QUERY__FIND_BY_DESHABILITADO)
