@@ -30,7 +30,7 @@ public class Ubicaciones {
     @Inject MessageService messageService;
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Crear Ubicación", sequence = "1")
     public Ubicacion create(
             @Descripcion final String descripcion) {
         return repositoryService.persist(Ubicacion.creacion(descripcion));
@@ -50,7 +50,7 @@ public class Ubicaciones {
 
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR, named = "Buscar por Código", sequence = "2")
     public Ubicacion buscarPorCodigoExacto(final Integer codigo) {
         Ubicacion ubicacion = repositoryService.firstMatch(
                         Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_POR_CODIGO_EXACTO)
@@ -64,7 +64,7 @@ public class Ubicaciones {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Lista de Ubicaciones", sequence = "3")
     public List<Ubicacion> listarTodos() {
         List<Ubicacion> ubicaciones = repositoryService.allInstances(Ubicacion.class);
         if (ubicaciones.size() == 1) {
@@ -76,7 +76,7 @@ public class Ubicaciones {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "4")
     public List<Ubicacion> ubicacionesHabilitadas() {
         return repositoryService.allMatches(
                 Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_HABILITADOS)
@@ -84,7 +84,7 @@ public class Ubicaciones {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, sequence = "5")
     public List<Ubicacion> ubicacionesDeshabilitadas() {
         return repositoryService.allMatches(
                 Query.named(Ubicacion.class, Ubicacion.NAMED_QUERY__BUSCAR_DESHABILITADOS)
